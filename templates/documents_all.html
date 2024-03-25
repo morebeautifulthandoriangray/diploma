@@ -1,15 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Последние созданные документы</h1>
-    <h1><a href="{% url 'document_new' %}">Создать Документ</a></h1>
+{#    <h1>Последние созданные документы</h1>#}
+{#    <h1><a href="{% url 'document_new' %}">Создать Документ на согласие</a></h1>#}
 
+    <h1><a href="{% url 'documents_all' %}">Документы на согласие</a></h1>
+    <h1><a href="{% url 'documents_consent_all' %}">Документы на уведомление</a></h1>
 
-    {% for document in object_list %}
-        <h2>{{ document.title }}</h2>
-        <p>{{ document.path_to_doc }}</p>
-        <p>{{ document.created_at }}</p>
-    {% endfor %}
 
 {% endblock %}
 

@@ -11,14 +11,14 @@ from .models import Document, DocumentConsent, Sample
 # Create your views here.
 
 
-class DocumentListView(ListView):
-    model = Document
-    template_name = 'documents_all.html'
+# class DocumentListView(ListView):
+#     model = Document
+#     template_name = 'documents_all.html'
 
 
 class DocumentConsentListView(ListView):
     model = DocumentConsent
-    template_name = 'documents_all.html'
+    template_name = 'documents_consent_all.html'
 
 
 class DocumentConsentCreateView(CreateView):
@@ -34,6 +34,11 @@ class DocumentConsentCreateView(CreateView):
               'address_street',
               'address_building_number',
               'address_house_flat_number']
+
+
+class DocumentConsentDetailView(DetailView):
+    model = DocumentConsent
+    template_name = 'document_detail.html'
 
 
 class SampleListView(ListView):
