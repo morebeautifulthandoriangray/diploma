@@ -2,6 +2,8 @@
 
 {% block content %}
     <h1>Последние созданные документы</h1>
+    <h1><a href="{% url 'document_new' %}">Создать Документ</a></h1>
+
 
     {% for document in object_list %}
         <h2>{{ document.title }}</h2>

@@ -5,7 +5,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Document
 from pydocx import PyDocX
-from .models import Document, Sample
+from .models import Document, DocumentConsent, Sample
+
 
 # Create your views here.
 
@@ -13,6 +14,26 @@ from .models import Document, Sample
 class DocumentListView(ListView):
     model = Document
     template_name = 'documents_all.html'
+
+
+class DocumentConsentListView(ListView):
+    model = DocumentConsent
+    template_name = 'documents_all.html'
+
+
+class DocumentConsentCreateView(CreateView):
+    model = DocumentConsent
+    template_name = 'document_new.html'
+    fields = ['title', 'path_to_template', 'program_name', 'application_number', 'applicant_name',
+              'applicant_surname',
+              'applicant_patronomic',
+              'applicant_date_of_birth',
+              'address_index',
+              'address_country',
+              'address_city',
+              'address_street',
+              'address_building_number',
+              'address_house_flat_number']
 
 
 class SampleListView(ListView):
