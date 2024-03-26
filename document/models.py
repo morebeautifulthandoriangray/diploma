@@ -49,7 +49,7 @@ class DocumentConsent(Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('document_detail', args=[str(self.id)], )
+        return reverse('document_consent_detail', args=[str(self.id)],)
 
 
 class DocumentNotification(Model):
@@ -78,5 +78,5 @@ class DocumentNotification(Model):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
-        return reverse('')
+    # def get_absolute_url(self):
+    #     return reverse('document_consent_detail', args=[str(self.id)],)

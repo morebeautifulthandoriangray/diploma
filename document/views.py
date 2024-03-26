@@ -23,7 +23,7 @@ class DocumentConsentListView(ListView):
 
 class DocumentConsentCreateView(CreateView):
     model = DocumentConsent
-    template_name = 'document_new.html'
+    template_name = 'documents_consent_new.html'
     fields = ['title', 'path_to_template', 'program_name', 'application_number', 'applicant_name',
               'applicant_surname',
               'applicant_patronomic',
@@ -38,7 +38,28 @@ class DocumentConsentCreateView(CreateView):
 
 class DocumentConsentDetailView(DetailView):
     model = DocumentConsent
-    template_name = 'document_detail.html'
+    template_name = 'document_consent_detail.html'
+
+
+class DocumentConsentUpdateView(UpdateView):
+    model = DocumentConsent
+    template_name = 'document_consent_edit.html'
+    fields = ['title', 'path_to_template', 'program_name', 'application_number', 'applicant_name',
+              'applicant_surname',
+              'applicant_patronomic',
+              'applicant_date_of_birth',
+              'address_index',
+              'address_country',
+              'address_city',
+              'address_street',
+              'address_building_number',
+              'address_house_flat_number']
+
+
+class DocumentConsentDeleteView(DeleteView):
+    model = DocumentConsent
+    template_name = 'document_consent_delete.html'
+    success_url = reverse_lazy('documents_consent_all')
 
 
 class SampleListView(ListView):

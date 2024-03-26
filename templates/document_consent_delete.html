@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Удалить документ</h1>
+    <form action="" method="post"> {% csrf_token %}
+        <p>Вы уверены, что хотите удалить этот "{{ documentconsent.title }}" документ?</p>
+        <input type="submit" value="Confirm">
+    </form>
+{% endblock content%}
