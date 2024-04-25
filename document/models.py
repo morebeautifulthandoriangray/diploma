@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Model
 from django.urls import reverse
+from django import forms
 
 
 # Create your models here.
@@ -17,14 +18,13 @@ class Document(models.Model):
 class Sample(Model):
     title = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
-    path_to_template = models.FileField(blank=True)
+    path_to_template = models.FileField(blank=True, upload_to='upload_sample/%Y-%m-%d/')
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse('sample_detail', args=[str(self.id)], )
-
 
 class DocumentConsent(Model):
     title = models.CharField(max_length=200)
@@ -37,7 +37,6 @@ class DocumentConsent(Model):
     applicant_patronomic = models.CharField(max_length=200)
     applicant_date_of_birth = models.DateField(null=True)
     address_index = models.IntegerField(null=True)
-    # подсказка - указать для пользователя, что нужно вводить полное название страны - Российская федерация
     address_country = models.CharField(max_length=200)
     address_city = models.CharField(max_length=200)
     address_street = models.CharField(max_length=200)
@@ -50,6 +49,7 @@ class DocumentConsent(Model):
 
     def get_absolute_url(self):
         return reverse('document_consent_detail', args=[str(self.id)],)
+    # подсказка - указать для пользователя, что нужно вводить полное название страны - Российская федерация
 
 
 class DocumentNotification(Model):

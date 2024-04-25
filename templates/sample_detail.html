@@ -3,11 +3,18 @@
 {% block content %}
     <div>
         <h2> {{ sample.title }}</h2>
-        <h2> {{ sample.title }}</h2>
         <p> {{ sample.created_at }}</p>
-        <p> {{ sample.path_to_template }}</p>
+{#        тут должен быть предпросмотр#}
+        <a href="#"> {{ sample.path_to_template }}</a>
     </div>
 
+
+    <div class="col-md-4">
+
+        <a href="#" class="btn btn-primary">Export DOCX</a>
+        <a href="#" class="btn btn-secondary">Export PDF</a>
+
+    </div>
     <a href="{% url 'sample_edit' sample.pk %}">+Edit Sample</a>
     <a href="{% url 'sample_delete' sample.pk %}">-Delete Sample</a>
 {% endblock %}

@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from .models import Document
 from pydocx import PyDocX
 from .models import Document, DocumentConsent, Sample
+from .forms import SampleForm
 
 
 # Create your views here.
@@ -74,8 +75,12 @@ class SampleDetailView(DetailView):
 
 class SampleCreateView(CreateView):
     model = Sample
+    form_class = SampleForm
     template_name = 'sample_new.html'
-    fields = ['title', 'path_to_template']
+
+
+    # fields = ['title', 'path_to_template']
+    success_url = reverse_lazy('samples_all')
 
 
 class SampleUpdateView(UpdateView):
@@ -88,3 +93,5 @@ class SampleDeleteView(DeleteView):
     model = Sample
     template_name = 'sample_delete.html'
     success_url = reverse_lazy('samples_all')
+
+
