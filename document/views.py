@@ -85,13 +85,20 @@ class SampleCreateView(CreateView):
 
 class SampleUpdateView(UpdateView):
     model = Sample
+    form_class = SampleForm
     template_name = 'sample_edit.html'
-    fields = ['title', 'path_to_template']
+    # fields = ['title', 'path_to_template']
 
 
 class SampleDeleteView(DeleteView):
     model = Sample
     template_name = 'sample_delete.html'
     success_url = reverse_lazy('samples_all')
+
+
+# from pydocx import PyDocX
+# def read_sample_word2thml(request):
+#     html = PyDocX.to_html(f'/Users/keito/Programming/Python/train/diploma/media/{Sample.path_to_template}')
+#     return HttpResponse(html)
 
 

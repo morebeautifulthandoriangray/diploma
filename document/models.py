@@ -8,7 +8,7 @@ from django import forms
 class Document(models.Model):
     title = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
-    template_name = models.ForeignKey('Sample', null=True, blank=True, on_delete=models.PROTECT)
+    template_name = models.ForeignKey('Sample', null=True, blank=True, on_delete=models.CASCADE)
     path_to_doc = models.FileField(blank=True)
 
     def __str__(self):

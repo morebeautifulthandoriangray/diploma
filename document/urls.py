@@ -3,6 +3,7 @@ from django.contrib import admin
 # DocumentListView
 from .views import DocumentConsentListView, DocumentConsentCreateView, SampleListView, SampleCreateView, SampleDetailView, SampleUpdateView, SampleDeleteView, DocumentConsentDetailView, DocumentConsentUpdateView, DocumentConsentDeleteView
 from django.views.generic import TemplateView
+# from .views import read_sample_word2thml
 
 
 urlpatterns = [
@@ -18,4 +19,6 @@ urlpatterns = [
     path('samples/new/', SampleCreateView.as_view(), name='sample_new'),
     path('samples/<int:pk>/edit/', SampleUpdateView.as_view(), name='sample_edit'),
     path('samples/<int:pk>/delete/', SampleDeleteView.as_view(), name='sample_delete'),
+    # path('samples/<int:pk>/read_word/', read_sample_word2thml, name='sample_read'),
+
 ]
