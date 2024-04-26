@@ -1,9 +1,15 @@
 from django.urls import path, include
 from django.contrib import admin
 # DocumentListView
-from .views import DocumentConsentListView, DocumentConsentCreateView, SampleListView, SampleCreateView, SampleDetailView, SampleUpdateView, SampleDeleteView, DocumentConsentDetailView, DocumentConsentUpdateView, DocumentConsentDeleteView
+from .views import ( DocumentConsentListView,
+                     DocumentConsentCreateView,
+                     SampleListView, SampleCreateView,
+                     SampleDetailView, SampleUpdateView,
+                     SampleDeleteView, DocumentConsentDetailView,
+                     DocumentConsentUpdateView, DocumentConsentDeleteView,
+                     FileDownloadDocx, FileDownloadPdf)
 from django.views.generic import TemplateView
-# from .views import read_sample_word2thml
+from document import views
 
 
 urlpatterns = [
@@ -19,6 +25,7 @@ urlpatterns = [
     path('samples/new/', SampleCreateView.as_view(), name='sample_new'),
     path('samples/<int:pk>/edit/', SampleUpdateView.as_view(), name='sample_edit'),
     path('samples/<int:pk>/delete/', SampleDeleteView.as_view(), name='sample_delete'),
-    # path('samples/<int:pk>/read_word/', read_sample_word2thml, name='sample_read'),
+    path('samples/<int:pk>/download_docx/', FileDownloadDocx.as_view() , name='sample_download_docx'),
+    path('samples/<int:pk>/download_pdf/', FileDownloadPdf.as_view(), name='sample_download_pdf'),
 
 ]

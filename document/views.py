@@ -7,6 +7,11 @@ from .models import Document
 from pydocx import PyDocX
 from .models import Document, DocumentConsent, Sample
 from .forms import SampleForm
+from django.views.generic.base import View
+from django.http import FileResponse
+from django.conf import settings
+import os
+from django.http import HttpResponse, HttpResponseBadRequest
 
 
 # Create your views here.
@@ -72,6 +77,35 @@ class SampleDetailView(DetailView):
     model = Sample
     template_name = 'sample_detail.html'
 
+class FileDownloadDocx(View):
+    def get(self, request, pk=1, *args, **kwargs):
+        sample = Sample.objects.get(pk=pk).path_to_template
+        file_path = os.path.join(settings.MEDIA_ROOT, f'{sample}')  # Specify the path to your file
+        if file_path.endswith('.docx'):
+            file_name = 'downloaded_file.docx'
+        elif file_path.endswith('.pdf'):
+            file_name = 'downloaded_file.pdf'
+        # else:
+        #     return HttpResponseBadRequest('Unsupported file format. Only DOCX and PDF files are allowed.'
+        #
+        response = FileResponse(open(file_path, 'rb'))
+        response['Content-Disposition'] = f'attachment; filename="{file_name}"'
+        return response
+
+class FileDownloadPdf(View):
+    def get(self, request, pk=1, *args, **kwargs):
+        sample = Sample.objects.get(pk=pk).path_to_template
+        file_path = os.path.join(settings.MEDIA_ROOT, f'{sample}')  # Specify the path to your file
+        if file_path.endswith('.docx'):
+            file_name = 'downloaded_file.docx'
+        elif file_path.endswith('.pdf'):
+            file_name = 'downloaded_file.pdf'
+        # else:
+        #     return HttpResponseBadRequest('Unsupported file format. Only DOCX and PDF files are allowed.'
+        #
+        response = FileResponse(open(file_path, 'rb'))
+        response['Content-Disposition'] = f'attachment; filename="{file_name}"'
+        return response
 
 class SampleCreateView(CreateView):
     model = Sample
@@ -96,9 +130,5 @@ class SampleDeleteView(DeleteView):
     success_url = reverse_lazy('samples_all')
 
 
-# from pydocx import PyDocX
-# def read_sample_word2thml(request):
-#     html = PyDocX.to_html(f'/Users/keito/Programming/Python/train/diploma/media/{Sample.path_to_template}')
-#     return HttpResponse(html)
 
 
