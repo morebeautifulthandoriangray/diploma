@@ -26,9 +26,13 @@ class Sample(Model):
     def get_absolute_url(self):
         return reverse('sample_detail', args=[str(self.id)], )
 
+    class Meta:
+        ordering = ('-created_at', )
+
 class DocumentConsent(Model):
     title = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
+    template_name = models.ForeignKey('Sample', null=True, blank=True, on_delete=models.CASCADE)
     path_to_template = models.FileField(blank=True)
     program_name = models.CharField(max_length=500)
     application_number = models.IntegerField(null=True)
@@ -43,6 +47,12 @@ class DocumentConsent(Model):
     address_building_number = models.SmallIntegerField(null=True)
     address_house_flat_number = models.SmallIntegerField(null=True)
     current_date = models.DateField(auto_now=True)
+    # applicant_name_short = applicant_name[0]
+    # applicant_patronomic_short = applicant_patronomic[0]
+    passport_seria = models.IntegerField(null=True)
+    passport_number = models.IntegerField(null=True)
+    passport_date_of_issue = models.DateField(null=True)
+    passport_place_giving = models.CharField(max_length=500, null=True)
 
     def __str__(self):
         return self.title

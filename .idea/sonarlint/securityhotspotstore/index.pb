@@ -27,8 +27,6 @@ S
 #.idea/sonarlint/issuestore/index.pb,9/f/9fe84ebb15faf917b7def6236dba604453cc61e0
 ]
 -.idea/sonarlint/securityhotspotstore/index.pb,8/8/88a9255124c95bdc913197c120a8d560edc59c8e
-9
-	manage.py,3/1/3156ad13e4d695cd526bbb7b031016ecba842270
 n
 >document/migrations/0008_documentconsent_application_number.py,5/8/58a3bc06fd674d8278396ebfd2e6f272e1c04c93
 |
@@ -38,16 +36,8 @@ Ldocument/migrations/0007_documentconsent_address_building_number_and_more.py,1
 C
 templates/base.html,d/a/da7c237b85a69c00a9ab8c189bf63e22070fcac3
 A
-document/tests.py,4/0/402deb36e7addb1442d1ffad7386fc3e24cd997c
-A
 document/admin.py,8/e/8e280ca6ce29aeff56a4f654b5ee8cbf14d1682e
 C
 templates/home.html,8/6/86f3a00c4de0ad1280042b4c75ce3672e5141a0f
-T
-$templates/documents_consent_new.html,2/f/2fc5a530ec56c4a27c91a266e2c8476689944713
-K
-templates/document_new.html,7/5/753f46d1f689cbcb2c57e7f904e8d763e4433a93
-L
-templates/documents_all.html,4/7/470b95cdd6322d149482c1aadbd7bad433e86643
 L
 templates/sample_delete.html,1/9/19bff5b97dce77cad59bada7b07895f50d9882b2
