@@ -2,7 +2,15 @@ from django.db import models
 from django.db.models import Model
 from django.urls import reverse
 from django import forms
+from diploma import settings
+from django.core.validators import RegexValidator
 
+class RussianPhoneNumber(models.Model):
+    phone_regex = RegexValidator(regex=r'^\+?7?\d{10,11}$', message="Phone number must be entered in the format: '+79991234567'. Up to 11 digits allowed.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=15, unique=True)
+
+    def __str__(self):
+        return self.phone_number
 
 # Create your models here.
 class Document(models.Model):
@@ -27,9 +35,12 @@ class Sample(Model):
         return reverse('sample_detail', args=[str(self.id)], )
 
     class Meta:
-        ordering = ('-created_at', )
+        ordering = ('-created_at',)
+
 
 class DocumentConsent(Model):
+    phone_regex = RegexValidator(regex=r'^\+?7?\d{10,11}$',
+                                 message="Phone number must be entered in the format: '+79991234567'. Up to 11 digits allowed.")
     title = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     template_name = models.ForeignKey('Sample', null=True, blank=True, on_delete=models.CASCADE)
@@ -46,6 +57,7 @@ class DocumentConsent(Model):
     address_street = models.CharField(max_length=200)
     address_building_number = models.SmallIntegerField(null=True)
     address_house_flat_number = models.SmallIntegerField(null=True)
+    applicant_phone_number = models.CharField(validators=[phone_regex], max_length=15, unique=True, default='+79998887716')
     current_date = models.DateField(auto_now=True)
     # applicant_name_short = applicant_name[0]
     # applicant_patronomic_short = applicant_patronomic[0]
@@ -58,7 +70,7 @@ class DocumentConsent(Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('document_consent_detail', args=[str(self.id)],)
+        return reverse('document_consent_detail', args=[str(self.id)], )
     # подсказка - указать для пользователя, что нужно вводить полное название страны - Российская федерация
 
 
@@ -83,7 +95,6 @@ class DocumentNotification(Model):
     address_building_number = models.SmallIntegerField(null=True)
     address_house_flat_number = models.SmallIntegerField(null=True)
     current_date = models.DateField(auto_now=True)
-
 
     def __str__(self):
         return self.title

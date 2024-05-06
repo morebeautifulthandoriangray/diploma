@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from .models import Document
 from pydocx import PyDocX
 from .models import Document, DocumentConsent, Sample
-from .forms import SampleForm
+from .forms import SampleForm, DocumentConsentForm
 from django.views.generic.base import View
 from django.http import FileResponse
 from django.conf import settings
@@ -31,17 +31,18 @@ class DocumentConsentListView(ListView):
 
 class DocumentConsentCreateView(CreateView):
     model = DocumentConsent
+    form_class = DocumentConsentForm
     template_name = 'documents_consent_new.html'
-    fields = ['title', 'template_name', 'path_to_template', 'program_name', 'application_number', 'applicant_name',
-              'applicant_surname',
-              'applicant_patronomic',
-              'applicant_date_of_birth',
-              'address_index',
-              'address_country',
-              'address_city',
-              'address_street',
-              'address_building_number',
-              'address_house_flat_number', 'passport_seria', 'passport_number', 'passport_date_of_issue',  'passport_place_giving']
+    # fields = ['title', 'template_name', 'path_to_template', 'program_name', 'application_number', 'applicant_name',
+    #           'applicant_surname',
+    #           'applicant_patronomic',
+    #           'applicant_date_of_birth',
+    #           'address_index',
+    #           'address_country',
+    #           'address_city',
+    #           'address_street',
+    #           'address_building_number',
+    #           'address_house_flat_number', 'passport_seria', 'passport_number', 'passport_date_of_issue',  'passport_place_giving']
 
     path_to_template = model.path_to_template
 
@@ -54,17 +55,18 @@ class DocumentConsentDetailView(DetailView):
 
 class DocumentConsentUpdateView(UpdateView):
     model = DocumentConsent
+    form_class = DocumentConsentForm
     template_name = 'document_consent_edit.html'
-    fields = ['title', 'path_to_template', 'program_name', 'application_number', 'applicant_name',
-              'applicant_surname',
-              'applicant_patronomic',
-              'applicant_date_of_birth',
-              'address_index',
-              'address_country',
-              'address_city',
-              'address_street',
-              'address_building_number',
-              'address_house_flat_number']
+    # fields = ['title', 'path_to_template', 'program_name', 'application_number', 'applicant_name',
+    #           'applicant_surname',
+    #           'applicant_patronomic',
+    #           'applicant_date_of_birth',
+    #           'address_index',
+    #           'address_country',
+    #           'address_city',
+    #           'address_street',
+    #           'address_building_number',
+    #           'address_house_flat_number']
 
 
 class DocumentConsentDeleteView(DeleteView):
@@ -78,7 +80,7 @@ class DocumentConsentDownloadDocx(View):
     def get(self, request, pk=1, *args, **kwargs):
         document_consent_program_name = DocumentConsent.objects.get(pk=pk).program_name
         document_consent_application_number = DocumentConsent.objects.get(pk=pk).application_number
-        document_consent_applicant_name = DocumentConsent.objects.get(pk=pk).application_number
+        document_consent_applicant_name = DocumentConsent.objects.get(pk=pk).applicant_name
         document_consent_applicant_surname = DocumentConsent.objects.get(pk=pk).applicant_surname
         document_consent_applicant_patronomic = DocumentConsent.objects.get(pk=pk).applicant_patronomic
         document_consent_applicant_date_of_birth = DocumentConsent.objects.get(pk=pk).applicant_date_of_birth
@@ -88,15 +90,17 @@ class DocumentConsentDownloadDocx(View):
         document_consent_address_street = DocumentConsent.objects.get(pk=pk).address_street
         document_consent_address_building_number = DocumentConsent.objects.get(pk=pk).address_building_number
         document_consent_address_house_flat_number = DocumentConsent.objects.get(pk=pk).address_house_flat_number
+        document_consent_applicant_phone_number = DocumentConsent.objects.get(pk=pk).applicant_phone_number
         document_consent_current_date = DocumentConsent.objects.get(pk=pk).current_date
         document_consent_passport_seria = DocumentConsent.objects.get(pk=pk).passport_seria
         document_consent_passport_number = DocumentConsent.objects.get(pk=pk).passport_number
         document_consent_passport_date_of_issue = DocumentConsent.objects.get(pk=pk).passport_date_of_issue
         document_consent_passport_place_giving = DocumentConsent.objects.get(pk=pk).passport_place_giving
 
-        file_path = '/Users/keito/Programming/Python/train/diploma/media/upload_sample/2024-05-02/sogsasiebro1.docx'
+        file_path = '/Users/keito/Programming/Python/train/diploma/media/upload_sample/2024-05-06/sogsasiebro1.docx'
             # os.path.join(settings.MEDIA_ROOT, '/upload_sample/2024-05-02/sogsasiebro1.docx')  # Specify the path to your file
         if file_path.endswith('.docx'):
+            from datetime import datetime as dt
             doc = DocxTemplate(file_path)
             context = {
                 'program_name': document_consent_program_name,
@@ -104,21 +108,30 @@ class DocumentConsentDownloadDocx(View):
                 'applicant_name': document_consent_applicant_name,
                 'applicant_surname': document_consent_applicant_surname,
                 'applicant_patronomic': document_consent_applicant_patronomic,
-                'applicant_date_of_birth': document_consent_applicant_date_of_birth,
+                'applicant_date_of_birth': dt.strftime(document_consent_applicant_date_of_birth, '%d.%m.%Y'),
+                'birth_day': document_consent_applicant_date_of_birth.day,
+                'birth_month': document_consent_applicant_date_of_birth.month if document_consent_applicant_date_of_birth.month >= 10 else str('0'+ f'{document_consent_applicant_date_of_birth.month}'),
+                'birth_year': document_consent_applicant_date_of_birth.year,
                 'address_index': document_consent_address_index,
                 'address_country': document_consent_address_country,
+                # указание страны в коротком содержании сделано костыльно, однако будет ли программа поставляться в СНГ и тд,
+                # хотя при регистрации могут указывать другое гражданство, и тогда что будет подставляться в документ?
+                # прописка иностранного гражданина, или изначально его страна? а если страна, то в каком формате?
+                'country_short': document_consent_address_country[0] + document_consent_address_country[11],
                 'address_city': document_consent_address_city,
                 'address_street': document_consent_address_street,
                 'address_building_number': document_consent_address_building_number,
                 'address_house_flat_number': document_consent_address_house_flat_number,
-                'current_date': document_consent_current_date,
-                'applicant_name_short': document_consent_applicant_name,
-                'applicant_patronomic_short': document_consent_applicant_patronomic,
+                'applicant_phone_number': document_consent_applicant_phone_number,
+                'current_date': dt.strftime(document_consent_current_date, '%d.%m.%Y'),
+                'applicant_name_short': document_consent_applicant_name[0],
+                'applicant_patronomic_short': document_consent_applicant_patronomic[0],
                 'passport_seria': document_consent_passport_seria,
                 'passport_number': document_consent_passport_number,
-                'passport_date_of_issue': document_consent_passport_date_of_issue,
+                'passport_date_of_issue': dt.strftime(document_consent_passport_date_of_issue, '%d.%m.%Y'),
                 'passport_place_giving': document_consent_passport_place_giving,
             }
+
             doc.render(context)
             file_name = 'downloaded_file.docx'
             doc.save(file_name)

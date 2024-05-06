@@ -39,5 +39,3 @@ A
 document/admin.py,8/e/8e280ca6ce29aeff56a4f654b5ee8cbf14d1682e
 C
 templates/home.html,8/6/86f3a00c4de0ad1280042b4c75ce3672e5141a0f
-L
-templates/sample_delete.html,1/9/19bff5b97dce77cad59bada7b07895f50d9882b2
