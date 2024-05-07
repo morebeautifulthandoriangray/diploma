@@ -97,7 +97,8 @@ class DocumentConsentDownloadDocx(View):
         document_consent_passport_date_of_issue = DocumentConsent.objects.get(pk=pk).passport_date_of_issue
         document_consent_passport_place_giving = DocumentConsent.objects.get(pk=pk).passport_place_giving
 
-        file_path = '/Users/keito/Programming/Python/train/diploma/media/upload_sample/2024-05-06/sogsasiebro1.docx'
+        file_path = '/Users/keito/Programming/Python/train/diploma/media/upload_sample/2024-05-07/document_consent.docx'
+        file_path_short = 'document_consent'
             # os.path.join(settings.MEDIA_ROOT, '/upload_sample/2024-05-02/sogsasiebro1.docx')  # Specify the path to your file
         if file_path.endswith('.docx'):
             from datetime import datetime as dt
@@ -114,10 +115,7 @@ class DocumentConsentDownloadDocx(View):
                 'birth_year': document_consent_applicant_date_of_birth.year,
                 'address_index': document_consent_address_index,
                 'address_country': document_consent_address_country,
-                # указание страны в коротком содержании сделано костыльно, однако будет ли программа поставляться в СНГ и тд,
-                # хотя при регистрации могут указывать другое гражданство, и тогда что будет подставляться в документ?
-                # прописка иностранного гражданина, или изначально его страна? а если страна, то в каком формате?
-                'country_short': document_consent_address_country[0] + document_consent_address_country[11],
+                'country_short': 'РФ',
                 'address_city': document_consent_address_city,
                 'address_street': document_consent_address_street,
                 'address_building_number': document_consent_address_building_number,
@@ -133,7 +131,8 @@ class DocumentConsentDownloadDocx(View):
             }
 
             doc.render(context)
-            file_name = 'downloaded_file.docx'
+            # file_name = f'/Users/keito/Downloads/{file_path_short}_downloaded.docx'
+            file_name = f'{file_path_short}_downloaded.docx'
             doc.save(file_name)
             # file_name = 'downloaded_file.docx'
         # elif file_path.endswith('.pdf'):
@@ -142,7 +141,7 @@ class DocumentConsentDownloadDocx(View):
         # else:
         #     return HttpResponseBadRequest('Unsupported file format. Only DOCX and PDF files are allowed.'
         #
-        response = FileResponse(open(file_path, 'rb'))
+        response = FileResponse(open(file_name, 'rb'))
         response['Content-Disposition'] = f'attachment; filename="{file_name}"'
         return response
         # sample = Sample.objects.get(pk=pk).path_to_template
@@ -175,7 +174,7 @@ class FileDownloadDocx(View):
         sample = Sample.objects.get(pk=pk).path_to_template
         file_path = os.path.join(settings.MEDIA_ROOT, f'{sample}')  # Specify the path to your file
         if file_path.endswith('.docx'):
-            file_name = 'downloaded_file.docx'
+            file_name = f'{sample}_downloaded.docx'
         # elif file_path.endswith('.pdf'):
         #     file_name_1 = 'downloaded_file.pdf'
         #     file_name = convert(file_path, file_name_1)

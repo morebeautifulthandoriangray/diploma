@@ -40,3 +40,4 @@ class DocumentConsentForm(ModelForm):
     applicant_date_of_birth = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
         # current_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
     passport_date_of_issue = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
+    application_number = forms.IntegerField(help_text='Указывается при наличии регистрационного номера заявки')
