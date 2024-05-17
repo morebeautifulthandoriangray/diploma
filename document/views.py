@@ -15,7 +15,6 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from docx2pdf import convert
 from docxtpl import DocxTemplate
 
-
 # Create your views here.
 
 class DocumentNotificationListView(ListView):
@@ -96,16 +95,17 @@ class DocumentConsentDownloadDocx(View):
         document_consent_passport_date_of_issue = DocumentConsent.objects.get(pk=pk).passport_date_of_issue
         document_consent_passport_place_giving = DocumentConsent.objects.get(pk=pk).passport_place_giving
 
-        # template_name_id = DocumentConsent.objects.get(pk=pk).template_name_id
-        # path_to_template = Sample.objects.get(pk=template_name_id).path_to_template.name
+        template_name_id = DocumentConsent.objects.get(pk=pk).template_name_id
+        path_to_template = Sample.objects.get(pk=template_name_id).path_to_template.name
 
-        # file_name_from_path = os.path.basename(path_to_template)
+        file_name_from_path = os.path.basename(path_to_template)
 
-        # file_name_without_extension = str(os.path.splitext(file_name_from_path)[0])
-        file_name_without_extension = 'document_consent'
+        file_name_without_extension = str(os.path.splitext(file_name_from_path)[0])
+        # file_name_without_extension = 'document_consent'
 
         # file_path = f'/Users/keito/Programming/Python/train/diploma/media/upload_sample/2024-05-07/{file_name_from_path}'
-        file_path = '/Users/keito/Programming/Python/train/diploma/media/upload_sample/2024-05-07/document_consent.docx'
+        # file_path = '/Users/keito/Programming/Python/train/diploma/media/upload_sample/2024-05-07/document_consent.docx'
+        file_path = f'/Users/keito/Programming/Python/train/diploma/media/{path_to_template}'
 
         file_path_short = file_name_without_extension
         if file_path.endswith('.docx'):
@@ -188,19 +188,18 @@ class DocumentNotificationDownloadDocx(View):
         document_notification_program_usage = DocumentNotification.objects.get(pk=pk).program_usage
         document_notification_fee = DocumentNotification.objects.get(pk=pk).fee
 
-        # template_name_id = 5
-        #     # DocumentConsent.objects.get(pk=pk).template_name_id
-        # path_to_template = Sample.objects.get(pk=template_name_id).path_to_template.name
+        template_name_id = DocumentNotification.objects.get(pk=pk).template_name_id
+        path_to_template = Sample.objects.get(pk=template_name_id).path_to_template.name
 
-        # file_name_from_path = os.path.basename(path_to_template)
+        file_name_from_path = os.path.basename(path_to_template)
 
-        file_name_from_path = 'document_notification.docx'
+        file_name_without_extension = str(os.path.splitext(file_name_from_path)[0])
+        # file_name_without_extension = 'document_consent'
 
-        # file_name_without_extension = str(os.path.splitext(file_name_from_path)[0])
+        # file_path = f'/Users/keito/Programming/Python/train/diploma/media/upload_sample/2024-05-07/{file_name_from_path}'
+        # file_path = '/Users/keito/Downloads/document_notif.docx'
+        file_path = f'/Users/keito/Programming/Python/train/diploma/media/{path_to_template}'
 
-        file_name_without_extension = 'document_notification'
-
-        file_path = '/Users/keito/Downloads/aaa.docx'
         file_path_short = file_name_without_extension
         if file_path.endswith('.docx'):
             from datetime import datetime as dt
