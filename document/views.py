@@ -5,8 +5,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Document
 from pydocx import PyDocX
-from .models import Document, DocumentConsent, Sample
-from .forms import SampleForm, DocumentConsentForm
+from .models import Document, DocumentConsent, Sample, DocumentNotification
+from .forms import SampleForm, DocumentConsentForm, DocumentNotificationForm
 from django.views.generic.base import View
 from django.http import FileResponse
 from django.conf import settings
@@ -18,56 +18,55 @@ from docxtpl import DocxTemplate
 
 # Create your views here.
 
-
-# class DocumentListView(ListView):
-#     model = Document
-#     template_name = 'documents_all.html'
-
+class DocumentNotificationListView(ListView):
+    model = DocumentNotification
+    template_name = 'document_notification/document_notification_all.html'
 
 class DocumentConsentListView(ListView):
     model = DocumentConsent
     template_name = 'documents_consent_all.html'
 
 
+
+class DocumentNotificationCreateView(CreateView):
+    model = DocumentNotification
+    form_class = DocumentNotificationForm
+    template_name = 'document_notification/document_notification_new.html'
+
+    path_to_template = model.path_to_template
 class DocumentConsentCreateView(CreateView):
     model = DocumentConsent
     form_class = DocumentConsentForm
     template_name = 'documents_consent_new.html'
-    # fields = ['title', 'template_name', 'path_to_template', 'program_name', 'application_number', 'applicant_name',
-    #           'applicant_surname',
-    #           'applicant_patronomic',
-    #           'applicant_date_of_birth',
-    #           'address_index',
-    #           'address_country',
-    #           'address_city',
-    #           'address_street',
-    #           'address_building_number',
-    #           'address_house_flat_number', 'passport_seria', 'passport_number', 'passport_date_of_issue',  'passport_place_giving']
 
     path_to_template = model.path_to_template
 
 
+class DocumentNotificationDetailView(DetailView):
+    model = DocumentNotification
+    template_name = 'document_notification/document_notification_detail.html'
 
 class DocumentConsentDetailView(DetailView):
     model = DocumentConsent
     template_name = 'document_consent_detail.html'
 
 
+
+class DocumentNotificationUpdateView(UpdateView):
+    model = DocumentNotification
+    form_class = DocumentNotificationForm
+    template_name = 'document_notification/document_notification_edit.html'
+
 class DocumentConsentUpdateView(UpdateView):
     model = DocumentConsent
     form_class = DocumentConsentForm
     template_name = 'document_consent_edit.html'
-    # fields = ['title', 'path_to_template', 'program_name', 'application_number', 'applicant_name',
-    #           'applicant_surname',
-    #           'applicant_patronomic',
-    #           'applicant_date_of_birth',
-    #           'address_index',
-    #           'address_country',
-    #           'address_city',
-    #           'address_street',
-    #           'address_building_number',
-    #           'address_house_flat_number']
 
+
+class DocumentNotificationDeleteView(DeleteView):
+    model = DocumentNotification
+    template_name = 'document_notification/document_notification_delete.html'
+    success_url = reverse_lazy('documents_notification_all')
 
 class DocumentConsentDeleteView(DeleteView):
     model = DocumentConsent
@@ -97,14 +96,17 @@ class DocumentConsentDownloadDocx(View):
         document_consent_passport_date_of_issue = DocumentConsent.objects.get(pk=pk).passport_date_of_issue
         document_consent_passport_place_giving = DocumentConsent.objects.get(pk=pk).passport_place_giving
 
-        template_name_id = DocumentConsent.objects.get(pk=pk).template_name_id
-        path_to_template = Sample.objects.get(pk=template_name_id).path_to_template.name
+        # template_name_id = DocumentConsent.objects.get(pk=pk).template_name_id
+        # path_to_template = Sample.objects.get(pk=template_name_id).path_to_template.name
 
-        file_name_from_path = os.path.basename(path_to_template)
+        # file_name_from_path = os.path.basename(path_to_template)
 
-        file_name_without_extension = str(os.path.splitext(file_name_from_path)[0])
+        # file_name_without_extension = str(os.path.splitext(file_name_from_path)[0])
+        file_name_without_extension = 'document_consent'
 
-        file_path = f'/Users/keito/Programming/Python/train/diploma/media/upload_sample/2024-05-07/{file_name_from_path}'
+        # file_path = f'/Users/keito/Programming/Python/train/diploma/media/upload_sample/2024-05-07/{file_name_from_path}'
+        file_path = '/Users/keito/Programming/Python/train/diploma/media/upload_sample/2024-05-07/document_consent.docx'
+
         file_path_short = file_name_without_extension
         if file_path.endswith('.docx'):
             from datetime import datetime as dt
@@ -140,29 +142,133 @@ class DocumentConsentDownloadDocx(View):
             # file_name = f'/Users/keito/Downloads/{file_path_short}_downloaded.docx'
             file_name = f'{file_path_short}_downloaded.docx'
             doc.save(file_name)
-            # file_name = 'downloaded_file.docx'
-        # elif file_path.endswith('.pdf'):
-        #     file_name_1 = 'downloaded_file.pdf'
-        #     file_name = convert(file_path, file_name_1)
-        # else:
-        #     return HttpResponseBadRequest('Unsupported file format. Only DOCX and PDF files are allowed.'
-        #
+
         response = FileResponse(open(file_name, 'rb'))
         response['Content-Disposition'] = f'attachment; filename="{file_name}"'
         return response
-        # sample = Sample.objects.get(pk=pk).path_to_template
-        # file_path = os.path.join(settings.MEDIA_ROOT, f'{sample}')  # Specify the path to your file
-        # if file_path.endswith('.docx'):
-        #     file_name = 'downloaded_file.docx'
-        # # elif file_path.endswith('.pdf'):
-        # #     file_name_1 = 'downloaded_file.pdf'
-        # #     file_name = convert(file_path, file_name_1)
-        # # else:
-        # #     return HttpResponseBadRequest('Unsupported file format. Only DOCX and PDF files are allowed.'
-        # #
-        # response = FileResponse(open(file_path, 'rb'))
-        # response['Content-Disposition'] = f'attachment; filename="{file_name}"'
-        # return response
+
+
+
+class DocumentNotificationDownloadDocx(View):
+    def get(self, request, pk=1, *args, **kwargs):
+        document_notification_program_name = DocumentNotification.objects.get(pk=pk).program_name
+        document_notification_program_destiny = DocumentNotification.objects.get(pk=pk).program_destiny
+        document_notification_head_name = DocumentNotification.objects.get(pk=pk).head_name
+        document_notification_head_surname = DocumentNotification.objects.get(pk=pk).head_surname
+        document_notification_head_patronomic = DocumentNotification.objects.get(pk=pk).head_patronomic
+        document_notification_applicant1_name = DocumentNotification.objects.get(pk=pk).applicant1_name
+        document_notification_applicant1_surname = DocumentNotification.objects.get(pk=pk).applicant1_surname
+        document_notification_applicant1_patronomic = DocumentNotification.objects.get(pk=pk).applicant1_patronomic
+        document_notification_applicant2_name = DocumentNotification.objects.get(pk=pk).applicant2_name
+        document_notification_applicant2_surname = DocumentNotification.objects.get(pk=pk).applicant2_surname
+        document_notification_applicant2_patronomic = DocumentNotification.objects.get(pk=pk).applicant2_patronomic
+        document_notification_applicant1_uni_position = DocumentNotification.objects.get(pk=pk).applicant1_uni_position
+        document_notification_applicant2_uni_position = DocumentNotification.objects.get(pk=pk).applicant2_uni_position
+        document_notification_uni_department = DocumentNotification.objects.get(pk=pk).uni_department
+        document_notification_applicant1_index = DocumentNotification.objects.get(pk=pk).applicant1_index
+        document_notification_applicant1_country = DocumentNotification.objects.get(pk=pk).applicant1_country
+        document_notification_applicant1_city = DocumentNotification.objects.get(pk=pk).applicant1_city
+        document_notification_applicant1_street = DocumentNotification.objects.get(pk=pk).applicant1_street
+        document_notification_applicant1_build_number = DocumentNotification.objects.get(pk=pk).applicant1_build_number
+        document_notification_applicant1_flat_number= DocumentNotification.objects.get(pk=pk).applicant1_flat_number
+        document_notification_applicant1_snils = DocumentNotification.objects.get(pk=pk).applicant1_snils
+        document_notification_applicant2_index = DocumentNotification.objects.get(pk=pk).applicant2_index
+        document_notification_applicant2_country = DocumentNotification.objects.get(pk=pk).applicant2_country
+        document_notification_applicant2_city = DocumentNotification.objects.get(pk=pk).applicant2_city
+        document_notification_applicant2_street = DocumentNotification.objects.get(pk=pk).applicant2_street
+        document_notification_applicant2_build_number= DocumentNotification.objects.get(pk=pk).applicant2_build_number
+        document_notification_applicant2_flat_number = DocumentNotification.objects.get(pk=pk).applicant2_flat_number
+        document_notification_applicant2_snils = DocumentNotification.objects.get(pk=pk).applicant2_snils
+        document_notification_applicant1_percent_contribution = DocumentNotification.objects.get(pk=pk).applicant1_percent_contribution
+        document_notification_applicant2_percent_contribution = DocumentNotification.objects.get(pk=pk).applicant2_percent_contribution
+        document_notification_applicant1_phone_number = DocumentNotification.objects.get(pk=pk).applicant1_phone_number
+        document_notification_applicant2_phone_number = DocumentNotification.objects.get(pk=pk).applicant2_phone_number
+        document_notification_applicant1_email = DocumentNotification.objects.get(pk=pk).applicant1_email
+        document_notification_applicant2_email = DocumentNotification.objects.get(pk=pk).applicant2_email
+        document_notification_program_usage = DocumentNotification.objects.get(pk=pk).program_usage
+        document_notification_fee = DocumentNotification.objects.get(pk=pk).fee
+
+        # template_name_id = 5
+        #     # DocumentConsent.objects.get(pk=pk).template_name_id
+        # path_to_template = Sample.objects.get(pk=template_name_id).path_to_template.name
+
+        # file_name_from_path = os.path.basename(path_to_template)
+
+        file_name_from_path = 'document_notification.docx'
+
+        # file_name_without_extension = str(os.path.splitext(file_name_from_path)[0])
+
+        file_name_without_extension = 'document_notification'
+
+        file_path = '/Users/keito/Downloads/aaa.docx'
+        file_path_short = file_name_without_extension
+        if file_path.endswith('.docx'):
+            from datetime import datetime as dt
+            doc = DocxTemplate(file_path)
+            context = {
+                'program_name': document_notification_program_name,
+                'program_destiny': document_notification_program_destiny,
+
+                # # руководитель
+                'head_name': document_notification_head_name,
+                'head_surname': document_notification_head_surname,
+                'head_patronomic': document_notification_head_patronomic,
+
+                'applicant1_name': document_notification_applicant1_name,
+                'applicant1_name_short': document_notification_applicant1_name[0],
+                'applicant1_surname': document_notification_applicant1_surname,
+                'applicant1_patronomic': document_notification_applicant1_patronomic,
+                'applicant1_patronomic_short': document_notification_applicant1_patronomic[0],
+
+                #
+                'applicant2_name': document_notification_applicant2_name,
+                'applicant2_name_short': document_notification_applicant2_name[0],
+                'applicant2_surname': document_notification_applicant2_surname,
+                'applicant2_patronomic': document_notification_applicant2_patronomic,
+                'applicant2_patronomic_short': document_notification_applicant2_patronomic[0],
+
+                #
+                'applicant1_uni_position': document_notification_applicant1_uni_position,
+                'applicant2_uni_position': document_notification_applicant2_uni_position,
+                #
+                'uni_department': document_notification_uni_department,
+                #
+                'applicant1_index': document_notification_applicant1_index,
+                'applicant1_country': document_notification_applicant1_country,
+                'applicant1_city': document_notification_applicant1_city,
+                'applicant1_street': document_notification_applicant1_street,
+                'applicant1_build_number': document_notification_applicant1_build_number,
+                'applicant1_flat_number': document_notification_applicant1_flat_number,
+                'applicant1_snils': document_notification_applicant1_snils,
+                #
+                'applicant2_index': document_notification_applicant2_index,
+                'applicant2_country': document_notification_applicant2_country,
+                'applicant2_city': document_notification_applicant2_city,
+                'applicant2_street': document_notification_applicant2_street,
+                'applicant2_build_number': document_notification_applicant2_build_number,
+                'applicant2_flat_number': document_notification_applicant2_flat_number,
+                'applicant2_snils': document_notification_applicant2_snils,
+                #
+                'applicant1_percent_contribution': document_notification_applicant1_percent_contribution,
+                'applicant2_percent_contribution': document_notification_applicant2_percent_contribution ,
+                #
+                'applicant1_phone_number': document_notification_applicant1_phone_number,
+                'applicant2_phone_number': document_notification_applicant2_phone_number,
+                #
+                'applicant1_email': document_notification_applicant1_email,
+                'applicant2_email': document_notification_applicant2_email,
+                'program_usage': document_notification_program_usage,
+                'fee': document_notification_fee
+            }
+
+            doc.render(context)
+            # file_name = f'/Users/keito/Downloads/{file_path_short}_downloaded.docx'
+            file_name = f'{file_path_short}_downloaded.docx'
+            doc.save(file_name)
+
+        response = FileResponse(open(file_name, 'rb'))
+        response['Content-Disposition'] = f'attachment; filename="{file_name}"'
+        return response
 
 
 class SampleListView(ListView):
@@ -181,12 +287,7 @@ class FileDownloadDocx(View):
         file_path = os.path.join(settings.MEDIA_ROOT, f'{sample}')  # Specify the path to your file
         if file_path.endswith('.docx'):
             file_name = f'{sample}_downloaded.docx'
-        # elif file_path.endswith('.pdf'):
-        #     file_name_1 = 'downloaded_file.pdf'
-        #     file_name = convert(file_path, file_name_1)
-        # else:
-        #     return HttpResponseBadRequest('Unsupported file format. Only DOCX and PDF files are allowed.'
-        #
+
         response = FileResponse(open(file_path, 'rb'))
         response['Content-Disposition'] = f'attachment; filename="{file_name}"'
         return response
@@ -228,7 +329,6 @@ class SampleDeleteView(DeleteView):
     model = Sample
     template_name = 'sample_delete.html'
     success_url = reverse_lazy('samples_all')
-
 
 
 

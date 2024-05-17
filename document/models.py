@@ -75,29 +75,70 @@ class DocumentConsent(Model):
 
 
 class DocumentNotification(Model):
+    phone_regex = RegexValidator(regex=r'^\+?7?\d{10,11}$',
+                                 message="Phone number must be entered in the format: '+79991234567'. Up to 11 digits allowed.")
     title = models.CharField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True)
+    template_name = models.ForeignKey('Sample', null=True, blank=True, on_delete=models.CASCADE)
     path_to_template = models.FileField(blank=True)
-    program_name = models.CharField(max_length=500)
-    application_number = models.IntegerField(null=True)
-    main_applicant_name = models.CharField(max_length=200)
-    main_applicant_surname = models.CharField(max_length=200)
-    main_applicant_patronomic = models.CharField(max_length=200)
-    second_applicant_name = models.CharField(max_length=200)
-    second_applicant_surname = models.CharField(max_length=200)
-    second_applicant_patronomic = models.CharField(max_length=200)
-    second_applicant_date_of_birth = models.DateField(null=True)
-    address_index = models.IntegerField(null=True)
-    # подсказка - указать для пользователя, что нужно вводить полное название страны - Российская федерация
-    address_country = models.CharField(max_length=200)
-    address_city = models.CharField(max_length=200)
-    address_street = models.CharField(max_length=200)
-    address_building_number = models.SmallIntegerField(null=True)
-    address_house_flat_number = models.SmallIntegerField(null=True)
+
+    program_name = models.CharField(max_length=500, blank=True)
+    program_destiny = models.CharField(max_length=500, blank=True)
+
+    # руководитель
+    head_name = models.CharField(max_length=200, blank=True)
+    head_surname = models.CharField(max_length=200, blank=True)
+    head_patronomic = models.CharField(max_length=200, blank=True)
+
+
+    applicant1_name = models.CharField(max_length=200, blank=True)
+    applicant1_surname = models.CharField(max_length=200, blank=True)
+    applicant1_patronomic = models.CharField(max_length=200, blank=True)
+
+    applicant2_name = models.CharField(max_length=200, blank=True)
+    applicant2_surname = models.CharField(max_length=200, blank=True)
+    applicant2_patronomic = models.CharField(max_length=200, blank=True)
+
+    applicant1_uni_position = models.CharField(max_length=200, blank=True)
+    applicant2_uni_position = models.CharField(max_length=200, blank=True)
+
+    uni_department = models.CharField(max_length=20, blank=True)
+
+
+    applicant1_index = models.IntegerField(null=True)
+    applicant1_country = models.CharField(max_length=200, blank=True)
+    applicant1_city = models.CharField(max_length=200, blank=True)
+    applicant1_street = models.CharField(max_length=200, blank=True)
+    applicant1_build_number = models.SmallIntegerField(null=True)
+    applicant1_flat_number = models.SmallIntegerField(null=True)
+    applicant1_snils = models.CharField(max_length=200, blank=True)
+
+    applicant2_index = models.IntegerField(null=True, blank=True)
+    applicant2_country = models.CharField(max_length=200, blank=True)
+    applicant2_city = models.CharField(max_length=200, blank=True)
+    applicant2_street = models.CharField(max_length=200, blank=True)
+    applicant2_build_number = models.SmallIntegerField(null=True, blank=True)
+    applicant2_flat_number = models.SmallIntegerField(null=True, blank=True)
+    applicant2_snils = models.CharField(max_length=200, blank=True)
+
+    applicant1_percent_contribution = models.SmallIntegerField(null=True)
+    applicant2_percent_contribution = models.SmallIntegerField(null=True)
+
+    applicant1_phone_number = models.CharField(validators=[phone_regex], max_length=15, unique=True, default='+79998887716')
+    applicant2_phone_number = models.CharField(validators=[phone_regex], max_length=15, unique=True, default='+79998887716')
+
+    applicant1_email = models.CharField(max_length=200, blank=True)
+    applicant2_email = models.CharField(max_length=200, blank=True)
+
+    program_usage = models.CharField(max_length=200, blank=True)
+
+    fee = models.SmallIntegerField(null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
     current_date = models.DateField(auto_now=True)
+
 
     def __str__(self):
         return self.title
 
-    # def get_absolute_url(self):
-    #     return reverse('document_consent_detail', args=[str(self.id)],)
+    def get_absolute_url(self):
+        return reverse('document_notification_detail', args=[str(self.id)], )

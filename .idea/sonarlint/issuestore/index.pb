@@ -33,9 +33,5 @@ n
 Ldocument/migrations/0007_documentconsent_address_building_number_and_more.py,1/2/12726ca0f63f853da6af5e1e00459fa148870336
 [
 +document/migrations/0006_documentconsent.py,8/5/85014c678d4d451697806a48437c03016f728950
-C
-templates/base.html,d/a/da7c237b85a69c00a9ab8c189bf63e22070fcac3
 A
 document/admin.py,8/e/8e280ca6ce29aeff56a4f654b5ee8cbf14d1682e
-C
-templates/home.html,8/6/86f3a00c4de0ad1280042b4c75ce3672e5141a0f

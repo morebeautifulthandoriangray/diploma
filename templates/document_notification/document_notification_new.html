@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1> Создать документ на согласие </h1>
+    <h1> Создать документ на уведомление </h1>
     <form method="post" action="">
         {% csrf_token %}
         {{ form.as_p }}
