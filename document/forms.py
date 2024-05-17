@@ -1,4 +1,4 @@
-from .models import Sample, DocumentConsent, DocumentNotification
+from .models import Sample, DocumentConsent, DocumentNotification, DocumentAuthorsAward
 from django.forms import ModelForm
 from django import forms
 from diploma import settings
@@ -97,3 +97,63 @@ class DocumentNotificationForm(ModelForm):
             'program_usage',
             'fee',
     ]
+
+
+class DocumentAuthorsAwardForm(ModelForm):
+    class Meta:
+        model = DocumentAuthorsAward
+        fields = [
+            'title',
+            'template_name',
+
+            'program_name',
+
+            'applicant1_name' ,
+            'applicant1_surname' ,
+            'applicant1_patronomic' ,
+            'applicant1_date_birth' ,
+
+            'applicant1_passport_seria' ,
+            'applicant1_passport_number' ,
+            'applicant1_passport_date_of_issue' ,
+            'applicant1_passport_place_giving' ,
+
+            'applicant1_inn' ,
+            'applicant1_snils' ,
+            'applicant1_bank_info' ,
+            'applicant1_account_number',
+            'applicant1_bik',
+            'applicant1_bank_inn',
+            'applicant1_bank_kpp' ,
+            'applicant1_corr_account',
+
+            # 2
+            'applicant2_name',
+            'applicant2_surname',
+            'applicant2_patronomic',
+            'applicant2_date_birth',
+
+            'applicant2_passport_seria',
+            'applicant2_passport_number',
+            'applicant2_passport_date_of_issue',
+            'applicant2_passport_place_giving',
+
+            'applicant2_inn',
+            'applicant2_snils',
+            'applicant2_bank_info',
+            'applicant2_account_number',
+            'applicant2_bik',
+            'applicant2_bank_inn',
+            'applicant2_bank_kpp' ,
+            'applicant2_corr_account',
+
+            'authors_award',
+
+
+        ]
+
+    applicant1_date_birth = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
+    applicant2_date_birth = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
+    # current_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
+    applicant1_passport_date_of_issue = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
+    applicant2_passport_date_of_issue = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)

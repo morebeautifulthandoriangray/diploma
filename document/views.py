@@ -5,8 +5,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Document
 from pydocx import PyDocX
-from .models import Document, DocumentConsent, Sample, DocumentNotification
-from .forms import SampleForm, DocumentConsentForm, DocumentNotificationForm
+from .models import Document, DocumentConsent, Sample, DocumentNotification, DocumentAuthorsAward
+from .forms import SampleForm, DocumentConsentForm, DocumentNotificationForm, DocumentAuthorsAwardForm
 from django.views.generic.base import View
 from django.http import FileResponse
 from django.conf import settings
@@ -17,6 +17,10 @@ from docxtpl import DocxTemplate
 
 # Create your views here.
 
+
+class DocumentAuthorsAwardListView(ListView):
+    model = DocumentAuthorsAward
+    template_name = 'document_authors_award/document_authors_award_all.html'
 class DocumentNotificationListView(ListView):
     model = DocumentNotification
     template_name = 'document_notification/document_notification_all.html'
@@ -26,6 +30,10 @@ class DocumentConsentListView(ListView):
     template_name = 'documents_consent_all.html'
 
 
+class DocumentAuthorsAwardCreateView(CreateView):
+    model = DocumentAuthorsAward
+    form_class = DocumentAuthorsAwardForm
+    template_name = 'document_authors_award/document_authors_award_new.html'
 
 class DocumentNotificationCreateView(CreateView):
     model = DocumentNotification
@@ -41,6 +49,11 @@ class DocumentConsentCreateView(CreateView):
     path_to_template = model.path_to_template
 
 
+
+class DocumentAuthorsAwardDetailView(DetailView):
+    model = DocumentAuthorsAward
+    template_name = 'document_authors_award/document_authors_award_detail.html'
+
 class DocumentNotificationDetailView(DetailView):
     model = DocumentNotification
     template_name = 'document_notification/document_notification_detail.html'
@@ -50,6 +63,10 @@ class DocumentConsentDetailView(DetailView):
     template_name = 'document_consent_detail.html'
 
 
+class DocumentAuthorsAwardUpdateView(UpdateView):
+    model = DocumentAuthorsAward
+    form_class = DocumentAuthorsAwardForm
+    template_name = 'document_authors_award/document_authors_award_edit.html'
 
 class DocumentNotificationUpdateView(UpdateView):
     model = DocumentNotification
@@ -62,6 +79,11 @@ class DocumentConsentUpdateView(UpdateView):
     template_name = 'document_consent_edit.html'
 
 
+
+class DocumentAuthorsAwardDeleteView(DeleteView):
+    model = DocumentAuthorsAward
+    template_name = 'document_authors_award/document_authors_award_delete.html'
+    success_url = reverse_lazy('documents_authors_award_all')
 class DocumentNotificationDeleteView(DeleteView):
     model = DocumentNotification
     template_name = 'document_notification/document_notification_delete.html'
@@ -269,6 +291,147 @@ class DocumentNotificationDownloadDocx(View):
         response['Content-Disposition'] = f'attachment; filename="{file_name}"'
         return response
 
+
+class DocumentAuthorsAwardDownloadDocx(View):
+    def get(self, request, pk=1, *args, **kwargs):
+        document_authors_award_program_name = DocumentAuthorsAward.objects.get(pk=pk).program_name
+
+        document_authors_award_applicant1_name = DocumentAuthorsAward.objects.get(pk=pk).applicant1_name
+        document_authors_award_applicant1_surname = DocumentAuthorsAward.objects.get(pk=pk).applicant1_surname
+        document_authors_award_applicant1_patronomic = DocumentAuthorsAward.objects.get(pk=pk).applicant1_patronomic
+        document_authors_award_applicant1_date_birth = DocumentAuthorsAward.objects.get(pk=pk).applicant1_date_birth
+
+        document_authors_award_applicant1_passport_seria = DocumentAuthorsAward.objects.get(pk=pk).applicant1_passport_seria
+        document_authors_award_applicant1_passport_number = DocumentAuthorsAward.objects.get(pk=pk).applicant1_passport_number
+        document_authors_award_applicant1_passport_date_of_issue = DocumentAuthorsAward.objects.get(pk=pk).applicant1_passport_date_of_issue
+        document_authors_award_applicant1_passport_place_giving = DocumentAuthorsAward.objects.get(pk=pk).applicant1_passport_place_giving
+
+        document_authors_award_applicant1_inn = DocumentAuthorsAward.objects.get(pk=pk).applicant1_inn
+        document_authors_award_applicant1_snils = DocumentAuthorsAward.objects.get(pk=pk).applicant1_snils
+        document_authors_award_applicant1_bank_info = DocumentAuthorsAward.objects.get(pk=pk).applicant1_bank_info
+        document_authors_award_applicant1_account_number = DocumentAuthorsAward.objects.get(pk=pk).applicant1_account_number
+        document_authors_award_applicant1_bik = DocumentAuthorsAward.objects.get(pk=pk).applicant1_bik
+        document_authors_award_applicant1_bank_inn = DocumentAuthorsAward.objects.get(pk=pk).applicant1_bank_inn
+        document_authors_award_applicant1_bank_kpp = DocumentAuthorsAward.objects.get(pk=pk).applicant1_bank_kpp
+        document_authors_award_applicant1_corr_account = DocumentAuthorsAward.objects.get(pk=pk).applicant1_corr_account
+
+        document_authors_award_applicant2_name = DocumentAuthorsAward.objects.get(pk=pk).applicant2_name
+        document_authors_award_applicant2_surname = DocumentAuthorsAward.objects.get(pk=pk).applicant2_surname
+        document_authors_award_applicant2_patronomic = DocumentAuthorsAward.objects.get(pk=pk).applicant2_patronomic
+        document_authors_award_applicant2_date_birth = DocumentAuthorsAward.objects.get(pk=pk).applicant2_date_birth
+
+
+        document_authors_award_applicant2_passport_seria = DocumentAuthorsAward.objects.get(pk=pk).applicant2_passport_seria
+        document_authors_award_applicant2_passport_number = DocumentAuthorsAward.objects.get(pk=pk).applicant2_passport_number
+        document_authors_award_applicant2_passport_date_of_issue = DocumentAuthorsAward.objects.get(pk=pk).applicant2_passport_date_of_issue
+        document_authors_award_applicant2_passport_place_giving = DocumentAuthorsAward.objects.get(pk=pk).applicant2_passport_place_giving
+
+        document_authors_award_applicant2_inn = DocumentAuthorsAward.objects.get(pk=pk).applicant2_inn
+        document_authors_award_applicant2_snils = DocumentAuthorsAward.objects.get(pk=pk).applicant2_snils
+        document_authors_award_applicant2_bank_info = DocumentAuthorsAward.objects.get(pk=pk).applicant2_bank_info
+        document_authors_award_applicant2_account_number = DocumentAuthorsAward.objects.get(pk=pk).applicant2_account_number
+        document_authors_award_applicant2_bik = DocumentAuthorsAward.objects.get(pk=pk).applicant2_bik
+        document_authors_award_applicant2_bank_inn = DocumentAuthorsAward.objects.get(pk=pk).applicant2_bank_inn
+        document_authors_award_applicant2_bank_kpp = DocumentAuthorsAward.objects.get(pk=pk).applicant2_bank_kpp
+        document_authors_award_applicant2_corr_account = DocumentAuthorsAward.objects.get(pk=pk).applicant2_corr_account
+
+        document_authors_award_authors_award = DocumentAuthorsAward.objects.get(pk=pk).authors_award
+        document_authors_award_authors_award_half = document_authors_award_authors_award // 2
+
+        template_name_id = DocumentAuthorsAward.objects.get(pk=pk).template_name_id
+        path_to_template = Sample.objects.get(pk=template_name_id).path_to_template.name
+
+        file_name_from_path = os.path.basename(path_to_template)
+
+        file_name_without_extension = str(os.path.splitext(file_name_from_path)[0])
+        # file_name_without_extension = 'document_consent'
+
+        # file_path = f'/Users/keito/Programming/Python/train/diploma/media/upload_sample/2024-05-07/{file_name_from_path}'
+        # file_path = '/Users/keito/Downloads/document_notif.docx'
+        file_path = f'/Users/keito/Programming/Python/train/diploma/media/{path_to_template}'
+
+        file_path_short = file_name_without_extension
+        if file_path.endswith('.docx'):
+            from datetime import datetime as dt
+            from numtostr_rus import convert
+            doc = DocxTemplate(file_path)
+            context = {
+                'program_name': document_authors_award_program_name,
+
+                'applicant1_name': document_authors_award_applicant1_name,
+                'applicant1_surname': document_authors_award_applicant1_surname,
+                'applicant1_patronomic': document_authors_award_applicant1_patronomic,
+                'applicant1_date_birth': dt.strftime(document_authors_award_applicant1_date_birth, '%d.%m.%Y'),
+
+                'applicant1_index': '413111',
+                'applicant1_country': 'Российская Федерация',
+                'applicant1_city': 'Энгельс',
+                'applicant1_street': 'пр-т Фридриха Энгельса',
+                'applicant1_building_number': 11,
+                'applicant1_flat_number': 69,
+
+                'applicant1_passport_seria': document_authors_award_applicant1_passport_seria,
+                'applicant1_passport_number': document_authors_award_applicant1_passport_number,
+                'applicant1_passport_date_of_issue': dt.strftime(document_authors_award_applicant1_passport_date_of_issue, '%d.%m.%Y'),
+                'applicant1_passport_place_giving': document_authors_award_applicant1_passport_place_giving,
+
+                'applicant1_inn': document_authors_award_applicant1_inn,
+                'applicant1_snils': document_authors_award_applicant1_snils,
+                'applicant1_bank_info': document_authors_award_applicant1_bank_info,
+                'applicant1_account_number': document_authors_award_applicant1_account_number,
+                'applicant1_bik': document_authors_award_applicant1_bik,
+                'applicant1_bank_inn': document_authors_award_applicant1_bank_inn,
+                'applicant1_bank_kpp': document_authors_award_applicant1_bank_kpp,
+                'applicant1_corr_account': document_authors_award_applicant1_corr_account,
+
+                # 2
+                'applicant2_name': document_authors_award_applicant2_name,
+                'applicant2_surname': document_authors_award_applicant2_surname,
+                'applicant2_patronomic': document_authors_award_applicant2_patronomic,
+                'applicant2_date_birth': dt.strftime(document_authors_award_applicant2_date_birth, '%d.%m.%Y'),
+
+                'applicant2_index': '999111',
+                'applicant2_country': 'Российская Федерация',
+                'applicant2_city': 'Саратов',
+                'applicant2_street': 'Кирова',
+                'applicant2_building_number': 1,
+                'applicant2_flat_number': 629,
+
+                'applicant2_passport_seria': document_authors_award_applicant2_passport_seria,
+                'applicant2_passport_number': document_authors_award_applicant2_passport_number,
+                'applicant2_passport_date_of_issue': dt.strftime(document_authors_award_applicant2_passport_date_of_issue, '%d.%m.%Y'),
+                'applicant2_passport_place_giving': document_authors_award_applicant2_passport_place_giving,
+
+                'applicant2_inn': document_authors_award_applicant2_inn,
+                'applicant2_snils': document_authors_award_applicant2_snils,
+                'applicant2_bank_info': document_authors_award_applicant2_bank_info,
+                'applicant2_account_number': document_authors_award_applicant2_account_number,
+                'applicant2_bik': document_authors_award_applicant2_bik,
+                'applicant2_bank_inn': document_authors_award_applicant2_bank_inn,
+                'applicant2_bank_kpp': document_authors_award_applicant2_bank_kpp,
+                'applicant2_corr_account': document_authors_award_applicant2_corr_account,
+
+                'applicant1_name_short': document_authors_award_applicant1_name[0],
+                'applicant1_patronomic_short': document_authors_award_applicant1_patronomic[0],
+                'applicant2_name_short': document_authors_award_applicant2_name[0],
+                'applicant2_patronomic_short': document_authors_award_applicant2_patronomic[0],
+
+                'applicant1_authors_award': document_authors_award_authors_award_half,
+                'applicant2_authors_award': document_authors_award_authors_award_half,
+
+                'authors_award_text': convert(document_authors_award_authors_award),
+                'applicant1_authors_award_text': convert(document_authors_award_authors_award_half),
+                'applicant2_authors_award_text': convert(document_authors_award_authors_award_half),
+            }
+
+            doc.render(context)
+            # file_name = f'/Users/keito/Downloads/{file_path_short}_downloaded.docx'
+            file_name = f'{file_path_short}_downloaded.docx'
+            doc.save(file_name)
+
+        response = FileResponse(open(file_name, 'rb'))
+        response['Content-Disposition'] = f'attachment; filename="{file_name}"'
+        return response
 
 class SampleListView(ListView):
     model = Sample

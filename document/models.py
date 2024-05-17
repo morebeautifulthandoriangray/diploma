@@ -142,3 +142,74 @@ class DocumentNotification(Model):
 
     def get_absolute_url(self):
         return reverse('document_notification_detail', args=[str(self.id)], )
+
+
+class DocumentAuthorsAward(Model):
+    phone_regex = RegexValidator(regex=r'^\+?7?\d{10,11}$',
+                                 message="Phone number must be entered in the format: '+79991234567'. Up to 11 digits allowed.")
+    title = models.CharField(max_length=200)
+    template_name = models.ForeignKey('Sample', null=True, blank=True, on_delete=models.CASCADE)
+    path_to_template = models.FileField(blank=True)
+
+    program_name = models.CharField(max_length=500, blank=True)
+
+    # 1
+    applicant1_name = models.CharField(max_length=200, blank=True)
+    applicant1_surname = models.CharField(max_length=200, blank=True)
+    applicant1_patronomic = models.CharField(max_length=200, blank=True)
+    applicant1_date_birth = models.DateField(null=True)
+
+    applicant1_passport_seria = models.IntegerField(null=True)
+    applicant1_passport_number = models.IntegerField(null=True)
+    applicant1_passport_date_of_issue = models.DateField(null=True)
+    applicant1_passport_place_giving = models.CharField(max_length=500, null=True)
+
+    applicant1_inn = models.CharField(max_length=200, blank=True)
+    applicant1_snils = models.CharField(max_length=200, blank=True)
+    applicant1_bank_info = models.CharField(max_length=200, blank=True)
+    applicant1_account_number = models.CharField(max_length=200, blank=True)
+    applicant1_bik = models.CharField(max_length=200, blank=True)
+    applicant1_bank_inn = models.CharField(max_length=200, blank=True)
+    applicant1_bank_kpp = models.CharField(max_length=200, blank=True)
+    applicant1_corr_account = models.CharField(max_length=200, blank=True)
+
+
+    # 2
+    applicant2_name = models.CharField(max_length=200, blank=True)
+    applicant2_surname = models.CharField(max_length=200, blank=True)
+    applicant2_patronomic = models.CharField(max_length=200, blank=True)
+    applicant2_date_birth = models.DateField(null=True)
+
+
+    applicant2_passport_seria = models.IntegerField(null=True)
+    applicant2_passport_number = models.IntegerField(null=True)
+    applicant2_passport_date_of_issue = models.DateField(null=True)
+    applicant2_passport_place_giving = models.CharField(max_length=500, null=True)
+
+    applicant2_inn = models.CharField(max_length=200, blank=True)
+    applicant2_snils = models.CharField(max_length=200, blank=True)
+    applicant2_bank_info = models.CharField(max_length=200, blank=True)
+    applicant2_account_number = models.CharField(max_length=200, blank=True)
+    applicant2_bik = models.CharField(max_length=200, blank=True)
+    applicant2_bank_inn = models.CharField(max_length=200, blank=True)
+    applicant2_bank_kpp = models.CharField(max_length=200, blank=True)
+    applicant2_corr_account = models.CharField(max_length=200, blank=True)
+
+
+    authors_award = models.SmallIntegerField(null=True, blank=True)
+
+    # не хочется делать эту логику делания на 2 на беке, мб на фронте сделать?
+    # applicant1_authors_award = models.SmallIntegerField(null=True, blank=True)
+    # applicant2_authors_award = models.SmallIntegerField(null=True, blank=True)
+
+    # authors_award_text - не забыть это подсчитать с помощью спец библиотеки нам ту текст
+    # applicant1_name_short
+    # applicant1_patronomic_short
+    #applicant2_name_short
+    #applicant2_patronomic_short
+    #
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('document_authors_award_detail', args=[str(self.id)], )

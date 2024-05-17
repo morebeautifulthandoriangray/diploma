@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block content %}
+    <div>
+        <h2> {{ documentauthorsaward.title }}</h2>
+        <p> {{ documentauthorsaward.created_at }}</p>
+        <p> {{ documentauthorsaward.path_to_template }}</p>
+    </div>
+
+    <h1><a href="#">Скачать документ</a></h1>
+
+    <div class="col-md-4">
+
+        <a href="{% url 'document_authors_award_download_docx' documentauthorsaward.pk %}" class="btn btn-primary">Export DOCX</a>
+{#        <a href="#" class="btn btn-secondary">Export PDF</a>#}
+
+    </div>
+    <a href="{% url 'document_authors_award_edit' documentauthorsaward.pk %}">+Редактировать данные для документа</a>
+    </br>
+    <a href="{% url 'document_authors_award_delete' documentauthorsaward.pk %}">-Удалить документ</a>
+{% endblock %}

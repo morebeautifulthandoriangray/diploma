@@ -15,7 +15,15 @@ from .views import ( DocumentConsentListView,
                      DocumentNotificationUpdateView,
                      DocumentNotificationDeleteView,
                      DocumentNotificationCreateView,
-                     DocumentNotificationDownloadDocx)
+                     DocumentNotificationDownloadDocx,
+
+
+                     DocumentAuthorsAwardListView,
+                     DocumentAuthorsAwardDetailView,
+                     DocumentAuthorsAwardUpdateView,
+                     DocumentAuthorsAwardDeleteView,
+                     DocumentAuthorsAwardCreateView,
+                     DocumentAuthorsAwardDownloadDocx)
 from django.views.generic import TemplateView
 from document import views
 
@@ -49,12 +57,12 @@ urlpatterns = [
          name='document_notification_download_docx'),
 
 #
-    path('documents/authors_award/', DocumentConsentListView.as_view(), name='documents_authors_award_all'),
-    path('documents/authors_award/new/', DocumentConsentCreateView.as_view(), name='document_authors_award_new'),
-    path('documents/authors_award/<int:pk>/', DocumentConsentDetailView.as_view(), name='document_authors_award_detail'),
-    path('documents/authors_award/<int:pk>/edit', DocumentConsentUpdateView.as_view(), name='document_authors_award_edit'),
-    path('documents/authors_award/<int:pk>/delete', DocumentConsentDeleteView.as_view(), name='document_authors_award_delete'),
-    path('documents/authors_award/<int:pk>/download_docx/', DocumentConsentDownloadDocx.as_view(),
-         name='document_authors_award_delete'),
+    path('documents/authors_award/', DocumentAuthorsAwardListView.as_view(), name='documents_authors_award_all'),
+    path('documents/authors_award/new/', DocumentAuthorsAwardCreateView.as_view(), name='document_authors_award_new'),
+    path('documents/authors_award/<int:pk>/', DocumentAuthorsAwardDetailView.as_view(), name='document_authors_award_detail'),
+    path('documents/authors_award/<int:pk>/edit', DocumentAuthorsAwardUpdateView.as_view(), name='document_authors_award_edit'),
+    path('documents/authors_award/<int:pk>/delete', DocumentAuthorsAwardDeleteView.as_view(), name='document_authors_award_delete'),
+    path('documents/authors_award/<int:pk>/download_docx/', DocumentAuthorsAwardDownloadDocx.as_view(),
+         name='document_authors_award_download_docx'),
 
 ]
