@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Main</title>
+    <title>Hedgehog</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/product.css' %}">
@@ -139,22 +139,23 @@
     <main>
         <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary">
             <div class="col-md-6 p-lg-5 mx-auto my-5">
-                <h1 class="display-3 fw-bold">Designed for engineers</h1>
-                <h3 class="fw-normal text-muted mb-3">Build anything you want with Aperture</h3>
-                <div class="d-flex gap-3 justify-content-center lead fw-normal">
-                    <a class="icon-link" href="#">
-                        Learn more
-                        <svg class="bi">
-                            <use xlink:href="#chevron-right"/>
-                        </svg>
-                    </a>
-                    <a class="icon-link" href="#">
-                        Buy
-                        <svg class="bi">
-                            <use xlink:href="#chevron-right"/>
-                        </svg>
-                    </a>
-                </div>
+                <h1 class="display-3 fw-bold">Онлайн генерация документов</h1>
+                <h2 class="fw-normal text-muted mb-3">Не теряйте время на создание документов </h2>
+                <h3 class="fw-lighter text-muted mb-3">Готовая библиотека шаблонов у вас в руках </h3>
+{#                <div class="d-flex gap-3 justify-content-center lead fw-normal">#}
+{#                    <a class="icon-link" href="#">#}
+{#                        Learn more#}
+{#                        <svg class="bi">#}
+{#                            <use xlink:href="#chevron-right"/>#}
+{#                        </svg>#}
+{#                    </a>#}
+{#                    <a class="icon-link" href="#">#}
+{#                        Buy#}
+{#                        <svg class="bi">#}
+{#                            <use xlink:href="#chevron-right"/>#}
+{#                        </svg>#}
+{#                    </a>#}
+{#                </div>#}
             </div>
             <div class="product-device shadow-sm d-none d-md-block"></div>
             <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
@@ -163,78 +164,83 @@
         <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
             <div class="text-bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
                 <div class="my-3 py-3">
-                    <h2 class="display-5">Another headline</h2>
-                    <p class="lead">And an even wittier subheading.</p>
+                    <h2 class="display-5">
+                        <a class="nav-link" href="{% url 'samples_all' %}">Шаблоны</a>
+                    </h2>
+                    <p class="lead">Сгенерируй свой шаблон по
+                        <a class="link-light link-underline-light" href="#">подсказке</a></p>
                 </div>
                 <div class="bg-body-tertiary shadow-sm mx-auto"
                      style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
             </div>
             <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
                 <div class="my-3 p-3">
-                    <h2 class="display-5">Another headline</h2>
-                    <p class="lead">And an even wittier subheading.</p>
+                    <h2 class="display-5">
+                        <a class="nav-link" href="{% url 'documents_all' %}">Документы</a></h2>
+                    </h2>
+                    <p class="lead">Создай свой документ по шаблону.</p>
                 </div>
                 <div class="bg-dark shadow-sm mx-auto"
                      style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
             </div>
         </div>
 
-        <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-            <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-                <div class="my-3 p-3">
-                    <h2 class="display-5">Another headline</h2>
-                    <p class="lead">And an even wittier subheading.</p>
-                </div>
-                <div class="bg-dark shadow-sm mx-auto"
-                     style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-            </div>
-            <div class="text-bg-primary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-                <div class="my-3 py-3">
-                    <h2 class="display-5">Another headline</h2>
-                    <p class="lead">And an even wittier subheading.</p>
-                </div>
-                <div class="bg-body-tertiary shadow-sm mx-auto"
-                     style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-            </div>
-        </div>
+{#        <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">#}
+{#            <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">#}
+{#                <div class="my-3 p-3">#}
+{#                    <h2 class="display-5">Another headline</h2>#}
+{#                    <p class="lead">And an even wittier subheading.</p>#}
+{#                </div>#}
+{#                <div class="bg-dark shadow-sm mx-auto"#}
+{#                     style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>#}
+{#            </div>#}
+{#            <div class="text-bg-primary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">#}
+{#                <div class="my-3 py-3">#}
+{#                    <h2 class="display-5">Another headline</h2>#}
+{#                    <p class="lead">And an even wittier subheading.</p>#}
+{#                </div>#}
+{#                <div class="bg-body-tertiary shadow-sm mx-auto"#}
+{#                     style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>#}
+{#            </div>#}
+{#        </div>#}
 
-        <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-            <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-                <div class="my-3 p-3">
-                    <h2 class="display-5">Another headline</h2>
-                    <p class="lead">And an even wittier subheading.</p>
-                </div>
-                <div class="bg-body shadow-sm mx-auto"
-                     style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-            </div>
-            <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-                <div class="my-3 py-3">
-                    <h2 class="display-5">Another headline</h2>
-                    <p class="lead">And an even wittier subheading.</p>
-                </div>
-                <div class="bg-body shadow-sm mx-auto"
-                     style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-            </div>
-        </div>
+{#        <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">#}
+{#            <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">#}
+{#                <div class="my-3 p-3">#}
+{#                    <h2 class="display-5">Another headline</h2>#}
+{#                    <p class="lead">And an even wittier subheading.</p>#}
+{#                </div>#}
+{#                <div class="bg-body shadow-sm mx-auto"#}
+{#                     style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>#}
+{#            </div>#}
+{#            <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">#}
+{#                <div class="my-3 py-3">#}
+{#                    <h2 class="display-5">Another headline</h2>#}
+{#                    <p class="lead">And an even wittier subheading.</p>#}
+{#                </div>#}
+{#                <div class="bg-body shadow-sm mx-auto"#}
+{#                     style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>#}
+{#            </div>#}
+{#        </div>#}
 
-        <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-            <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-                <div class="my-3 p-3">
-                    <h2 class="display-5">Another headline</h2>
-                    <p class="lead">And an even wittier subheading.</p>
-                </div>
-                <div class="bg-body shadow-sm mx-auto"
-                     style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-            </div>
-            <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-                <div class="my-3 py-3">
-                    <h2 class="display-5">Another headline</h2>
-                    <p class="lead">And an even wittier subheading.</p>
-                </div>
-                <div class="bg-body shadow-sm mx-auto"
-                     style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-            </div>
-        </div>
+{#        <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">#}
+{#            <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">#}
+{#                <div class="my-3 p-3">#}
+{#                    <h2 class="display-5">Another headline</h2>#}
+{#                    <p class="lead">And an even wittier subheading.</p>#}
+{#                </div>#}
+{#                <div class="bg-body shadow-sm mx-auto"#}
+{#                     style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>#}
+{#            </div>#}
+{#            <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">#}
+{#                <div class="my-3 py-3">#}
+{#                    <h2 class="display-5">Another headline</h2>#}
+{#                    <p class="lead">And an even wittier subheading.</p>#}
+{#                </div>#}
+{#                <div class="bg-body shadow-sm mx-auto"#}
+{#                     style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>#}
+{#            </div>#}
+{#        </div>#}
     </main>
 
     <footer class="container py-5">
@@ -246,44 +252,46 @@
                     <circle cx="12" cy="12" r="10"/>
                     <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
                 </svg>
-                <small class="d-block mb-3 text-body-secondary">&copy; 2017–2024</small>
+                <small class="d-block mb-3 text-body-secondary">&copy; 2024</small>
             </div>
             <div class="col-6 col-md">
-                <h5>Features</h5>
+                <h5>Функциональность</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Random feature</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Team feature</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Stuff for developers</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Another one</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Last time</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">Создание шаблона</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">Создание документа</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">Подсказки адреса и ФИО</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">Админская панель</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">Аналитика</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">Каталог документов</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md">
-                <h5>Resources</h5>
+                <h5>Технологии</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">Python</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">Django</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">DocxTpl</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">DaData API</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">Petrovich</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">NumToText</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md">
-                <h5>Resources</h5>
+                <h5>Применение</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="link-secondary text-decoration-none" href="#">Business</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Education</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Government</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Gaming</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">Бизнес</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">Частные английские школы</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">Авиация</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">Системный и бизнес анализ</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md">
-                <h5>About</h5>
+                <h5>О нас</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="link-secondary text-decoration-none" href="#">Team</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Locations</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">Дипломная работа</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">СГТУ</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">ИнПИТ</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">ИФСТ</a></li>
                 </ul>
             </div>
         </div>

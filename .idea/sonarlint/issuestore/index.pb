@@ -1,16 +1,10 @@
 
-C
-diploma/__init__.py,1/3/13fb2c41d953bc5a982b056e25f98c80ba34db07
-?
-diploma/asgi.py,d/e/de0f275827e6c650b71e0599d42840733905b6a6
 D
 document/__init__.py,9/e/9ec672a2afd8e817dc9d9a3a75c7836f4dfd5a28
 S
 #document/migrations/0001_initial.py,4/7/47acd3b22682830437a3de706817806fd7884453
 @
 document/apps.py,2/d/2d18885726f19f3a3ef2cf384d657542fb9573a5
-F
-static/css/product.css,6/3/6377ce3a1b042a6bac39134b48b2a5e82cd08eac
 O
 document/migrations/__init__.py,9/6/96b4402e25a5a85f4f7cf633c4ec7d05066af838
 b

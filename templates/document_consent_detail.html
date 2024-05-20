@@ -7,8 +7,6 @@
         <p> {{ documentconsent.path_to_template }}</p>
     </div>
 
-    <h1><a href="#">Скачать документ</a></h1>
-
     <div class="col-md-4">
 
         <a href="{% url 'document_consent_download_docx' documentconsent.pk %}" class="btn btn-primary">Export DOCX</a>
