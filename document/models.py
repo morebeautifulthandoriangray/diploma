@@ -213,3 +213,54 @@ class DocumentAuthorsAward(Model):
 
     def get_absolute_url(self):
         return reverse('document_authors_award_detail', args=[str(self.id)], )
+
+
+
+class DocumentDiplomaPractice(Model):
+    title = models.CharField(max_length=200)
+    template_name = models.ForeignKey('Sample', null=True, blank=True, on_delete=models.CASCADE)
+    path_to_template = models.FileField(blank=True)
+
+    student_name = models.CharField(max_length=200, blank=True)
+    student_surname = models.CharField(max_length=200, blank=True)
+    student_patronomic = models.CharField(max_length=200, blank=True)
+
+    org_name = models.CharField(max_length=200, blank=True)
+    org_surname = models.CharField(max_length=200, blank=True)
+    org_patronomic = models.CharField(max_length=200, blank=True)
+
+
+    # _shorrt
+    # student_name = models.CharField(max_length=200, blank=True)
+    # student_patronomic = models.CharField(max_length=200, blank=True)
+
+    # org_name = models.CharField(max_length=200, blank=True)
+    # org_patronomic = models.CharField(max_length=200, blank=True)
+
+    practice_company = models.CharField(max_length=200, blank=True)
+    practice_address = models.CharField(max_length=200, blank=True)
+    practice_date_from = models.DateField(null=True)
+    practice_date_to = models.DateField(null=True)
+
+    agreement_number = models.CharField(max_length=200, blank=True)
+    date_agreement = models.DateField(null=True)
+
+
+class DocumentSACB(Model):
+    title = models.CharField(max_length=200)
+    template_name = models.ForeignKey('Sample', null=True, blank=True, on_delete=models.CASCADE)
+    path_to_template = models.FileField(blank=True)
+
+    project_sponsor = models.CharField(max_length=200, blank=True)
+    project_name = models.CharField(max_length=200, blank=True)
+    project_developer = models.CharField(max_length=200, blank=True)
+    project_purpose = models.CharField(max_length=200, blank=True)
+    project_tasks = models.CharField(max_length=500, blank=True)
+    project_deadline = models.DateField(auto_now=True)
+    project_participants = models.CharField(max_length=200, blank=True)
+    project_short_description = models.CharField(max_length=200, blank=True)
+    projects_integration = models.CharField(max_length=200, blank=True)
+    expected_final_results = models.CharField(max_length=200, blank=True)
+    project_financing_sources = models.CharField(max_length=200, blank=True)
+
+    current_date = models.DateField(auto_now=True)

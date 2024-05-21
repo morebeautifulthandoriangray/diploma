@@ -13,7 +13,7 @@
 {#        <a href="#" class="btn btn-secondary">Export PDF</a>#}
 
     </div>
-    <a href="{% url 'document_authors_award_edit' documentauthorsaward.pk %}">+Редактировать данные для документа</a>
+    <a href="{% url 'document_authors_award_edit' documentauthorsaward.pk %}" class="btn btn-outline-warning">+Редактировать данные для документа</a>
     </br>
-    <a href="{% url 'document_authors_award_delete' documentauthorsaward.pk %}">-Удалить документ</a>
+    <a href="{% url 'document_authors_award_delete' documentauthorsaward.pk %}" class="btn btn-outline-danger">-Удалить документ</a>
 {% endblock %}

@@ -4,13 +4,27 @@
 
     <div>
         <h1>Последние созданные шаблоны</h1>
-        <h1><a href="{% url 'sample_new' %}">Создать шаблон</a></h1>
     </div>
 
+
     {% for sample in object_list %}
-        <br/>
-        <h3><a href="{% url 'sample_detail' sample.pk %}">{{ sample.title }}</a></h3>
-        <p>{{ sample.path_to_template }}</p>
-        <p>{{ sample.created_at }}</p>
+
+
+        <div class="list-group">
+
+            <a href="{% url 'sample_detail' sample.pk %}" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ sample.title }}</h5>
+                    <small class="text-muted">{{ sample.created_at }}</small>
+                </div>
+                <p class="mb-1"><p>{{ sample.path_to_template }}</p></p>
+{#                <small class="text-muted"><p>{{ document.template_name }}</p></small>#}
+            </a>
+
+        </div>
     {% endfor %}
+
+    </br>
+    <a href="{% url 'sample_new' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Создать шаблон</a>
+
 {% endblock %}

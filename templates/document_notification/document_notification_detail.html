@@ -14,7 +14,7 @@
 
     </div>
 
-    <a href="{% url 'document_notification_edit' documentnotification.pk %}">+Редактировать данные для документа</a>
+    <a href="{% url 'document_notification_edit' documentnotification.pk %}" class="btn btn-outline-warning">+Редактировать данные для документа</a>
     </br>
-    <a href="{% url 'document_notification_delete' documentnotification.pk %}">-Удалить документ</a>
+    <a href="{% url 'document_notification_delete' documentnotification.pk %}" class="btn btn-outline-danger">-Удалить документ</a>
 {% endblock %}

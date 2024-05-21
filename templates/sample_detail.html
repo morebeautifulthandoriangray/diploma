@@ -1,23 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div>
-        <h2> {{ sample.title }}</h2>
-        <p> {{ sample.created_at }}</p>
-{#        тут должен быть предпросмотр#}
-        <a href="#"> {{ sample.path_to_template }}</a>
-    </div>
 
+    <div>
+        <h2> {{ sample.title  }}</h2>
+        <p> {{ sample.created_at}}</p>
+        <p> {{ sample.path_to_template }}</p>
+    </div>
 
     <div class="col-md-4">
 
         <a href="{% url 'sample_download_docx' sample.pk %}" class="btn btn-primary">Export DOCX</a>
-{#        <a href="{% url 'sample_download_pdf' sample.pk %}" class="btn btn-secondary">Export PDF</a>#}
+{#        <a href="#sample_download_pdf" class="btn btn-secondary">Export PDF</a>#}
 
     </div>
 
-
-
-    <a href="{% url 'sample_edit' sample.pk %}">+Edit Sample</a>
-    <a href="{% url 'sample_delete' sample.pk %}">-Delete Sample</a>
+    <a href="{% url 'sample_edit' sample.pk %}" class="btn btn-outline-warning">+Редактировать шаблон</a>
+    </br>
+    <a href="{% url 'sample_delete' sample.pk %}" class="btn btn-outline-danger">-Удалить шаблон</a>
 {% endblock %}

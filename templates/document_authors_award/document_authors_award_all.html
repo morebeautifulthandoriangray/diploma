@@ -4,14 +4,25 @@
 
     <div>
         <h1>Последние созданные документы</h1>
-        <h1><a href="{% url 'document_authors_award_new' %}">Создать документ</a></h1>
     </div>
 
-
     {% for document in object_list %}
-        <br/>
-        <h3><a href="{% url 'document_authors_award_detail' document.pk %}">{{ document.title }}</a></h3>
-        <p>{{ document.path_to_template }}</p>
-        <p>{{ document.created_at }}</p>
+
+
+        <div class="list-group">
+
+            <a href="{% url 'document_authors_award_detail' document.pk %}" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ document.title }}</h5>
+                    <small class="text-muted">{{ document.created_at }}</small>
+                </div>
+                <p class="mb-1"><p>{{ document.path_to_template }}</p></p>
+                <small class="text-muted"><p>{{ document.template_name }}</p></small>
+            </a>
+
+        </div>
     {% endfor %}
+
+    </br>
+    <a href="{% url 'document_authors_award_new' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Создать документ</a>
 {% endblock %}
