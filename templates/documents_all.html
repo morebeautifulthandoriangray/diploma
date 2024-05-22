@@ -13,16 +13,23 @@
 {#    <h1><a href="#">Стопка документов на поспупление в ВУЗ</a></h1>#}
     <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
         <div class="row">
-            <div class="col-4">
+            <div class="col">
                 <div class="list-group" id="list-tab" role="tablist">
-                    <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list"
-                       href="{% url 'documents_consent_all' %}" role="tab" aria-controls="list-home">Документы на согласие и обработку персональных данных</a>
+                    <a class="list-group-item list-group-item-action" id="list-home-list" data-bs-toggle="list"
+                       href="{% url 'documents_consent_all' %}" role="tab" aria-controls="list-home">
+                        <h1> Документы на согласие и обработку персональных данных</h1></a>
                     <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list"
-                       href="{% url 'documents_notification_all' %}" role="tab" aria-controls="list-profile">Документы на уведомление о создании интеллектуальной деятельности</a>
+                       href="{% url 'documents_notification_all' %}" role="tab" aria-controls="list-profile">
+                        <h1>Документы на уведомление о создании интеллектуальной деятельности</h1>
+                    </a>
                     <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list"
-                       href="{% url 'documents_notification_all' %}" role="tab" aria-controls="list-messages">Документ о выплате авторского вознаграждения</a>
+                       href="{% url 'documents_authors_award_all' %}" role="tab" aria-controls="list-messages">
+                        <h1>Документ о выплате авторского вознаграждения</h1>
+                    </a>
                     <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list"
-                       href="#list-settings" role="tab" aria-controls="list-settings">???</a>
+                       href="#list-settings" role="tab" aria-controls="list-settings">
+                        <h1>Документ на преддипломную практику</h1>
+                    </a>
                 </div>
             </div>
 {#            <div class="col-8">#}
