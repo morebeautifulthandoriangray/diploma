@@ -3,8 +3,6 @@ D
 document/__init__.py,9/e/9ec672a2afd8e817dc9d9a3a75c7836f4dfd5a28
 S
 #document/migrations/0001_initial.py,4/7/47acd3b22682830437a3de706817806fd7884453
-@
-document/apps.py,2/d/2d18885726f19f3a3ef2cf384d657542fb9573a5
 O
 document/migrations/__init__.py,9/6/96b4402e25a5a85f4f7cf633c4ec7d05066af838
 b
