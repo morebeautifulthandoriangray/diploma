@@ -65,4 +65,5 @@ urlpatterns = [
     path('documents/authors_award/<int:pk>/download_docx/', DocumentAuthorsAwardDownloadDocx.as_view(),
          name='document_authors_award_download_docx'),
 
+
 ]
