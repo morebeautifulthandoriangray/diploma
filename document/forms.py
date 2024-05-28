@@ -9,6 +9,7 @@ class SampleForm(ModelForm):
         fields = ['title', 'path_to_template']
 
 
+
 class DocumentConsentForm(ModelForm):
     class Meta:
         model = DocumentConsent

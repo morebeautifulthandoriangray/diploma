@@ -1,0 +1,13 @@
+#header,
+.module h2, .module caption, .inline-group h2{
+    background: #343a40;
+    color: white;
+}
+
+#site-name a:link, #site-name a:visited {
+    color: white;
+}
+
+div.breadcrumbs {
+    background: #282e31;
+}

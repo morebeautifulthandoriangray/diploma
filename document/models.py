@@ -24,9 +24,9 @@ class Document(models.Model):
 
 
 class Sample(Model):
-    title = models.CharField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True)
-    path_to_template = models.FileField(blank=True, upload_to='upload_sample/%Y-%m-%d/')
+    title = models.CharField(max_length=200, verbose_name='Название шаблона')
+    created_at = models.DateTimeField(auto_now_add=True,  verbose_name='Дата создания')
+    path_to_template = models.FileField(blank=True, upload_to='upload_sample/%Y-%m-%d/', verbose_name='Путь до файла')
 
     def __str__(self):
         return self.title
@@ -36,6 +36,8 @@ class Sample(Model):
 
     class Meta:
         ordering = ('-created_at',)
+        verbose_name = 'Шаблон'
+        verbose_name_plural = 'Шаблоны'
 
 
 class DocumentConsent(Model):
