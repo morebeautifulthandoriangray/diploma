@@ -7,7 +7,7 @@ from .views import ( DocumentConsentListView,
                      SampleDetailView, SampleUpdateView,
                      SampleDeleteView, DocumentConsentDetailView,
                      DocumentConsentUpdateView, DocumentConsentDeleteView,
-                     FileDownloadDocx, FileDownloadPdf, DocumentConsentDownloadDocx,
+                     FileDownloadDocx, FileDownloadPdf, DocumentConsentDownloadDocx, DocumentConsentDownloadPDF,
 
 
                      DocumentNotificationListView,
@@ -38,7 +38,10 @@ urlpatterns = [
     path('documents/consent/<int:pk>/edit', DocumentConsentUpdateView.as_view(), name='document_consent_edit'),
     path('documents/consent/<int:pk>/delete', DocumentConsentDeleteView.as_view(), name='document_consent_delete'),
     path('documents/consent/<int:pk>/download_docx/', DocumentConsentDownloadDocx.as_view(), name='document_consent_download_docx'),
-#     sample document
+    path('documents/consent/<int:pk>/download_pdf/', DocumentConsentDownloadPDF.as_view(),
+         name='document_consent_download_pdf'),
+
+    #     sample document
     path('samples/', SampleListView.as_view(), name='samples_all'),
     path('samples/<int:pk>/', SampleDetailView.as_view(), name='sample_detail'),
     path('samples/new/', SampleCreateView.as_view(), name='sample_new'),

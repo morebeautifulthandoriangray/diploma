@@ -9,8 +9,8 @@
 
     <div class="col-md-4">
 
-        <a href="{% url 'document_consent_download_docx' documentconsent.pk %}" class="btn btn-primary">Export DOCX</a>
-{#        <a href="#" class="btn btn-secondary">Export PDF</a>#}
+        <a href="{% url 'document_consent_download_docx' documentconsent.pk %}" class="btn btn-primary">Скачать в формате DOCX</a>
+        <a href="{% url 'document_consent_download_pdf' documentconsent.pk %}" class="btn btn-danger">Скачать в формате PDF</a>
 
     </div>
 

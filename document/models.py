@@ -22,6 +22,10 @@ class Document(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = 'Документ'
+        verbose_name_plural = 'Документы'
+
 
 class Sample(Model):
     title = models.CharField(max_length=200, verbose_name='Название шаблона')
@@ -43,14 +47,14 @@ class Sample(Model):
 class DocumentConsent(Model):
     phone_regex = RegexValidator(regex=r'^\+?7?\d{10,11}$',
                                  message="Phone number must be entered in the format: '+79991234567'. Up to 11 digits allowed.")
-    title = models.CharField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True)
-    template_name = models.ForeignKey('Sample', null=True, blank=True, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200, verbose_name='Название документа')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    template_name = models.ForeignKey('Sample', null=True, blank=True, on_delete=models.CASCADE, verbose_name='Имя шаблона')
     path_to_template = models.FileField(blank=True)
-    program_name = models.CharField(max_length=500)
+    program_name = models.CharField(max_length=500, verbose_name='Название программы')
     application_number = models.IntegerField(null=True)
-    applicant_name = models.CharField(max_length=200)
-    applicant_surname = models.CharField(max_length=200)
+    applicant_name = models.CharField(max_length=200, verbose_name='Имя заявителя')
+    applicant_surname = models.CharField(max_length=200, verbose_name='Фамилия заявителя')
     applicant_patronomic = models.CharField(max_length=200)
     applicant_date_of_birth = models.DateField(null=True)
     address_index = models.IntegerField(null=True)
@@ -75,15 +79,19 @@ class DocumentConsent(Model):
         return reverse('document_consent_detail', args=[str(self.id)], )
     # подсказка - указать для пользователя, что нужно вводить полное название страны - Российская федерация
 
+    class Meta:
+        verbose_name = 'Документ согласие на персональные данные'
+        verbose_name_plural = 'Документы согласие на персональные данные'
+
 
 class DocumentNotification(Model):
     phone_regex = RegexValidator(regex=r'^\+?7?\d{10,11}$',
                                  message="Phone number must be entered in the format: '+79991234567'. Up to 11 digits allowed.")
-    title = models.CharField(max_length=200)
-    template_name = models.ForeignKey('Sample', null=True, blank=True, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200, verbose_name='Название документа')
+    template_name = models.ForeignKey('Sample', null=True, blank=True, on_delete=models.CASCADE, verbose_name='Имя шаблона')
     path_to_template = models.FileField(blank=True)
 
-    program_name = models.CharField(max_length=500, blank=True)
+    program_name = models.CharField(max_length=500, blank=True, verbose_name='Название программы')
     program_destiny = models.CharField(max_length=500, blank=True)
 
     # руководитель
@@ -92,12 +100,12 @@ class DocumentNotification(Model):
     head_patronomic = models.CharField(max_length=200, blank=True)
 
 
-    applicant1_name = models.CharField(max_length=200, blank=True)
-    applicant1_surname = models.CharField(max_length=200, blank=True)
+    applicant1_name = models.CharField(max_length=200, blank=True, verbose_name='Имя заявителя 1')
+    applicant1_surname = models.CharField(max_length=200, blank=True, verbose_name='Фамилия заявителя 1')
     applicant1_patronomic = models.CharField(max_length=200, blank=True)
 
-    applicant2_name = models.CharField(max_length=200, blank=True)
-    applicant2_surname = models.CharField(max_length=200, blank=True)
+    applicant2_name = models.CharField(max_length=200, blank=True, verbose_name='Имя заявителя 2')
+    applicant2_surname = models.CharField(max_length=200, blank=True, verbose_name='Фамилия заявителя 2')
     applicant2_patronomic = models.CharField(max_length=200, blank=True)
 
     applicant1_uni_position = models.CharField(max_length=200, blank=True)
@@ -135,8 +143,8 @@ class DocumentNotification(Model):
 
     fee = models.SmallIntegerField(null=True)
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    current_date = models.DateField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    current_date = models.DateField(auto_now=True, verbose_name='Текущая дата')
 
 
     def __str__(self):
@@ -146,18 +154,23 @@ class DocumentNotification(Model):
         return reverse('document_notification_detail', args=[str(self.id)], )
 
 
+    class Meta:
+        verbose_name = 'Документ на уведомление'
+        verbose_name_plural = 'Документы на уведомление'
+
+
 class DocumentAuthorsAward(Model):
     phone_regex = RegexValidator(regex=r'^\+?7?\d{10,11}$',
                                  message="Phone number must be entered in the format: '+79991234567'. Up to 11 digits allowed.")
-    title = models.CharField(max_length=200)
-    template_name = models.ForeignKey('Sample', null=True, blank=True, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200, verbose_name='Название документа')
+    template_name = models.ForeignKey('Sample', null=True, blank=True, on_delete=models.CASCADE, verbose_name='Имя шаблона')
     path_to_template = models.FileField(blank=True)
 
-    program_name = models.CharField(max_length=500, blank=True)
+    program_name = models.CharField(max_length=500, blank=True, verbose_name='Название программы')
 
     # 1
-    applicant1_name = models.CharField(max_length=200, blank=True)
-    applicant1_surname = models.CharField(max_length=200, blank=True)
+    applicant1_name = models.CharField(max_length=200, blank=True, verbose_name='Имя заявителя 1')
+    applicant1_surname = models.CharField(max_length=200, blank=True, verbose_name='Фамилия заявителя 1')
     applicant1_patronomic = models.CharField(max_length=200, blank=True)
     applicant1_date_birth = models.DateField(null=True)
 
@@ -177,8 +190,8 @@ class DocumentAuthorsAward(Model):
 
 
     # 2
-    applicant2_name = models.CharField(max_length=200, blank=True)
-    applicant2_surname = models.CharField(max_length=200, blank=True)
+    applicant2_name = models.CharField(max_length=200, blank=True, verbose_name='Имя заявителя 2')
+    applicant2_surname = models.CharField(max_length=200, blank=True, verbose_name='Фамилия заявителя 2')
     applicant2_patronomic = models.CharField(max_length=200, blank=True)
     applicant2_date_birth = models.DateField(null=True)
 
@@ -198,7 +211,7 @@ class DocumentAuthorsAward(Model):
     applicant2_corr_account = models.CharField(max_length=200, blank=True)
 
 
-    authors_award = models.SmallIntegerField(null=True, blank=True)
+    authors_award = models.SmallIntegerField(null=True, blank=True, verbose_name='Сумма вознаграждения')
 
     # не хочется делать эту логику делания на 2 на беке, мб на фронте сделать?
     # applicant1_authors_award = models.SmallIntegerField(null=True, blank=True)
@@ -215,6 +228,10 @@ class DocumentAuthorsAward(Model):
 
     def get_absolute_url(self):
         return reverse('document_authors_award_detail', args=[str(self.id)], )
+
+    class Meta:
+        verbose_name = 'Документ на авт.вознаграждение'
+        verbose_name_plural = 'Документы на авт.вознаграждение'
 
 
 
