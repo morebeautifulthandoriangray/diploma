@@ -6,8 +6,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Document
 from pydocx import PyDocX
-from .models import Document, DocumentConsent, Sample, DocumentNotification, DocumentAuthorsAward
-from .forms import SampleForm, DocumentConsentForm, DocumentNotificationForm, DocumentAuthorsAwardForm
+from .models import Document, DocumentConsent, Sample, DocumentNotification, DocumentAuthorsAward, DocumentSet
+from .forms import SampleForm, DocumentConsentForm, DocumentNotificationForm, DocumentAuthorsAwardForm, DocumentSetForm
 from django.views.generic.base import View
 from django.http import FileResponse
 from django.conf import settings
@@ -22,10 +22,18 @@ import tempfile
 
 # Create your views here.
 
+class DocumentSetListView(ListView):
+    model = DocumentSet
+    template_name = 'document_doc_pack/documents_sets_all_detail.html'
+
+# Create your views here.
+
 
 class DocumentAuthorsAwardListView(ListView):
     model = DocumentAuthorsAward
     template_name = 'document_authors_award/document_authors_award_all.html'
+
+# Create your views here.
 class DocumentNotificationListView(ListView):
     model = DocumentNotification
     template_name = 'document_notification/document_notification_all.html'
@@ -34,6 +42,12 @@ class DocumentConsentListView(ListView):
     model = DocumentConsent
     template_name = 'documents_consent_all.html'
 
+
+# ----------------create view---------------- #
+class DocumentSetsCreateView(CreateView):
+    model = DocumentSet
+    form_class = DocumentSetForm
+    template_name = 'document_doc_pack/documents_sets_new.html'
 
 class DocumentAuthorsAwardCreateView(CreateView):
     model = DocumentAuthorsAward
@@ -54,6 +68,12 @@ class DocumentConsentCreateView(CreateView):
     path_to_template = model.path_to_template
 
 
+# ----------------detail view---------------- #
+
+class DocumentSetsDetailView(DetailView):
+    model = DocumentSet
+    # form_class = DocumentSetForm
+    template_name = 'document_doc_pack/document_set_detail.html'
 
 class DocumentAuthorsAwardDetailView(DetailView):
     model = DocumentAuthorsAward
@@ -67,6 +87,14 @@ class DocumentConsentDetailView(DetailView):
     model = DocumentConsent
     template_name = 'document_consent_detail.html'
 
+
+# ----------------update view---------------- #
+
+
+class DocumentSetsUpdateView(UpdateView):
+    model = DocumentSet
+    form_class = DocumentSetForm
+    template_name = 'document_doc_pack/document_set_edit.html'
 
 class DocumentAuthorsAwardUpdateView(UpdateView):
     model = DocumentAuthorsAward
@@ -84,6 +112,13 @@ class DocumentConsentUpdateView(UpdateView):
     template_name = 'document_consent_edit.html'
 
 
+# ----------------delete view---------------- #
+
+
+class DocumentSetsDeleteView(DeleteView):
+    model = DocumentSet
+    template_name = 'document_doc_pack/document_set_delete.html'
+    success_url = reverse_lazy('document_sets_all_detail')
 
 class DocumentAuthorsAwardDeleteView(DeleteView):
     model = DocumentAuthorsAward
@@ -138,6 +173,7 @@ class DocumentConsentDownloadDocx(View):
         if file_path.endswith('.docx'):
             from datetime import datetime as dt
             doc = DocxTemplate(file_path)
+            document2 = DocxTemplate(file_path)
             context = {
                 'program_name': document_consent_program_name,
                 'application_number': document_consent_application_number,
@@ -164,14 +200,27 @@ class DocumentConsentDownloadDocx(View):
                 'passport_date_of_issue': dt.strftime(document_consent_passport_date_of_issue, '%d.%m.%Y'),
                 'passport_place_giving': document_consent_passport_place_giving,
             }
-            import aspose.words as aw
+            # import aspose.words as aw
+            # import random
+            #
+            # doc.render(context)
+            # document2.render(context)
+            # # file_name = f'/Users/keito/Downloads/{file_path_short}_downloaded.docx'
+            # file_name = f'{file_path_short}_downloaded.docx'
+            # file_name_2 = f'{file_path_short}_downloaded.docx'
+            # # document = aw.Document(file_name)
+            # document2 = aw.Document(file_name_2)
+            #
+            # doc.save(file_name)
+            # document2.save(file_name_2)
 
             doc.render(context)
             # file_name = f'/Users/keito/Downloads/{file_path_short}_downloaded.docx'
             file_name = f'{file_path_short}_downloaded.docx'
-            document = aw.Document(file_name)
+            doc.save(file_name)
 
-            # doc.save(file_name)
+
+
         response = FileResponse(open(file_name, 'rb'))
         response['Content-Disposition'] = f'attachment; filename="{file_name}"'
         return response
@@ -554,6 +603,185 @@ class FileDownloadPdf(View):
         response = FileResponse(open(file_path, 'rb'))
         response['Content-Disposition'] = f'attachment; filename="{file_name}"'
         return response
+
+
+class DocumentSetsDownloadDocx(View):
+    def get(self, request, pk=1, *args, **kwargs):
+        document_consent_program_name = DocumentSet.objects.get(pk=pk).document_consent.program_name
+            # DocumentConsent.objects.get(pk=pk).program_name
+        document_consent_application_number = DocumentSet.objects.get(pk=pk).document_consent.application_number
+        document_consent_applicant_name = DocumentSet.objects.get(pk=pk).document_consent.applicant_name
+        document_consent_applicant_surname = DocumentSet.objects.get(pk=pk).document_consent.applicant_surname
+        document_consent_applicant_patronomic = DocumentSet.objects.get(pk=pk).document_consent.applicant_patronomic
+        document_consent_applicant_date_of_birth = DocumentSet.objects.get(pk=pk).document_consent.applicant_date_of_birth
+        document_consent_address_index = DocumentSet.objects.get(pk=pk).document_consent.address_index
+        document_consent_address_country = DocumentSet.objects.get(pk=pk).document_consent.address_country
+        document_consent_address_city = DocumentSet.objects.get(pk=pk).document_consent.address_city
+        document_consent_address_street = DocumentSet.objects.get(pk=pk).document_consent.address_street
+        document_consent_address_building_number = DocumentSet.objects.get(pk=pk).document_consent.address_building_number
+        document_consent_address_house_flat_number = DocumentSet.objects.get(pk=pk).document_consent.address_house_flat_number
+        document_consent_applicant_phone_number = DocumentSet.objects.get(pk=pk).document_consent.applicant_phone_number
+        document_consent_current_date = DocumentSet.objects.get(pk=pk).document_consent.current_date
+        document_consent_passport_seria = DocumentSet.objects.get(pk=pk).document_consent.passport_seria
+        document_consent_passport_number = DocumentSet.objects.get(pk=pk).document_consent.passport_number
+        document_consent_passport_date_of_issue = DocumentSet.objects.get(pk=pk).document_consent.passport_date_of_issue
+        document_consent_passport_place_giving = DocumentSet.objects.get(pk=pk).document_consent.passport_place_giving
+
+        template_name_id = DocumentSet.objects.get(pk=pk).template_name_id
+        # .objects.get(pk=pk).template_name_id
+        path_to_template = Sample.objects.get(pk=template_name_id).path_to_template.name
+
+        file_name_from_path = os.path.basename(path_to_template)
+
+        file_name_without_extension = str(os.path.splitext(file_name_from_path)[0])
+        # file_name_without_extension = 'document_consent'
+
+        # file_path = f'/Users/keito/Programming/Python/train/diploma/media/upload_sample/2024-05-07/{file_name_from_path}'
+        # file_path = '/Users/keito/Programming/Python/train/diploma/media/upload_sample/2024-05-07/document_consent.docx'
+        file_path = f'/Users/keito/Programming/Python/train/diploma/media/{path_to_template}'
+
+        file_path_short = file_name_without_extension
+        if file_path.endswith('.docx'):
+            from datetime import datetime as dt
+            doc = DocxTemplate(file_path)
+            document2 = DocxTemplate(file_path)
+            context = {
+                'program_name': document_consent_program_name,
+                'application_number': document_consent_application_number,
+                'applicant_name': document_consent_applicant_name,
+                'applicant_surname': document_consent_applicant_surname,
+                'applicant_patronomic': document_consent_applicant_patronomic,
+                'applicant_date_of_birth': dt.strftime(document_consent_applicant_date_of_birth, '%d.%m.%Y'),
+                'birth_day': document_consent_applicant_date_of_birth.day,
+                'birth_month': document_consent_applicant_date_of_birth.month if document_consent_applicant_date_of_birth.month >= 10 else str(
+                    '0' + f'{document_consent_applicant_date_of_birth.month}'),
+                'birth_year': document_consent_applicant_date_of_birth.year,
+                'address_index': document_consent_address_index,
+                'address_country': document_consent_address_country,
+                'country_short': 'РФ',
+                'address_city': document_consent_address_city,
+                'address_street': document_consent_address_street,
+                'address_building_number': document_consent_address_building_number,
+                'address_house_flat_number': document_consent_address_house_flat_number,
+                'applicant_phone_number': document_consent_applicant_phone_number,
+                'current_date': dt.strftime(document_consent_current_date, '%d.%m.%Y'),
+                'applicant_name_short': document_consent_applicant_name[0],
+                'applicant_patronomic_short': document_consent_applicant_patronomic[0],
+                'passport_seria': document_consent_passport_seria,
+                'passport_number': document_consent_passport_number,
+                'passport_date_of_issue': dt.strftime(document_consent_passport_date_of_issue, '%d.%m.%Y'),
+                'passport_place_giving': document_consent_passport_place_giving,
+            }
+            import aspose.words as aw
+            import random
+
+            doc.render(context)
+            document2.render(context)
+            # file_name = f'/Users/keito/Downloads/{file_path_short}_downloaded.docx'
+            file_name = f'{file_path_short}_downloaded.docx'
+            # file_name_2 = f'{file_path_short}_downloaded.docx'
+            # # document = aw.Document(file_name)
+            # document2 = aw.Document(file_name_2)
+
+            doc.save(file_name)
+            # document2.save(file_name_2)
+
+        response = FileResponse(open(file_name, 'rb'))
+        response['Content-Disposition'] = f'attachment; filename="{file_name}"'
+
+        # saved_document_word = DocumentConsent.objects.get(pk=pk)
+        #
+        # # saved_document_word.path_to_template = f'download_document/consent/2024-05-30/{file_name_2}'
+        # saved_document_word.path_to_template = f'download_document/consent/2024-05-30/{file_name_2}'
+        # saved_document_word.save()
+
+        # response = FileResponse(open(file_name_2, 'rb'))
+        # response['Content-Disposition'] = f'attachment; filename="{file_name_2}"'
+        return response
+
+
+class DocumentSetsDownloadPDF(View):
+    def get(self, request, pk=1, *args, **kwargs):
+        document_consent_program_name = DocumentSet.objects.get(pk=pk).document_consent.program_name
+        # DocumentConsent.objects.get(pk=pk).program_name
+        document_consent_application_number = DocumentSet.objects.get(pk=pk).document_consent.application_number
+        document_consent_applicant_name = DocumentSet.objects.get(pk=pk).document_consent.applicant_name
+        document_consent_applicant_surname = DocumentSet.objects.get(pk=pk).document_consent.applicant_surname
+        document_consent_applicant_patronomic = DocumentSet.objects.get(pk=pk).document_consent.applicant_patronomic
+        document_consent_applicant_date_of_birth = DocumentSet.objects.get(
+            pk=pk).document_consent.applicant_date_of_birth
+        document_consent_address_index = DocumentSet.objects.get(pk=pk).document_consent.address_index
+        document_consent_address_country = DocumentSet.objects.get(pk=pk).document_consent.address_country
+        document_consent_address_city = DocumentSet.objects.get(pk=pk).document_consent.address_city
+        document_consent_address_street = DocumentSet.objects.get(pk=pk).document_consent.address_street
+        document_consent_address_building_number = DocumentSet.objects.get(
+            pk=pk).document_consent.address_building_number
+        document_consent_address_house_flat_number = DocumentSet.objects.get(
+            pk=pk).document_consent.address_house_flat_number
+        document_consent_applicant_phone_number = DocumentSet.objects.get(pk=pk).document_consent.applicant_phone_number
+        document_consent_current_date = DocumentSet.objects.get(pk=pk).document_consent.current_date
+        document_consent_passport_seria = DocumentSet.objects.get(pk=pk).document_consent.passport_seria
+        document_consent_passport_number = DocumentSet.objects.get(pk=pk).document_consent.passport_number
+        document_consent_passport_date_of_issue = DocumentSet.objects.get(pk=pk).document_consent.passport_date_of_issue
+        document_consent_passport_place_giving = DocumentSet.objects.get(pk=pk).document_consent.passport_place_giving
+
+        template_name_id = DocumentSet.objects.get(pk=pk).template_name_id
+        # .objects.get(pk=pk).template_name_id
+        path_to_template = Sample.objects.get(pk=template_name_id).path_to_template.name
+
+        file_name_from_path = os.path.basename(path_to_template)
+
+        file_name_without_extension = str(os.path.splitext(file_name_from_path)[0])
+        # file_name_without_extension = 'document_consent'
+
+        # file_path = f'/Users/keito/Programming/Python/train/diploma/media/upload_sample/2024-05-07/{file_name_from_path}'
+        # file_path = '/Users/keito/Programming/Python/train/diploma/media/upload_sample/2024-05-07/document_consent.docx'
+        file_path = f'/Users/keito/Programming/Python/train/diploma/media/{path_to_template}'
+
+        file_path_short = file_name_without_extension
+        if file_path.endswith('.docx'):
+            from datetime import datetime as dt
+            doc = DocxTemplate(file_path)
+            context = {
+                'program_name': document_consent_program_name,
+                'application_number': document_consent_application_number,
+                'applicant_name': document_consent_applicant_name,
+                'applicant_surname': document_consent_applicant_surname,
+                'applicant_patronomic': document_consent_applicant_patronomic,
+                'applicant_date_of_birth': dt.strftime(document_consent_applicant_date_of_birth, '%d.%m.%Y'),
+                'birth_day': document_consent_applicant_date_of_birth.day,
+                'birth_month': document_consent_applicant_date_of_birth.month if document_consent_applicant_date_of_birth.month >= 10 else str(
+                    '0' + f'{document_consent_applicant_date_of_birth.month}'),
+                'birth_year': document_consent_applicant_date_of_birth.year,
+                'address_index': document_consent_address_index,
+                'address_country': document_consent_address_country,
+                'country_short': 'РФ',
+                'address_city': document_consent_address_city,
+                'address_street': document_consent_address_street,
+                'address_building_number': document_consent_address_building_number,
+                'address_house_flat_number': document_consent_address_house_flat_number,
+                'applicant_phone_number': document_consent_applicant_phone_number,
+                'current_date': dt.strftime(document_consent_current_date, '%d.%m.%Y'),
+                'applicant_name_short': document_consent_applicant_name[0],
+                'applicant_patronomic_short': document_consent_applicant_patronomic[0],
+                'passport_seria': document_consent_passport_seria,
+                'passport_number': document_consent_passport_number,
+                'passport_date_of_issue': dt.strftime(document_consent_passport_date_of_issue, '%d.%m.%Y'),
+                'passport_place_giving': document_consent_passport_place_giving,
+            }
+
+            doc.render(context)
+            file_name = f'{file_path_short}_downloaded.docx'
+            import aspose.words as aw
+            file_name_pdf = f'{file_path_short}_downloaded.pdf'
+            document = aw.Document(file_name)
+            # doc.save(file_name)
+            document.save(file_name_pdf)
+
+        response = FileResponse(open(file_name_pdf, 'rb'))
+        response['Content-Disposition'] = f'attachment; filename="{file_name_pdf}"'
+        return response
+
 
 class SampleCreateView(CreateView):
     model = Sample

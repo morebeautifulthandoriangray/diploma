@@ -5,7 +5,6 @@
     <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
     <h1> Редактировать документ </h1>
     <form method="post" action="">
-
         {% csrf_token %}
     {% for hidden_field in form.hidden_fields %}
             {{ hidden_field }}

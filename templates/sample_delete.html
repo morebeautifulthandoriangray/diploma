@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
-    <h1>Delete sample</h1>
-    <form action="" method="post"> {% csrf_token %}
-        <p>Are you sure you want to delete "{{ sample.title }}"?</p>
-        <input type="submit" value="Confirm">
+    <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
+    <h1>Удалить шаблон</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>Вы действительно хотите удалить "{{ sample.title }}"?</p>
+        <input class="btn btn-danger" type="submit" value="Удалить">
+    <input type="button" class="btn btn-outline-secondary" value="Отмена" onclick="history.back()">
     </form>
 {% endblock content%}

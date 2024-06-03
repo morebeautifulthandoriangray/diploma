@@ -23,7 +23,17 @@ from .views import ( DocumentConsentListView,
                      DocumentAuthorsAwardUpdateView,
                      DocumentAuthorsAwardDeleteView,
                      DocumentAuthorsAwardCreateView,
-                     DocumentAuthorsAwardDownloadDocx)
+                     DocumentAuthorsAwardDownloadDocx,
+
+
+                     DocumentSetListView,
+                     DocumentSetsCreateView,
+                    DocumentSetsDetailView,
+                    DocumentSetsUpdateView,
+                    DocumentSetsDeleteView,
+                    DocumentSetsDownloadDocx,
+                    DocumentSetsDownloadPDF
+                     )
 from django.views.generic import TemplateView
 from document import views
 
@@ -59,7 +69,7 @@ urlpatterns = [
     path('documents/notification/<int:pk>/download_docx/', DocumentNotificationDownloadDocx.as_view(),
          name='document_notification_download_docx'),
 
-#
+# document authors award
     path('documents/authors_award/', DocumentAuthorsAwardListView.as_view(), name='documents_authors_award_all'),
     path('documents/authors_award/new/', DocumentAuthorsAwardCreateView.as_view(), name='document_authors_award_new'),
     path('documents/authors_award/<int:pk>/', DocumentAuthorsAwardDetailView.as_view(), name='document_authors_award_detail'),
@@ -67,6 +77,21 @@ urlpatterns = [
     path('documents/authors_award/<int:pk>/delete', DocumentAuthorsAwardDeleteView.as_view(), name='document_authors_award_delete'),
     path('documents/authors_award/<int:pk>/download_docx/', DocumentAuthorsAwardDownloadDocx.as_view(),
          name='document_authors_award_download_docx'),
+
+
+# document  package all
+    path('documents/sets/', TemplateView.as_view(template_name='document_doc_pack/documents_sets_all.html'), name='documents_sets_all'),
+
+    path('documents/sets/patent/', DocumentSetListView.as_view(), name='document_sets_all_detail'),
+    path('documents/sets/patent/new', DocumentSetsCreateView.as_view(), name='document_sets_new'),
+    path('documents/sets/patent/<int:pk>/', DocumentSetsDetailView.as_view(), name='document_set_detail'),
+    path('documents/sets/patent/<int:pk>/edit', DocumentSetsUpdateView.as_view(), name='document_sets_edit'),
+    path('documents/sets/patent/<int:pk>/delete', DocumentSetsDeleteView.as_view(), name='document_sets_delete'),
+    path('documents/sets/patent/<int:pk>/download_docx/', DocumentSetsDownloadDocx.as_view(),name='document_sets_download_docx'),
+    path('documents/sets/patent/<int:pk>/download_pdf/', DocumentSetsDownloadPDF.as_view(),
+         name='document_sets_download_pdf')
+
+    # document  set
 
 
 ]

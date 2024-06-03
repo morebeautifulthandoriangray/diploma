@@ -1,4 +1,4 @@
-from .models import Sample, DocumentConsent, DocumentNotification, DocumentAuthorsAward
+from .models import Sample, DocumentConsent, DocumentNotification, DocumentAuthorsAward, DocumentSet
 from django.forms import ModelForm
 from django import forms
 from diploma import settings
@@ -38,6 +38,9 @@ class DocumentConsentForm(ModelForm):
         # applicant_date_of_birth = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
         # current_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
         # passport_date_of_issue = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
+
+    title = forms.CharField(max_length=100, required=True)
+    applicant_name = forms.CharField(max_length=100, required=True)
     applicant_date_of_birth = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
         # current_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
     passport_date_of_issue = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
@@ -158,3 +161,14 @@ class DocumentAuthorsAwardForm(ModelForm):
     # current_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
     applicant1_passport_date_of_issue = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
     applicant2_passport_date_of_issue = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
+
+
+class DocumentSetForm(ModelForm):
+    class Meta:
+        model = DocumentSet
+
+        fields = ['title',
+                  'template_name',
+                  'document_consent',
+                  'document_notification',
+                  'document_authors_award']

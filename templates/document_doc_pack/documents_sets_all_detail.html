@@ -4,7 +4,7 @@
 
     <div>
     <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
-        <h1>Последние созданные документы</h1>
+        <h1>Последние созданные пакеты документов</h1>
     </div>
 
 
@@ -13,7 +13,7 @@
 
         <div class="list-group">
 
-            <a href="{% url 'document_consent_detail' document.pk %}" class="list-group-item list-group-item-action flex-column align-items-start">
+            <a href="{% url 'document_set_detail' document.pk %}" class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{{ document.title }}</h5>
                     <small class="text-muted">{{ document.created_at }}</small>
@@ -26,6 +26,6 @@
     {% endfor %}
 
     </br>
-    <a href="{% url 'document_consent_new' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Создать документ</a>
+    <a href="{% url 'document_sets_new' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Создать пакет</a>
 
 {% endblock %}

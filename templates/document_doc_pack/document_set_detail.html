@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+    <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
+        <h2> {{ documentset.title}}</h2>
+        <p> {{ documentset.created_at }}</p>
+        <p> {{ documentset.path_to_template }}</p>
+    </div>
+
+    <div class="col-md-4">
+
+{#    {% url 'document_consent_download_docx' documentset.pk %}#}
+        <a href="{% url 'document_sets_download_docx' documentset.pk %}" class="btn btn-primary">Скачать в формате DOCX</a>
+        <a href="{% url 'document_sets_download_pdf' documentset.pk %}" class="btn btn-danger">Скачать в формате PDF</a>
+
+    </div>
+
+    <a href="{% url 'document_sets_edit' documentset.pk %}" class="btn btn-outline-warning">+Редактировать данные для документа</a>
+    </br>
+    <a href="{% url 'document_sets_delete' documentset.pk %}" class="btn btn-outline-danger" >-Удалить документ</a>
+{% endblock %}

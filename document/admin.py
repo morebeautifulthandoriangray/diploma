@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Document, Sample, DocumentConsent, DocumentNotification, DocumentAuthorsAward
+from .models import Document, Sample, DocumentConsent, DocumentNotification, DocumentAuthorsAward, DocumentSet
 
 
 # Register your models here.
@@ -11,7 +11,7 @@ class SampleAdmin(admin.ModelAdmin):
 
 
 class DocumentConsentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'created_at', 'template_name', 'program_name', 'applicant_surname', 'applicant_name')
+    list_display = ('id', 'title', 'created_at', 'template_name', 'path_to_template', 'program_name', 'applicant_surname', 'applicant_name')
     list_display_links = ('id', 'title')
     search_fields = ('title', 'created_at', 'program_name', 'applicant_surname', 'applicant_name')
 
@@ -33,6 +33,11 @@ class DocumentAuthorsAwardAdmin(admin.ModelAdmin):
     #     return mark_safe(f'')
 
 
+class DocumentSetAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'title', 'template_name', 'document_consent', 'document_notification', 'document_authors_award')
+    list_display_links = ('id', 'title')
+    search_fields = ('title', 'template_name', 'document_consent', 'document_notification', 'document_authors_award')
 # Добавить еще документы для кастомизированного отображения документов.
 
 
@@ -41,6 +46,8 @@ admin.site.register(Sample, SampleAdmin)
 admin.site.register(DocumentConsent, DocumentConsentAdmin)
 admin.site.register(DocumentNotification, DocumentNotificationAdmin)
 admin.site.register(DocumentAuthorsAward, DocumentAuthorsAwardAdmin)
+admin.site.register(DocumentSet, DocumentSetAdmin)
+
 
 admin.site.site_title = "Панель управление приложением"
 admin.site.site_header = "Панель управление приложением"

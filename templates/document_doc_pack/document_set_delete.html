@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
     <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
     <h1>Удалить документ</h1>
     <form action="" method="post"> {% csrf_token %}
-        <p>Вы уверены, что хотите удалить этот "{{ documentconsent.title }}" документ?</p>
+        <p>Вы уверены, что хотите удалить этот "{{ documentset.title }}" документ?</p>
                 <input class="btn btn-danger" type="submit" value="Удалить">
 
     <input type="button" class="btn btn-outline-secondary" value="Отмена" onclick="history.back()">
