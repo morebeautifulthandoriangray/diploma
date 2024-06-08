@@ -23,13 +23,18 @@
 {#</div>#}
 
 {% block nav-global %}
-{% endblock %}
-
-{% block footer %}
-    <div style="padding: 40px; font-weight: bold; color: white">
+    <div style="padding: 0px; font-weight: bold; color: white">
         <a class="btn btn-info" href="http://localhost:3000/d/abcd-xyz/my-monitoring-dashboard?orgId=1">
             Графики CPU Usage | Virtual Memory | Request rate
         </a>
     </div>
+{% endblock %}
+
+{% block footer %}
+{#    <div style="padding: 40px; font-weight: bold; color: white">#}
+{#        <a class="btn btn-info" href="http://localhost:3000/d/abcd-xyz/my-monitoring-dashboard?orgId=1">#}
+{#            Графики CPU Usage | Virtual Memory | Request rate#}
+{#        </a>#}
+{#    </div>#}
 
 {% endblock %}

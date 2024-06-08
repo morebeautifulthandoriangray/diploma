@@ -32,7 +32,22 @@ from .views import ( DocumentConsentListView,
                     DocumentSetsUpdateView,
                     DocumentSetsDeleteView,
                     DocumentSetsDownloadDocx,
-                    DocumentSetsDownloadPDF
+                    DocumentSetsDownloadPDF,
+
+ReviewProblemSampleCreateView,
+ReviewProblemDocumentConsentCreateView,
+
+SignDocumentCreateView,
+SignDocumentDetailView,
+SignDocumentListView,
+SignDocumentDeleteView,
+# SignDocumentUpdateView,
+HeadSignDocumentCreateView,
+HeadSignDocumentListView,
+HeadSignDocumentDetailView,
+HeadSignDocumentDetailView,
+HeadSignDocumentDeleteView,
+HeadSignDocumentUpdateView
                      )
 from django.views.generic import TemplateView
 from document import views
@@ -89,9 +104,51 @@ urlpatterns = [
     path('documents/sets/patent/<int:pk>/delete', DocumentSetsDeleteView.as_view(), name='document_sets_delete'),
     path('documents/sets/patent/<int:pk>/download_docx/', DocumentSetsDownloadDocx.as_view(),name='document_sets_download_docx'),
     path('documents/sets/patent/<int:pk>/download_pdf/', DocumentSetsDownloadPDF.as_view(),
-         name='document_sets_download_pdf')
+         name='document_sets_download_pdf'),
 
-    # document  set
+    # document  review
 
+    path('documents/reviews',
+         TemplateView.as_view(template_name='review_problems.html'),
+         name='review_problems'),
+
+    # path('documents/reviews/review_sample', TemplateView.as_view(template_name='ReviewProblemSample/review_problem_sample_all.html'), name='review_problem_sample_all'),
+    # path('documents/reviews/review_document_consent', TemplateView.as_view(template_name='ReviewProblemDocument/review_problem_document_consent_all.html'), name='review_problem_document_consent_all'),
+
+    path('documents/reviews/review_sample/new',
+         ReviewProblemSampleCreateView.as_view(),
+         name='review_problem_sample_new'),
+    path('documents/reviews/review_document_consent/new',
+         ReviewProblemDocumentConsentCreateView.as_view(),
+         name='review_problem_document_consent_new'),
+
+    path('documents/reviews/review_sample/success',
+         TemplateView.as_view(template_name='ReviewProblemSample/review_problem_sample_success.html'),
+         name='review_problem_sample_success'),
+
+    path('documents/reviews/review_document_consent/success',
+         TemplateView.as_view(template_name='ReviewProblemDocument/review_problem_document_consent_success.html'),
+         name='review_problem_document_consent_success'),
+
+    path('documents/sign', TemplateView.as_view(template_name='document_sign/document_sign_all.html'), name='documents_sign_all'),
+    path('documents/sign/dc', SignDocumentListView.as_view(), name='sign_dc_all'),
+    path('documents/sign/dc/new', SignDocumentCreateView.as_view(), name='sign_dc_new'),
+
+    path('documents/sign/dc/<int:pk>/', SignDocumentDetailView.as_view(), name='sign_dc_detail'),
+    path('documents/sign/dc/<int:pk>/delete', SignDocumentDeleteView.as_view(), name='sign_dc_delete'),
+
+
+
+
+    path('documents/head/sign', TemplateView.as_view(template_name='document_sign/head_sign_dc/head_document_sign_all.html'), name='head_documents_sign_all'),
+    path('documents/head/sign/dc', HeadSignDocumentListView.as_view(), name='head_sign_dc_all'),
+    path('documents/head/sign/dc/new', HeadSignDocumentCreateView.as_view(), name='head_sign_dc_new'),
+
+    path('documents/head/sign/dc/<int:pk>/', HeadSignDocumentDetailView.as_view(), name='head_sign_dc_detail'),
+    path('documents/head/sign/dc/<int:pk>/edit', HeadSignDocumentUpdateView.as_view(), name='head_sign_dc_detail_edit'),
+
+
+    # path('documents/sign/docpack/new', TemplateView.as_view(template_name='document_sign/head_document_sign_all.html'),
+    #      name='documents_sign_all'),
 
 ]

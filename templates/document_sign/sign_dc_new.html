@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+ <form method="post" action="">
+        <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
+        <h1> Создать документ на онлайн-подписание </h1>
+        {% csrf_token %}
+{#        {{ form.as_p }}#}
+
+        {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+        {% endfor %}
+        {% for field in form.visible_fields %}
+            <div class="form-group" >
+                {{ field.label_tag }}
+{#                {{ field }}#}
+                {% render_field field class="form-control" %}
+                {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                {% endif %}
+            </div>
+            </br>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">Подписать и отправить</button>
+ <input type="button" class="btn btn-outline-secondary" value="Отмена" onclick="history.back()">
+
+    </form>
+{% endblock %}

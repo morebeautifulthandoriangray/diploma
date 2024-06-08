@@ -2,13 +2,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+{#     {% block bootsrap %}#}
+{#            {% load bootstrap4 %}#}
+{##}
+{#            {% bootstrap_css %}#}
+{#         {% bootstrap_javascript jquery='full' %}#}
+{##}
+{#     {% endblock bootsrap %}#}
     <meta charset="UTF-8">
     <title>Hedgehog</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/product.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+
 </head>
 <body>
+
+{% block bootsrap %}
+            {% load bootstrap4 %}
+
+            {% bootstrap_css %}
+         {% bootstrap_javascript jquery='full' %}
+
+     {% endblock bootsrap %}
 
 <nav class="navbar navbar-expand-md bg-dark sticky-top border-bottom" data-bs-theme="dark">
     <div class="container">
@@ -43,17 +63,43 @@
                         Пакеты документов</a>
                     </li>
 
+                    <li class="nav-item"><a class="nav-link" href="{% url 'documents_sign_all' %}">
+                        Подпись документа и согласование</a>
+                    </li>
+
                     <li class="nav-item">
 
-                            <p>{{ user.username }}</p>
-                            <form method="post" action="{% url 'logout' %}">
-                                {% csrf_token %}
-                                <button class="btn btn-secondary" type="submit">Выйти</button>
-                            </form>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ user.username.upper }}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="{% url 'review_problems' %}">Сообщить о проблеме</a></li>
+                                <li><a class="dropdown-item" href="{% url 'head_documents_sign_all' %}">Подписать документы</a></li>
+
+                                <li>
+
+                                    <form method="post" action="{% url 'logout' %}">
+                                        {% csrf_token %}
+                                        <button class="btn btn-danger" type="submit">Выйти</button>
+                                    </form>
+                                </li>
+{#                                <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>#}
+                            </ul>
+                        </div>
+
+{#                        <p>{{ user.username }}</p>#}
+{#                        <form method="post" action="{% url 'logout' %}">#}
+{#                            {% csrf_token %}#}
+{#                            <button class="btn btn-secondary" type="submit">Выйти</button>#}
+{#                        </form>#}
 
                     </li>
 
+
                 </ul>
+
             {% else %}
                 <ul class="navbar-nav flex-grow-1 justify-content-between">
                     <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">
@@ -208,27 +254,41 @@
         </div>
 
         <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+
             <div class="text-bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
                 <div class="my-3 py-3">
                     <h2 class="display-5">
-                        {% if user.is_authenticated %}
-                        <a class="nav-link" href="{% url 'samples_all' %}">Готовые шаблоны</a>
-                        {% else %}
-                        <a class="nav-link" href="{% url 'login' %}">Войти</a>
-                        {% endif %}
+                            <a class="nav-link" href="{% url 'samples_all' %}">Готовые шаблоны</a>
                     </h2>
-                    {% if user.is_authenticated %}
-                    <p class="lead">Или сгенерируй свой шаблон по
-                        <a class="link-light link-underline-light" href="#">подсказке</a>
-                    </p>
-                    {% else %}
-                    <p class="lead">Чтобы перейти к ГОТОВЫМ ШАБЛОНАМ, необходимо ВОЙТИ
-                    </p>
-                {% endif %}
+                        <p class="lead">Или сгенерируй свой шаблон по
+                            <a class="link-light link-underline-light" href="#">подсказке</a>
+                        </p>
+
                 </div>
                 <div class="bg-body-tertiary shadow-sm mx-auto"
                      style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
             </div>
+{#            <div class="text-bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">#}
+{#                <div class="my-3 py-3">#}
+{#                    <h2 class="display-5">#}
+{#                        {% if user.is_authenticated %}#}
+{#                        <a class="nav-link" href="{% url 'samples_all' %}">Готовые шаблоны</a>#}
+{#                        {% else %}#}
+{#                        <a class="nav-link" href="{% url 'login' %}">Войти</a>#}
+{#                        {% endif %}#}
+{#                    </h2>#}
+{#                    {% if user.is_authenticated %}#}
+{#                    <p class="lead">Или сгенерируй свой шаблон по#}
+{#                        <a class="link-light link-underline-light" href="#">подсказке</a>#}
+{#                    </p>#}
+{#                    {% else %}#}
+{#                    <p class="lead">Чтобы перейти к ГОТОВЫМ ШАБЛОНАМ, необходимо ВОЙТИ#}
+{#                    </p>#}
+{#                {% endif %}#}
+{#                </div>#}
+{#                <div class="bg-body-tertiary shadow-sm mx-auto"#}
+{#                     style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>#}
+{#            </div>#}
             <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
                 <div class="my-3 p-3">
                     {% if user.is_authenticated %}
@@ -395,7 +455,6 @@
             </div>
         </div>
     </footer>
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock content %}
 
 </body>

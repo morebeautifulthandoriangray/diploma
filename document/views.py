@@ -6,8 +6,10 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Document
 from pydocx import PyDocX
-from .models import Document, DocumentConsent, Sample, DocumentNotification, DocumentAuthorsAward, DocumentSet
-from .forms import SampleForm, DocumentConsentForm, DocumentNotificationForm, DocumentAuthorsAwardForm, DocumentSetForm
+from .models import Document, DocumentConsent, Sample, DocumentNotification, DocumentAuthorsAward, DocumentSet, \
+    ReviewProblemDocumentConsent, ReviewProblemSample, SignDocument
+from .forms import SampleForm, DocumentConsentForm, DocumentNotificationForm, DocumentAuthorsAwardForm, DocumentSetForm, \
+    ReviewProblemDocumentConsentForm, ReviewProblemSampleForm, SignDocumentForm, HeadSignDocumentForm
 from django.views.generic.base import View
 from django.http import FileResponse
 from django.conf import settings
@@ -19,12 +21,12 @@ from docx import Document
 import tempfile
 
 
-
 # Create your views here.
 
 class DocumentSetListView(ListView):
     model = DocumentSet
     template_name = 'document_doc_pack/documents_sets_all_detail.html'
+
 
 # Create your views here.
 
@@ -33,10 +35,12 @@ class DocumentAuthorsAwardListView(ListView):
     model = DocumentAuthorsAward
     template_name = 'document_authors_award/document_authors_award_all.html'
 
+
 # Create your views here.
 class DocumentNotificationListView(ListView):
     model = DocumentNotification
     template_name = 'document_notification/document_notification_all.html'
+
 
 class DocumentConsentListView(ListView):
     model = DocumentConsent
@@ -49,10 +53,12 @@ class DocumentSetsCreateView(CreateView):
     form_class = DocumentSetForm
     template_name = 'document_doc_pack/documents_sets_new.html'
 
+
 class DocumentAuthorsAwardCreateView(CreateView):
     model = DocumentAuthorsAward
     form_class = DocumentAuthorsAwardForm
     template_name = 'document_authors_award/document_authors_award_new.html'
+
 
 class DocumentNotificationCreateView(CreateView):
     model = DocumentNotification
@@ -60,6 +66,8 @@ class DocumentNotificationCreateView(CreateView):
     template_name = 'document_notification/document_notification_new.html'
 
     path_to_template = model.path_to_template
+
+
 class DocumentConsentCreateView(CreateView):
     model = DocumentConsent
     form_class = DocumentConsentForm
@@ -75,13 +83,16 @@ class DocumentSetsDetailView(DetailView):
     # form_class = DocumentSetForm
     template_name = 'document_doc_pack/document_set_detail.html'
 
+
 class DocumentAuthorsAwardDetailView(DetailView):
     model = DocumentAuthorsAward
     template_name = 'document_authors_award/document_authors_award_detail.html'
 
+
 class DocumentNotificationDetailView(DetailView):
     model = DocumentNotification
     template_name = 'document_notification/document_notification_detail.html'
+
 
 class DocumentConsentDetailView(DetailView):
     model = DocumentConsent
@@ -96,15 +107,18 @@ class DocumentSetsUpdateView(UpdateView):
     form_class = DocumentSetForm
     template_name = 'document_doc_pack/document_set_edit.html'
 
+
 class DocumentAuthorsAwardUpdateView(UpdateView):
     model = DocumentAuthorsAward
     form_class = DocumentAuthorsAwardForm
     template_name = 'document_authors_award/document_authors_award_edit.html'
 
+
 class DocumentNotificationUpdateView(UpdateView):
     model = DocumentNotification
     form_class = DocumentNotificationForm
     template_name = 'document_notification/document_notification_edit.html'
+
 
 class DocumentConsentUpdateView(UpdateView):
     model = DocumentConsent
@@ -120,20 +134,23 @@ class DocumentSetsDeleteView(DeleteView):
     template_name = 'document_doc_pack/document_set_delete.html'
     success_url = reverse_lazy('document_sets_all_detail')
 
+
 class DocumentAuthorsAwardDeleteView(DeleteView):
     model = DocumentAuthorsAward
     template_name = 'document_authors_award/document_authors_award_delete.html'
     success_url = reverse_lazy('documents_authors_award_all')
+
+
 class DocumentNotificationDeleteView(DeleteView):
     model = DocumentNotification
     template_name = 'document_notification/document_notification_delete.html'
     success_url = reverse_lazy('documents_notification_all')
 
+
 class DocumentConsentDeleteView(DeleteView):
     model = DocumentConsent
     template_name = 'document_consent_delete.html'
     success_url = reverse_lazy('documents_consent_all')
-
 
 
 class DocumentConsentDownloadDocx(View):
@@ -182,7 +199,8 @@ class DocumentConsentDownloadDocx(View):
                 'applicant_patronomic': document_consent_applicant_patronomic,
                 'applicant_date_of_birth': dt.strftime(document_consent_applicant_date_of_birth, '%d.%m.%Y'),
                 'birth_day': document_consent_applicant_date_of_birth.day,
-                'birth_month': document_consent_applicant_date_of_birth.month if document_consent_applicant_date_of_birth.month >= 10 else str('0'+ f'{document_consent_applicant_date_of_birth.month}'),
+                'birth_month': document_consent_applicant_date_of_birth.month if document_consent_applicant_date_of_birth.month >= 10 else str(
+                    '0' + f'{document_consent_applicant_date_of_birth.month}'),
                 'birth_year': document_consent_applicant_date_of_birth.year,
                 'address_index': document_consent_address_index,
                 'address_country': document_consent_address_country,
@@ -218,8 +236,6 @@ class DocumentConsentDownloadDocx(View):
             # file_name = f'/Users/keito/Downloads/{file_path_short}_downloaded.docx'
             file_name = f'{file_path_short}_downloaded.docx'
             doc.save(file_name)
-
-
 
         response = FileResponse(open(file_name, 'rb'))
         response['Content-Disposition'] = f'attachment; filename="{file_name}"'
@@ -271,7 +287,8 @@ class DocumentConsentDownloadPDF(View):
                 'applicant_patronomic': document_consent_applicant_patronomic,
                 'applicant_date_of_birth': dt.strftime(document_consent_applicant_date_of_birth, '%d.%m.%Y'),
                 'birth_day': document_consent_applicant_date_of_birth.day,
-                'birth_month': document_consent_applicant_date_of_birth.month if document_consent_applicant_date_of_birth.month >= 10 else str('0'+ f'{document_consent_applicant_date_of_birth.month}'),
+                'birth_month': document_consent_applicant_date_of_birth.month if document_consent_applicant_date_of_birth.month >= 10 else str(
+                    '0' + f'{document_consent_applicant_date_of_birth.month}'),
                 'birth_year': document_consent_applicant_date_of_birth.year,
                 'address_index': document_consent_address_index,
                 'address_country': document_consent_address_country,
@@ -290,7 +307,6 @@ class DocumentConsentDownloadPDF(View):
                 'passport_place_giving': document_consent_passport_place_giving,
             }
 
-
             doc.render(context)
             file_name = f'{file_path_short}_downloaded.docx'
             import aspose.words as aw
@@ -304,7 +320,7 @@ class DocumentConsentDownloadPDF(View):
         return response
 
 
-#TODO: https://stackoverflow.com/questions/67385436/how-to-save-a-python-docxtemplate-as-pdf-quickly:
+# TODO: https://stackoverflow.com/questions/67385436/how-to-save-a-python-docxtemplate-as-pdf-quickly:
 class DocumentNotificationDownloadDocx(View):
     def get(self, request, pk=1, *args, **kwargs):
         document_notification_program_name = DocumentNotification.objects.get(pk=pk).program_name
@@ -326,17 +342,19 @@ class DocumentNotificationDownloadDocx(View):
         document_notification_applicant1_city = DocumentNotification.objects.get(pk=pk).applicant1_city
         document_notification_applicant1_street = DocumentNotification.objects.get(pk=pk).applicant1_street
         document_notification_applicant1_build_number = DocumentNotification.objects.get(pk=pk).applicant1_build_number
-        document_notification_applicant1_flat_number= DocumentNotification.objects.get(pk=pk).applicant1_flat_number
+        document_notification_applicant1_flat_number = DocumentNotification.objects.get(pk=pk).applicant1_flat_number
         document_notification_applicant1_snils = DocumentNotification.objects.get(pk=pk).applicant1_snils
         document_notification_applicant2_index = DocumentNotification.objects.get(pk=pk).applicant2_index
         document_notification_applicant2_country = DocumentNotification.objects.get(pk=pk).applicant2_country
         document_notification_applicant2_city = DocumentNotification.objects.get(pk=pk).applicant2_city
         document_notification_applicant2_street = DocumentNotification.objects.get(pk=pk).applicant2_street
-        document_notification_applicant2_build_number= DocumentNotification.objects.get(pk=pk).applicant2_build_number
+        document_notification_applicant2_build_number = DocumentNotification.objects.get(pk=pk).applicant2_build_number
         document_notification_applicant2_flat_number = DocumentNotification.objects.get(pk=pk).applicant2_flat_number
         document_notification_applicant2_snils = DocumentNotification.objects.get(pk=pk).applicant2_snils
-        document_notification_applicant1_percent_contribution = DocumentNotification.objects.get(pk=pk).applicant1_percent_contribution
-        document_notification_applicant2_percent_contribution = DocumentNotification.objects.get(pk=pk).applicant2_percent_contribution
+        document_notification_applicant1_percent_contribution = DocumentNotification.objects.get(
+            pk=pk).applicant1_percent_contribution
+        document_notification_applicant2_percent_contribution = DocumentNotification.objects.get(
+            pk=pk).applicant2_percent_contribution
         document_notification_applicant1_phone_number = DocumentNotification.objects.get(pk=pk).applicant1_phone_number
         document_notification_applicant2_phone_number = DocumentNotification.objects.get(pk=pk).applicant2_phone_number
         document_notification_applicant1_email = DocumentNotification.objects.get(pk=pk).applicant1_email
@@ -405,7 +423,7 @@ class DocumentNotificationDownloadDocx(View):
                 'applicant2_snils': document_notification_applicant2_snils,
                 #
                 'applicant1_percent_contribution': document_notification_applicant1_percent_contribution,
-                'applicant2_percent_contribution': document_notification_applicant2_percent_contribution ,
+                'applicant2_percent_contribution': document_notification_applicant2_percent_contribution,
                 #
                 'applicant1_phone_number': document_notification_applicant1_phone_number,
                 'applicant2_phone_number': document_notification_applicant2_phone_number,
@@ -435,15 +453,20 @@ class DocumentAuthorsAwardDownloadDocx(View):
         document_authors_award_applicant1_patronomic = DocumentAuthorsAward.objects.get(pk=pk).applicant1_patronomic
         document_authors_award_applicant1_date_birth = DocumentAuthorsAward.objects.get(pk=pk).applicant1_date_birth
 
-        document_authors_award_applicant1_passport_seria = DocumentAuthorsAward.objects.get(pk=pk).applicant1_passport_seria
-        document_authors_award_applicant1_passport_number = DocumentAuthorsAward.objects.get(pk=pk).applicant1_passport_number
-        document_authors_award_applicant1_passport_date_of_issue = DocumentAuthorsAward.objects.get(pk=pk).applicant1_passport_date_of_issue
-        document_authors_award_applicant1_passport_place_giving = DocumentAuthorsAward.objects.get(pk=pk).applicant1_passport_place_giving
+        document_authors_award_applicant1_passport_seria = DocumentAuthorsAward.objects.get(
+            pk=pk).applicant1_passport_seria
+        document_authors_award_applicant1_passport_number = DocumentAuthorsAward.objects.get(
+            pk=pk).applicant1_passport_number
+        document_authors_award_applicant1_passport_date_of_issue = DocumentAuthorsAward.objects.get(
+            pk=pk).applicant1_passport_date_of_issue
+        document_authors_award_applicant1_passport_place_giving = DocumentAuthorsAward.objects.get(
+            pk=pk).applicant1_passport_place_giving
 
         document_authors_award_applicant1_inn = DocumentAuthorsAward.objects.get(pk=pk).applicant1_inn
         document_authors_award_applicant1_snils = DocumentAuthorsAward.objects.get(pk=pk).applicant1_snils
         document_authors_award_applicant1_bank_info = DocumentAuthorsAward.objects.get(pk=pk).applicant1_bank_info
-        document_authors_award_applicant1_account_number = DocumentAuthorsAward.objects.get(pk=pk).applicant1_account_number
+        document_authors_award_applicant1_account_number = DocumentAuthorsAward.objects.get(
+            pk=pk).applicant1_account_number
         document_authors_award_applicant1_bik = DocumentAuthorsAward.objects.get(pk=pk).applicant1_bik
         document_authors_award_applicant1_bank_inn = DocumentAuthorsAward.objects.get(pk=pk).applicant1_bank_inn
         document_authors_award_applicant1_bank_kpp = DocumentAuthorsAward.objects.get(pk=pk).applicant1_bank_kpp
@@ -454,16 +477,20 @@ class DocumentAuthorsAwardDownloadDocx(View):
         document_authors_award_applicant2_patronomic = DocumentAuthorsAward.objects.get(pk=pk).applicant2_patronomic
         document_authors_award_applicant2_date_birth = DocumentAuthorsAward.objects.get(pk=pk).applicant2_date_birth
 
-
-        document_authors_award_applicant2_passport_seria = DocumentAuthorsAward.objects.get(pk=pk).applicant2_passport_seria
-        document_authors_award_applicant2_passport_number = DocumentAuthorsAward.objects.get(pk=pk).applicant2_passport_number
-        document_authors_award_applicant2_passport_date_of_issue = DocumentAuthorsAward.objects.get(pk=pk).applicant2_passport_date_of_issue
-        document_authors_award_applicant2_passport_place_giving = DocumentAuthorsAward.objects.get(pk=pk).applicant2_passport_place_giving
+        document_authors_award_applicant2_passport_seria = DocumentAuthorsAward.objects.get(
+            pk=pk).applicant2_passport_seria
+        document_authors_award_applicant2_passport_number = DocumentAuthorsAward.objects.get(
+            pk=pk).applicant2_passport_number
+        document_authors_award_applicant2_passport_date_of_issue = DocumentAuthorsAward.objects.get(
+            pk=pk).applicant2_passport_date_of_issue
+        document_authors_award_applicant2_passport_place_giving = DocumentAuthorsAward.objects.get(
+            pk=pk).applicant2_passport_place_giving
 
         document_authors_award_applicant2_inn = DocumentAuthorsAward.objects.get(pk=pk).applicant2_inn
         document_authors_award_applicant2_snils = DocumentAuthorsAward.objects.get(pk=pk).applicant2_snils
         document_authors_award_applicant2_bank_info = DocumentAuthorsAward.objects.get(pk=pk).applicant2_bank_info
-        document_authors_award_applicant2_account_number = DocumentAuthorsAward.objects.get(pk=pk).applicant2_account_number
+        document_authors_award_applicant2_account_number = DocumentAuthorsAward.objects.get(
+            pk=pk).applicant2_account_number
         document_authors_award_applicant2_bik = DocumentAuthorsAward.objects.get(pk=pk).applicant2_bik
         document_authors_award_applicant2_bank_inn = DocumentAuthorsAward.objects.get(pk=pk).applicant2_bank_inn
         document_authors_award_applicant2_bank_kpp = DocumentAuthorsAward.objects.get(pk=pk).applicant2_bank_kpp
@@ -506,7 +533,8 @@ class DocumentAuthorsAwardDownloadDocx(View):
 
                 'applicant1_passport_seria': document_authors_award_applicant1_passport_seria,
                 'applicant1_passport_number': document_authors_award_applicant1_passport_number,
-                'applicant1_passport_date_of_issue': dt.strftime(document_authors_award_applicant1_passport_date_of_issue, '%d.%m.%Y'),
+                'applicant1_passport_date_of_issue': dt.strftime(
+                    document_authors_award_applicant1_passport_date_of_issue, '%d.%m.%Y'),
                 'applicant1_passport_place_giving': document_authors_award_applicant1_passport_place_giving,
 
                 'applicant1_inn': document_authors_award_applicant1_inn,
@@ -533,7 +561,8 @@ class DocumentAuthorsAwardDownloadDocx(View):
 
                 'applicant2_passport_seria': document_authors_award_applicant2_passport_seria,
                 'applicant2_passport_number': document_authors_award_applicant2_passport_number,
-                'applicant2_passport_date_of_issue': dt.strftime(document_authors_award_applicant2_passport_date_of_issue, '%d.%m.%Y'),
+                'applicant2_passport_date_of_issue': dt.strftime(
+                    document_authors_award_applicant2_passport_date_of_issue, '%d.%m.%Y'),
                 'applicant2_passport_place_giving': document_authors_award_applicant2_passport_place_giving,
 
                 'applicant2_inn': document_authors_award_applicant2_inn,
@@ -567,6 +596,7 @@ class DocumentAuthorsAwardDownloadDocx(View):
         response['Content-Disposition'] = f'attachment; filename="{file_name}"'
         return response
 
+
 class SampleListView(ListView):
     model = Sample
     template_name = 'samples_list.html'
@@ -588,6 +618,7 @@ class FileDownloadDocx(View):
         response['Content-Disposition'] = f'attachment; filename="{file_name}"'
         return response
 
+
 class FileDownloadPdf(View):
     def get(self, request, pk=1, *args, **kwargs):
         sample = Sample.objects.get(pk=pk).path_to_template
@@ -608,18 +639,21 @@ class FileDownloadPdf(View):
 class DocumentSetsDownloadDocx(View):
     def get(self, request, pk=1, *args, **kwargs):
         document_consent_program_name = DocumentSet.objects.get(pk=pk).document_consent.program_name
-            # DocumentConsent.objects.get(pk=pk).program_name
+        # DocumentConsent.objects.get(pk=pk).program_name
         document_consent_application_number = DocumentSet.objects.get(pk=pk).document_consent.application_number
         document_consent_applicant_name = DocumentSet.objects.get(pk=pk).document_consent.applicant_name
         document_consent_applicant_surname = DocumentSet.objects.get(pk=pk).document_consent.applicant_surname
         document_consent_applicant_patronomic = DocumentSet.objects.get(pk=pk).document_consent.applicant_patronomic
-        document_consent_applicant_date_of_birth = DocumentSet.objects.get(pk=pk).document_consent.applicant_date_of_birth
+        document_consent_applicant_date_of_birth = DocumentSet.objects.get(
+            pk=pk).document_consent.applicant_date_of_birth
         document_consent_address_index = DocumentSet.objects.get(pk=pk).document_consent.address_index
         document_consent_address_country = DocumentSet.objects.get(pk=pk).document_consent.address_country
         document_consent_address_city = DocumentSet.objects.get(pk=pk).document_consent.address_city
         document_consent_address_street = DocumentSet.objects.get(pk=pk).document_consent.address_street
-        document_consent_address_building_number = DocumentSet.objects.get(pk=pk).document_consent.address_building_number
-        document_consent_address_house_flat_number = DocumentSet.objects.get(pk=pk).document_consent.address_house_flat_number
+        document_consent_address_building_number = DocumentSet.objects.get(
+            pk=pk).document_consent.address_building_number
+        document_consent_address_house_flat_number = DocumentSet.objects.get(
+            pk=pk).document_consent.address_house_flat_number
         document_consent_applicant_phone_number = DocumentSet.objects.get(pk=pk).document_consent.applicant_phone_number
         document_consent_current_date = DocumentSet.objects.get(pk=pk).document_consent.current_date
         document_consent_passport_seria = DocumentSet.objects.get(pk=pk).document_consent.passport_seria
@@ -788,7 +822,6 @@ class SampleCreateView(CreateView):
     form_class = SampleForm
     template_name = 'sample_new.html'
 
-
     # fields = ['title', 'path_to_template']
     success_url = reverse_lazy('samples_all')
 
@@ -806,4 +839,87 @@ class SampleDeleteView(DeleteView):
     success_url = reverse_lazy('samples_all')
 
 
+class ReviewProblemSampleCreateView(CreateView):
+    model = ReviewProblemSample
+    form_class = ReviewProblemSampleForm
+    template_name = 'ReviewProblemSample/review_problem_sample_new.html'
 
+    # fields = ['title', 'path_to_template']
+    success_url = reverse_lazy('review_problem_sample_success')
+
+
+class ReviewProblemDocumentConsentCreateView(CreateView):
+    model = ReviewProblemDocumentConsent
+    form_class = ReviewProblemDocumentConsentForm
+
+    template_name = 'ReviewProblemDocument/review_problem_document_consent_new.html'
+
+    # fields = ['title', 'path_to_template']
+    success_url = reverse_lazy('review_problem_document_consent_success')
+
+
+class SignDocumentCreateView(CreateView):
+    model = SignDocument
+    form_class = SignDocumentForm
+    template_name = 'document_sign/sign_dc_new.html'
+
+    # fields = ['title', 'path_to_template']
+    success_url = reverse_lazy('head_sign_dc_all')
+
+
+class SignDocumentListView(ListView):
+    model = SignDocument
+    template_name = 'document_sign/sign_dc_all.html'
+
+
+class SignDocumentDetailView(DetailView):
+    model = SignDocument
+    template_name = 'document_sign/sign_dc_detail.html'
+
+
+class SignDocumentDeleteView(DeleteView):
+    model = SignDocument
+    template_name = 'document_sign/sign_dc_delete.html'
+    success_url = reverse_lazy('sign_dc_all')
+
+
+# class SignDocumentUpdateView(UpdateView):
+#     model = Sample
+#     form_class = SignDocumentForm
+#     template_name = 'document_sign/sign_dc_edit.html'
+#     # fields = ['title', 'path_to_template']
+
+
+class HeadSignDocumentCreateView(CreateView):
+    model = SignDocument
+    form_class = SignDocumentForm
+    template_name = 'document_sign/head_sign_dc/head_sign_dc_new.html'
+
+    # fields = ['title', 'path_to_template']
+    success_url = reverse_lazy('head_sign_dc_all')
+
+
+class HeadSignDocumentListView(ListView):
+    model = SignDocument
+    template_name = 'document_sign/head_sign_dc/head_sign_dc_all.html'
+
+
+class HeadSignDocumentDetailView(DetailView):
+    model = SignDocument
+    template_name = 'document_sign/head_sign_dc/head_sign_dc_detail.html'
+
+
+class HeadSignDocumentDeleteView(DeleteView):
+    model = SignDocument
+    template_name = 'document_sign/head_sign_dc/head_sign_dc_delete.html'
+    success_url = reverse_lazy('sign_dc_all')
+
+
+class HeadSignDocumentUpdateView(UpdateView):
+    model = SignDocument
+    form_class = SignDocumentForm
+    # fields = ['status', ]
+    template_name = 'document_sign/head_sign_dc/head_sign_dc_edit.html'
+    success_url = reverse_lazy('head_sign_dc_all')
+
+    # fields = ['title', 'path_to_template']

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+    <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
+        <h2> {{ signdocument.document_consent_name }}</h2>
+        <p> {{ signdocument.status }}</p>
+        <p> {{ signdocument.FIO_head }}</p>
+    </div>
+
+    <div class="col-md-4">
+
+
+
+    </div>
+
+</br>
+    </br>
+
+
+<a href="{% url 'sign_dc_delete' signdocument.pk %}" class="btn btn-outline-danger" >Отменить подписание</a>
+
+
+
+{#    <a href="#" class="btn btn-dark" >Подписать и отправить</a>#}
+{% endblock %}

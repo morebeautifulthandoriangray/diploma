@@ -1,4 +1,5 @@
-from .models import Sample, DocumentConsent, DocumentNotification, DocumentAuthorsAward, DocumentSet
+from .models import Sample, DocumentConsent, DocumentNotification, DocumentAuthorsAward, DocumentSet, \
+    ReviewProblemSample, ReviewProblemDocumentConsent, SignDocument
 from django.forms import ModelForm
 from django import forms
 from diploma import settings
@@ -38,13 +39,17 @@ class DocumentConsentForm(ModelForm):
         # applicant_date_of_birth = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
         # current_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
         # passport_date_of_issue = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-input'}),
+        }
 
-    title = forms.CharField(max_length=100, required=True)
-    applicant_name = forms.CharField(max_length=100, required=True)
-    applicant_date_of_birth = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
+    title = forms.CharField(max_length=100, required=True, label='Название документа')
+    applicant_name = forms.CharField(max_length=100, required=True, label='Имя заявителя')
+    applicant_date_of_birth = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, label='Дата рождения заявителя')
         # current_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
-    passport_date_of_issue = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
-    application_number = forms.IntegerField(help_text='Указывается при наличии регистрационного номера заявки')
+    passport_date_of_issue = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, label='Дата выдачи паспорта')
+    application_number = forms.IntegerField(help_text='Указывается при наличии регистрационного номера заявки', label='Номер заявки')
+
 
 class DocumentNotificationForm(ModelForm):
     class Meta:
@@ -172,3 +177,42 @@ class DocumentSetForm(ModelForm):
                   'document_consent',
                   'document_notification',
                   'document_authors_award']
+
+class ReviewProblemSampleForm(ModelForm):
+    class Meta:
+        model = ReviewProblemSample
+
+        fields = ['review_problem_sample_title',
+                  'sample_name',
+                  'review_text']
+
+
+class ReviewProblemDocumentConsentForm(ModelForm):
+    class Meta:
+        model = ReviewProblemDocumentConsent
+
+        fields = ['review_problem_document_consent_title',
+                  'document_consent_name',
+                  'review_text']
+
+
+
+class SignDocumentForm(ModelForm):
+    class Meta:
+        model = SignDocument
+
+        fields = [
+                  'document_consent_name',
+            'FIO_head',
+                  'status']
+
+    # document_consent_name = forms.CharField(emp)
+
+class HeadSignDocumentForm(ModelForm):
+    class Meta:
+        model = SignDocument
+
+        fields = [
+            'status']
+
+        # document_consent_name = forms.CharField(emp)

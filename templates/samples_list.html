@@ -34,7 +34,12 @@
     </br>
     </br>
     </br>
+    {% if user.is_authenticated %}
     <a href="{% url 'sample_new' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Создать шаблон</a>
+    {% else %}
+            <a href="{% url 'sample_new' %}"  ></a>
+
+    {% endif %}
 
 
 {% endblock %}

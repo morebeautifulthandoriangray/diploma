@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div>
+    <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
+        <h1>Документы на согласие для подписания</h1>
+    </div>
+
+
+    {% for document in object_list %}
+
+        <div class="list-group">
+
+            <a href="{% url 'head_sign_dc_detail' document.pk %}" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ document.document_consent_name }}</h5>
+                </div>
+
+                <p class="mb-1"><p>{{ document.status }}</p></p>
+                <small class="text-muted"><p>{{ document.FIO_head }}</p></small>
+            </a>
+
+        </div>
+    {% endfor %}
+
+    </br>
+{#    <a href="{% url 'sign_dc_new' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Создать задание на онлайн-подписание</a>#}
+
+{% endblock %}
