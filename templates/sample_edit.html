@@ -3,8 +3,15 @@
 
 {% block content %}
     <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
-    <h1> Редактировать шаблон </h1>
-    <form method="POST" action="" enctype="multipart/form-data">
+
+    <div class="d-flex justify-content-center">
+        <h1> Редактировать шаблон </h1>
+    </div>
+
+    </br>
+
+    <div class="d-flex justify-content-center w-50 mx-auto">
+    <form method="POST" action="" enctype="multipart/form-data" class=" w-50 mx-auto" >
 
     {% csrf_token %}
     {% for hidden_field in form.hidden_fields %}
@@ -22,7 +29,11 @@
             </br>
         {% endfor %}
 
-    <input class="btn btn-warning" type="submit" value="Обновить данные">
+    <div class="d-flex justify-content-center w-50 mx-auto">
+
+    <input class="btn btn-warning mr-2" type="submit" value="Обновить данные">
     <input type="button" class="btn btn-outline-secondary" value="Отмена" onclick="history.back()">
+        </div>
     </form>
+    </div>
 {% endblock %}

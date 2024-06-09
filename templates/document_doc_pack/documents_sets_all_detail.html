@@ -3,7 +3,7 @@
 {% block content %}
 
     <div>
-    <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
+        <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
         <h1 class="d-flex justify-content-center">Последние созданные пакеты документов</h1>
     </div>
     </br>
@@ -14,23 +14,29 @@
 
         <div class="list-group w-50 mx-auto">
 
-            <a href="{% url 'document_set_detail' document.pk %}" class="list-group-item list-group-item-action flex-column align-items-start">
+            <a href="{% url 'document_set_detail' document.pk %}"
+               class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{{ document.title }}</h5>
                     <small class="text-muted">{{ document.created_at }}</small>
                 </div>
-                <p class="mb-1"><p>{{ document.path_to_template }}</p></p>
+                <p class="mb-1">
+                <p>{{ document.path_to_template }}</p></p>
                 <small class="text-muted"><p>{{ document.template_name }}</p></small>
             </a>
-        </br>
+            </br>
 
         </div>
     {% endfor %}
 
     </br>
     <div class="d-flex justify-content-center">
-    <a href="{% url 'document_sets_new' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Создать пакет</a>
-</div>
+        <a href="{% url 'document_sets_new' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Создать
+            пакет</a>
+
+    </div>
+    </br>
+    </br>
 
 
 {% endblock %}

@@ -3,29 +3,42 @@
 
 {% block content %}
 
-     <form method="POST" action="" enctype="multipart/form-data">
-     <h1> Создать новый шаблон </h1>
-     <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
-        {% csrf_token %}
+    <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
 
-        {% for hidden_field in form.hidden_fields %}
-            {{ hidden_field }}
-        {% endfor %}
-        {% for field in form.visible_fields %}
-            <div class="form-group" >
-                {{ field.label_tag }}
-                {% render_field field class="form-control" %}
-                {% if field.help_text %}
-                    <small class="form-text text-muted">{{ field.help_text }}</small>
-                {% endif %}
+    <div class="d-flex justify-content-center">
+        <h1> Создать новый шаблон </h1>
+    </div>
+
+    </br>
+
+    <div class="d-flex justify-content-center w-50 mx-auto">
+
+
+        <form method="POST" action="" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {% render_field field class="form-control" %}
+                    {% if field.help_text %}
+                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                </div>
+                </br>
+            {% endfor %}
+
+            <div class="d-flex justify-content-center w-50 mx-auto">
+                <button type="submit" class="btn btn-primary mr-2">Сохранить</button>
+                <input type="button" class="btn btn-outline-secondary" value="Отмена" onclick="history.back()">
             </div>
-            </br>
-        {% endfor %}
 
-        <button type="submit" class="btn btn-primary">Сохранить</button>
-     <input type="button" class="btn btn-outline-secondary" value="Отмена" onclick="history.back()">
-
-    </form>
+        </form>
+    </div>
 {% endblock %}
 
 

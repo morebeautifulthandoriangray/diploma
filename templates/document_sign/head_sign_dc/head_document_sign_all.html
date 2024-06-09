@@ -13,34 +13,34 @@
 {#    <h1><a href="#">Заявление о гос регистрации</a></h1>#}
 {#    <h1><a href="#">Стопка документов на регистрацию патента</a></h1>#}
 {#    <h1><a href="#">Стопка документов на поспупление в ВУЗ</a></h1>#}
-    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
-        <div class="row">
-            <div class="col">
-                <div class="list-group" id="list-tab" role="tablist">
+{#    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">#}
+{#        <div class="row">#}
+{#            <div class="col">#}
+{#                <div class="list-group" id="list-tab" role="tablist">#}
 {#                    list-group-item list-group-item-action" id="list-home-list id="list-home-list" data-bs-toggle="list"#}
-                    <a href="{% url 'head_sign_dc_all' %}" class="list-group-item list-group-item-action" id="list-home-list"
-                        role="tab" aria-controls="list-home">
-                        <h1> Подписать документ на согласие и обработку персональных данных</h1></a>
-
-                    <a class="list-group-item list-group-item-action" id="list-settings-list"
-                       href="#" role="tab" aria-controls="list-settings">
-                        <h1>Подписать пакет документов</h1>
-                    </a>
-                    <a class="list-group-item list-group-item-action" id="list-profile-list"
-                       href="#" role="tab" aria-controls="list-profile">
-                        <h1>Подписать документ на уведомление о создании интеллектуальной деятельности</h1>
-                    </a>
-
-                    <a class="list-group-item list-group-item-action" id="list-messages-list"
-                       href="#" role="tab" aria-controls="list-messages">
-                        <h1>Подписать документ о выплате авторского вознаграждения</h1>
-                    </a>
-                    <a class="list-group-item list-group-item-action" id="list-settings-list"
-                       href="#" role="tab" aria-controls="list-settings">
-                        <h1>Подписать документ на преддипломную практику</h1>
-                    </a>
-                </div>
-            </div>
+{#                    <a href="{% url 'head_sign_dc_all' %}" class="list-group-item list-group-item-action" id="list-home-list"#}
+{#                        role="tab" aria-controls="list-home">#}
+{#                        <h1> Подписать документ на согласие и обработку персональных данных</h1></a>#}
+{##}
+{#                    <a class="list-group-item list-group-item-action" id="list-settings-list"#}
+{#                       href="#" role="tab" aria-controls="list-settings">#}
+{#                        <h1>Подписать пакет документов</h1>#}
+{#                    </a>#}
+{#                    <a class="list-group-item list-group-item-action" id="list-profile-list"#}
+{#                       href="#" role="tab" aria-controls="list-profile">#}
+{#                        <h1>Подписать документ на уведомление о создании интеллектуальной деятельности</h1>#}
+{#                    </a>#}
+{##}
+{#                    <a class="list-group-item list-group-item-action" id="list-messages-list"#}
+{#                       href="#" role="tab" aria-controls="list-messages">#}
+{#                        <h1>Подписать документ о выплате авторского вознаграждения</h1>#}
+{#                    </a>#}
+{#                    <a class="list-group-item list-group-item-action" id="list-settings-list"#}
+{#                       href="#" role="tab" aria-controls="list-settings">#}
+{#                        <h1>Подписать документ на преддипломную практику</h1>#}
+{#                    </a>#}
+{#                </div>#}
+{#            </div>#}
 {#            <div class="col-8">#}
 {#                <div class="tab-content" id="nav-tabContent">#}
 {#                    <div class="tab-pane fade show active" id="list-home" role="tabpanel"#}
@@ -57,8 +57,95 @@
 {#                    </div>#}
 {#                </div>#}
 {#            </div>#}
-        </div>
-    </main>
+{#        </div>#}
+{#    </main>#}
+
+
+    <div class="d-flex justify-content-center">
+        <div class="card-deck">
+                <div class="card border-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-header"><a href="{% url 'head_sign_dc_all' %}">Перейти к оформлению</a></div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">Подписать документ на согласие и обработку персональных данных</h5>
+                        <p class="card-text">Подтверждаю согласие на обработку моих персональных данных, предусмотренную частью 3 статьи 3 Федерального закона...</p>
+                    </div>
+                </div>
+
+                <div class="card border-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-header"><a href="#">Перейти к оформлению</a></div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">Подписать пакет документов</h5>
+                        <p class="card-text">Уведомление
+    о создании результата интеллектуальной деятельности (изобретения, полезной модели, промышленного образца, товарного знака...</p>
+                    </div>
+                </div>
+
+<div class="card border-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-header"><a href="#">Перейти к оформлению</a></div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">Документы на уведомление о создании интеллектуальной деятельности</h5>
+                        <p class="card-text">Уведомление
+    о создании результата интеллектуальной деятельности (изобретения, полезной модели, промышленного образца, товарного знака...</p>
+                    </div>
+                </div>
+
+                <div class="card border-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-header"><a href="#">Перейти к оформлению</a></div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">Подписать документ об авторском вознаграждении</h5>
+                        <p class="card-text">Вознаграждение, которое получает автор изобретения, в случае если права на это изобретение принадлежат работодателю...</p>
+                    </div>
+                </div>
+
+
+
+
+                <div class="card border-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-header"><a href="#">Перейти к оформлению</a></div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">Подписать документ о преддипломной практике</h5>
+                        <p class="card-text">Данная функция станет доступна после интеграции с системой университета...</p>
+                    </div>
+                </div>
+
+
+{#                <div class="col">#}
+{#                    <div class="list-group" id="list-tab" role="tablist">#}
+{##}
+{#                        <a href="{% url 'documents_consent_all' %}" class="list-group-item list-group-item-action" id="list-home-list"#}
+{#                            role="tab" aria-controls="list-home">#}
+{#                            <h1> Документы на согласие и обработку персональных данных</h1></a>#}
+{#                        <a class="list-group-item list-group-item-action" id="list-profile-list"#}
+{#                           href="{% url 'documents_notification_all' %}" role="tab" aria-controls="list-profile">#}
+{#                            <h1>Документы на уведомление о создании интеллектуальной деятельности</h1>#}
+{#                        </a>#}
+{#                        <a class="list-group-item list-group-item-action" id="list-messages-list"#}
+{#                           href="{% url 'documents_authors_award_all' %}" role="tab" aria-controls="list-messages">#}
+{#                            <h1>Документ о выплате авторского вознаграждения</h1>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{##}
+{##}
+{#                <div class="col-8">#}
+{#                    <div class="tab-content" id="nav-tabContent">#}
+{#                        <div class="tab-pane fade show active" id="list-home" role="tabpanel"#}
+{#                             aria-labelledby="list-home-list">...#}
+{#                        </div>#}
+{#                        <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">#}
+{#                            ...#}
+{#                        </div>#}
+{#                        <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">#}
+{#                            ...#}
+{#                        </div>#}
+{#                        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">#}
+{#                            ...#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+            </div>
+    </div>
 
 
 

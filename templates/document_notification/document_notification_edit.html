@@ -3,25 +3,36 @@
 
 {% block content %}
     <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
-    <h1> Редактировать документ </h1>
-    <form method="post" action="">
 
-        {% csrf_token %}
-    {% for hidden_field in form.hidden_fields %}
-            {{ hidden_field }}
-        {% endfor %}
-        {% for field in form.visible_fields %}
-            <div class="form-group" >
-                {{ field.label_tag }}
-{#                {{ field }}#}
-                {% render_field field class="form-control" %}
-                {% if field.help_text %}
-                    <small class="form-text text-muted">{{ field.help_text }}</small>
-                {% endif %}
+    <div class="d-flex justify-content-center">
+        <h1> Редактировать документ на согласие на уведомление </h1>
+    </div>
+
+    </br>
+
+    <div class="d-flex justify-content-center w-50 mx-auto">
+        <form method="post" action="" class="w-50 mx-auto">
+
+            {% csrf_token %}
+            {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {#                {{ field }}#}
+                    {% render_field field class="form-control" %}
+                    {% if field.help_text %}
+                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                </div>
+                </br>
+            {% endfor %}
+
+            <div class="d-flex justify-content-center w-50 mx-auto">
+                <input class="btn btn-warning mr-2" type="submit" value="Обновить данные">
+                <input type="button" class="btn btn-outline-secondary" value="Отмена" onclick="history.back()">
             </div>
-            </br>
-        {% endfor %}
-        <input class="btn btn-warning" type="submit" value="Обновить данные">
-    <input type="button" class="btn btn-outline-secondary" value="Отмена" onclick="history.back()">
-    </form>
+        </form>
+    </div>
 {% endblock %}

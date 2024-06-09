@@ -2,43 +2,60 @@
 {% load widget_tweaks %}
 
 {% block content %}
- <form method="post" action="">
-        <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
+    <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
+    <div class="d-flex justify-content-center">
         <h1> Создать документ на согласие </h1>
-        {% csrf_token %}
-{#        {{ form.as_p }}#}
+    </div>
+    </br>
+    <div class="d-flex justify-content-center w-50 mx-auto">
+        <form method="post" action="" class="w-50 mx-auto">
 
-        {% for hidden_field in form.hidden_fields %}
-            {{ hidden_field }}
-        {% endfor %}
-        {% for field in form.visible_fields %}
-            <div class="form-group" >
-                {{ field.label_tag }}
-{#                {{ field }}#}
-                {% render_field field class="form-control" %}
-                {% if field.help_text %}
-                    <small class="form-text text-muted">{{ field.help_text }}</small>
-                {% endif %}
+            {% csrf_token %}
+            {#        {{ form.as_p }}#}
+
+            {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {#                {{ field }}#}
+                    {% render_field field class="form-control" %}
+                    {% if field.help_text %}
+                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                </div>
+                </br>
+            {% endfor %}
+            {#        <input id="address" name="address" type="text" />#}
+            {#        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>#}
+            {#        <link href="http://cdn.jsdelivr.net/npm/suggestions-jquery@22.6.0/dist/css/suggestions.min.css" rel="stylesheet" />#}
+            {#        <script src="http://cdn.jsdelivr.net/npm/suggestions-jquery@22.6.0/dist/js/jquery.suggestions.min.js"></script>#}
+            {##}
+            {#        <script>#}
+            {#            $("#address").suggestions({#}
+            {#                token: "22d8df41284cf0c9095de490a6e30032d7fa20fe",#}
+            {#                type: "ADDRESS",#}
+            {#                /* Вызывается, когда пользователь выбирает одну из подсказок */#}
+            {#                onSelect: function(suggestion) {#}
+            {#                    console.log(suggestion);#}
+            {#                }#}
+            {#            });#}
+            {#        </script>#}
+
+
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary mr-2 ">Завершить</button>
+
+                <input type="button" class="btn btn-outline-secondary" value="Отмена" onclick="history.back()">
             </div>
-            </br>
-        {% endfor %}
-{#        <input id="address" name="address" type="text" />#}
-{#        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>#}
-{#        <link href="http://cdn.jsdelivr.net/npm/suggestions-jquery@22.6.0/dist/css/suggestions.min.css" rel="stylesheet" />#}
-{#        <script src="http://cdn.jsdelivr.net/npm/suggestions-jquery@22.6.0/dist/js/jquery.suggestions.min.js"></script>#}
-{##}
-{#        <script>#}
-{#            $("#address").suggestions({#}
-{#                token: "22d8df41284cf0c9095de490a6e30032d7fa20fe",#}
-{#                type: "ADDRESS",#}
-{#                /* Вызывается, когда пользователь выбирает одну из подсказок */#}
-{#                onSelect: function(suggestion) {#}
-{#                    console.log(suggestion);#}
-{#                }#}
-{#            });#}
-{#        </script>#}
-        <button type="submit" class="btn btn-primary">Завершить</button>
- <input type="button" class="btn btn-outline-secondary" value="Отмена" onclick="history.back()">
 
-    </form>
+            </br>
+            </br>
+
+
+        </form>
+    </div>
+
+
 {% endblock %}
