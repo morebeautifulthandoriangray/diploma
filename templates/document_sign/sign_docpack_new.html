@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{#{% extends 'base.html' %}#}
+{#{% load widget_tweaks %}#}
+{##}
+{#{% block content %}#}
+{##}
+{#    <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">#}
+{##}
+{#    <div class="d-flex justify-content-center">#}
+{#        <h1> Создать задание на онлайн-подписание документа</h1>#}
+{#    </div>#}
+{#    </br>#}
+{#    </br>#}
+{##}
+{# <div class="d-flex justify-content-center w-50 mx-auto">#}
+{#        <form method="post" action="" class="w-50 mx-auto">#}
+{##}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{##}
+{#        {% for hidden_field in form.hidden_fields %}#}
+{#            {{ hidden_field }}#}
+{#        {% endfor %}#}
+{#        {% for field in form.visible_fields %}#}
+{#            <div class="form-group" >#}
+{#                {{ field.label_tag }}#}
+{#                {{ field }}#}
+{#                {% render_field field class="form-control" %}#}
+{#                {% if field.help_text %}#}
+{#                    <small class="form-text text-muted">{{ field.help_text }}</small>#}
+{#                {% endif %}#}
+{#            </div>#}
+{#            </br>#}
+{#        {% endfor %}#}
+{#<div class="d-flex justify-content-center">#}
+{#        <button type="submit" class="btn btn-primary mr-2">Подписать и отправить</button>#}
+{# <input type="button" class="btn btn-outline-secondary" value="Отмена" onclick="history.back()">#}
+{#        </div>#}
+{##}
+{#    </form>#}
+{# </div>#}
+{#{% endblock %}#}
