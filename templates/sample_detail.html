@@ -3,20 +3,44 @@
 {% block content %}
     <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
 
-    <div>
-        <h2> {{ sample.title  }}</h2>
-        <p> {{ sample.created_at}}</p>
-        <p> {{ sample.path_to_template }}</p>
-    </div>
-
-    <div class="col-md-4">
-
-        <a href="{% url 'sample_download_docx' sample.pk %}" class="btn btn-primary">Export DOCX</a>
+{#    <div>#}
+{#        <h2> {{ sample.title  }}</h2>#}
+{#        <p> {{ sample.created_at}}</p>#}
+{#        <p> {{ sample.path_to_template }}</p>#}
+{#    </div>#}
+{##}
+{#    <div class="col-md-4">#}
+{##}
+{#        <a href="{% url 'sample_download_docx' sample.pk %}" class="btn btn-primary">Скачать в формате DOCX</a>#}
 {#        <a href="#sample_download_pdf" class="btn btn-secondary">Export PDF</a>#}
+{##}
+{#    </div>#}
+{##}
+{#    <a href="{% url 'sample_edit' sample.pk %}" class="btn btn-outline-warning">+Редактировать шаблон</a>#}
+{#    </br>#}
+{#    <a href="{% url 'sample_delete' sample.pk %}" class="btn btn-outline-danger">-Удалить шаблон</a>#}
 
+
+
+    <div class="d-flex justify-content-center">
+         <div class="card" style="width: 25rem;">
+      <div class="card-body">
+        <h2 class="card-title">{{ sample.title  }}</h2>
+        <p class="card-text">{{ sample.created_at}}</p>
+        <p class="card-text">{{ sample.path_to_template }}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <a href="{% url 'sample_download_docx' sample.pk %}" class="btn btn-primary">Скачать в формате DOCX</a>
+        </li>
+{#        <li class="list-group-item">Dapibus ac facilisis in</li>#}
+{#        <li class="list-group-item">Vestibulum at eros</li>#}
+      </ul>
+      <div class="card-body">
+        <a href="{% url 'sample_edit' sample.pk %}" class="btn btn-outline-warning">Редактировать шаблон</a>
+        <a href="{% url 'sample_delete' sample.pk %}" class="btn btn-outline-danger">Удалить шаблон</a>
+      </div>
+    </div>
     </div>
 
-    <a href="{% url 'sample_edit' sample.pk %}" class="btn btn-outline-warning">+Редактировать шаблон</a>
-    </br>
-    <a href="{% url 'sample_delete' sample.pk %}" class="btn btn-outline-danger">-Удалить шаблон</a>
 {% endblock %}

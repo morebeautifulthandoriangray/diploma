@@ -3,13 +3,15 @@
 {% block content %}
 
     <div>
-        <h1>Последние созданные документы</h1>
+    <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
+        <h1 class="d-flex justify-content-center">Последние созданные документы</h1>
     </div>
+    </br>
 
     {% for document in object_list %}
 
 
-        <div class="list-group">
+        <div class="list-group w-50 mx-auto">
 
             <a href="{% url 'document_authors_award_detail' document.pk %}" class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
@@ -19,10 +21,13 @@
                 <p class="mb-1"><p>{{ document.path_to_template }}</p></p>
                 <small class="text-muted"><p>{{ document.template_name }}</p></small>
             </a>
-
+</br>
         </div>
     {% endfor %}
 
     </br>
+
+    <div class="d-flex justify-content-center">
     <a href="{% url 'document_authors_award_new' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Создать документ</a>
+    </div>
 {% endblock %}

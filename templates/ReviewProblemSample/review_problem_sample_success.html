@@ -3,58 +3,39 @@
 
 {% block content %}
 
+    <div class="d-flex justify-content-center">
         <div class="d-md-flex flex-md-equal w-50 my-md-3 ps-md-3">
-            <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-                <div class="my-3 p-3">
-                    {% if user.is_authenticated %}
-                        <h2 class="display-5">Спасибо, отзыв отправлен!</h2>
-                        <p class="lead">
-                            <a class="nav-link" href="{% url 'home' %}">
-                                 Перейти на ГЛАВНУЮ
-                            </a>
-                        </p>
-                        {# ниже реализация белой строки для выравнивания дизайна карточек #}
+                <div class="bg-success-subtle me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" >
+                    <div class="my-3 p-3">
+                        {% if user.is_authenticated %}
+                            <h2 class="display-5">Спасибо, отзыв отправлен!</h2>
+                            <p class="lead">
+                                <a class="nav-link" href="{% url 'home' %}">
+                                     Перейти на ГЛАВНУЮ
+                                </a>
+                            </p>
+                            {# ниже реализация белой строки для выравнивания дизайна карточек #}
 
-                    {% else %}
-{#                        <h2 class="display-5"><a class="nav-link" href="{% url 'login' %}">#}
-{#                                 Войти#}
-{#                        </a>#}
-{#                        </h2>#}
-{#                        <p class="lead">Для получения доступа к СФОРМИРОВАННЫМ ШАБЛОНАМ и ДОКУМЕНТАМ, необходимо ВОЙТИ#}
-{#                        </p>#}
-{#                        <p class="lead text-white">efrerfef</p>#}
-                    {% endif %}
+                        {% else %}
+    {#                        <h2 class="display-5"><a class="nav-link" href="{% url 'login' %}">#}
+    {#                                 Войти#}
+    {#                        </a>#}
+    {#                        </h2>#}
+    {#                        <p class="lead">Для получения доступа к СФОРМИРОВАННЫМ ШАБЛОНАМ и ДОКУМЕНТАМ, необходимо ВОЙТИ#}
+    {#                        </p>#}
+    {#                        <p class="lead text-white">efrerfef</p>#}
+                        {% endif %}
+                    </div>
+                    <div class="bg-dark shadow-sm mx-auto"
+                         style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+                    </div>
                 </div>
-                <div class="bg-dark shadow-sm mx-auto"
-                     style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-                </div>
+
             </div>
-{#            <div class="text-bg-primary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">#}
-{#                <div class="my-3 py-3">#}
-{#                    {% if user.is_authenticated %}#}
-{#                        <h2 class="display-5">#}
-{#                             <a class="nav-link" href="{% url 'review_problem_document_consent_new' %}">#}
-{#                                 Ошибка при ЗАПОЛНЕНИИ или ГЕНЕРАЦИИ документа?#}
-{#                             </a>#}
-{#                        </h2>#}
-{#                        <p class="lead">Напишите о проблеме для скорейшего решения!</p>#}
-{#                        <p class="fw-lighter lead">Ваш отзыв поможет нам стать лучше#}
-{#                        </p>#}
-{#                    {% else %}#}
-{#                        <h2 class="display-5">#}
-{#                             <a class="nav-link" href="{% url 'login' %}">#}
-{#                                 Войти#}
-{#                             </a>#}
-{#                        </h2>#}
-{#                        <p class="lead">Хотите собрать ПАКЕТ ДОКУМЕНТОВ быстро и легко? </p>#}
-{#                        <p class="fw-lighter lead">Необходимо ВОЙТИ#}
-{#                        </p>#}
-{#                    {% endif %}#}
-{#                </div>#}
-{#                <div class="bg-body-tertiary shadow-sm mx-auto"#}
-{#                     style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">#}
-{#                </div>#}
-{#            </div>#}
-        </div>
+    </div>
+
+
+
+
 
 {% endblock content %}

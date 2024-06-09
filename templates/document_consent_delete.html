@@ -2,11 +2,50 @@
 
 {% block content %}
     <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
-    <h1>Удалить документ</h1>
-    <form action="" method="post"> {% csrf_token %}
-        <p>Вы уверены, что хотите удалить этот "{{ documentconsent.title }}" документ?</p>
-                <input class="btn btn-danger" type="submit" value="Удалить">
+{#    <h1>Удалить документ</h1>#}
+{#    <form action="" method="post"> {% csrf_token %}#}
+{#        <p>Вы уверены, что хотите удалить этот "{{ documentconsent.title }}" документ?</p>#}
+{#                <input class="btn btn-danger" type="submit" value="Удалить">#}
+{##}
+{#    <input type="button" class="btn btn-outline-secondary" value="Отмена" onclick="history.back()">#}
+{#    </form>#}
 
-    <input type="button" class="btn btn-outline-secondary" value="Отмена" onclick="history.back()">
-    </form>
+
+    <div class="d-flex justify-content-center">
+        <div class="d-md-flex flex-md-equal w-50 my-md-3 ps-md-3" >
+            <div class="bg-danger-subtle me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                <div class="my-3 p-3" >
+                    {% if user.is_authenticated %}
+                        <h2 class="display-5">Удаление документа</h2>
+                        <h5>Вы действительно хотите удалить документ "{{  documentconsent.title }}"?</h5>
+                        <p class="lead">
+{#                            <a class="nav-link" href="{% url 'home' %}">#}
+{#                                 Перейти на ГЛАВНУЮ#}
+{#                            </a>#}
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input class="btn btn-danger" type="submit" value="Удалить">
+                            <input type="button" class="btn btn-outline-secondary" value="Отмена"
+                                   onclick="history.back()">
+                        </form>
+                        </p>
+                        {# ниже реализация белой строки для выравнивания дизайна карточек #}
+
+                    {% else %}
+{#                        <h2 class="display-5"><a class="nav-link" href="{% url 'login' %}">#}
+{#                                 Войти#}
+{#                        </a>#}
+{#                        </h2>#}
+{#                        <p class="lead">Для получения доступа к СФОРМИРОВАННЫМ ШАБЛОНАМ и ДОКУМЕНТАМ, необходимо ВОЙТИ#}
+{#                        </p>#}
+{#                        <p class="lead text-white">efrerfef</p>#}
+                    {% endif %}
+                </div>
+                <div class="bg-dark shadow-sm mx-auto"
+                     style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+                </div>
+            </div>
+
+        </div>
+    </div>
 {% endblock content%}

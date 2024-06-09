@@ -4,14 +4,15 @@
 
     <div>
     <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
-        <h1>Последние созданные документы</h1>
+        <h1 class="d-flex justify-content-center">Последние созданные документы</h1>
     </div>
+    </br>
 
 
     {% for document in object_list %}
 
 
-        <div class="list-group">
+        <div class="list-group w-50 mx-auto">
 
             <a href="{% url 'document_consent_detail' document.pk %}" class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
@@ -22,10 +23,19 @@
                 <small class="text-muted"><p>{{ document.template_name }}</p></small>
             </a>
 
+        <br>
+
         </div>
     {% endfor %}
 
     </br>
-    <a href="{% url 'document_consent_new' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Создать документ</a>
+
+    <div class="d-flex justify-content-center">
+        <a href="{% url 'document_consent_new' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Создать документ</a>
+
+    </div>
+    <br>
+    <br>
+
 
 {% endblock %}

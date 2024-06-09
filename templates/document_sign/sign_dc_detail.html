@@ -1,24 +1,64 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{#    <div>#}
+{#    <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">#}
+{#        <h2> {{ signdocument.document_consent_name }}</h2>#}
+{#        <p> {{ signdocument.status }}</p>#}
+{#        <p> {{ signdocument.FIO_head }}</p>#}
+{#    </div>#}
+{##}
+{#    <div class="col-md-4">#}
+{##}
+{##}
+{##}
+{#    </div>#}
+{##}
+{#</br>#}
+{#    </br>#}
+{##}
+{##}
+{#<a href="{% url 'sign_dc_delete' signdocument.pk %}" class="btn btn-outline-danger" >Отменить подписание</a>#}
+
+
     <div>
-    <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
-        <h2> {{ signdocument.document_consent_name }}</h2>
-        <p> {{ signdocument.status }}</p>
-        <p> {{ signdocument.FIO_head }}</p>
-    </div>
-
-    <div class="col-md-4">
-
-
+        <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
 
     </div>
 
-</br>
-    </br>
+    <div class="d-flex justify-content-center">
+        <div class="card" style="width: 40rem;">
+            <div class="card-body">
+                <h2 class="card-title">{{ signdocument.document_consent_name }}</h2>
+{#                <p class="card-text">{{ signdocument.status  }}</p>#}
+{#                <p class="card-text">{{ signdocument.FIO_head  }}</p>#}
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"> Статус:
+{{ signdocument.status  }}
+                </li>
+
+                        <li class="list-group-item">
+                            Руководитель: {{ signdocument.FIO_head  }}
+                        </li>
+            </ul>
+{#            <div class="card-body">#}
+{#                <a href="{% url 'document_sets_edit' documentset.pk %}" class="btn btn-outline-warning">Редактировать данные для документа</a>#}
+{##}
+{#    <a href="{% url 'document_sets_delete' documentset.pk %}" class="btn btn-outline-danger" >Удалить документ</a>#}
+{##}
+{#            </div>#}
 
 
-<a href="{% url 'sign_dc_delete' signdocument.pk %}" class="btn btn-outline-danger" >Отменить подписание</a>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <a href="{% url 'sign_dc_delete' signdocument.pk %}" class="btn btn-outline-danger" >Отменить подписание</a>
+
+                </li>
+
+            </ul>
+        </div>
+    </div>
 
 
 

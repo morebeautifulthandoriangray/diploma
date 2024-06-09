@@ -3,30 +3,67 @@
 {% block content %}
     <div>
     <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
-        <h2> {{ documentconsent.title }}</h2>
-        <p> {{ documentconsent.created_at }}</p>
-        <p> {{ documentconsent.path_to_template }}</p>
+{#        <h2> {{ documentconsent.title }}</h2>#}
+{#        <p> {{ documentconsent.created_at }}</p>#}
+{#        <p> {{ documentconsent.path_to_template }}</p>#}
+    </div>
+{##}
+{#    <div class="col-md-4">#}
+{##}
+{#        <a href="{% url 'document_consent_download_docx' documentconsent.pk %}" class="btn btn-primary">Скачать в формате DOCX</a>#}
+{#        <a href="{% url 'document_consent_download_pdf' documentconsent.pk %}" class="btn btn-danger">Скачать в формате PDF</a>#}
+{##}
+{#    </div>#}
+{##}
+{#    <a href="{% url 'document_consent_edit' documentconsent.pk %}" class="btn btn-outline-warning">+Редактировать данные для документа</a>#}
+{#    </br>#}
+{#    <a href="{% url 'document_consent_delete' documentconsent.pk %}" class="btn btn-outline-danger" >-Удалить документ</a>#}
+{##}
+{#</br>#}
+{#    </br>#}
+{#    </br>#}
+{#    </br>#}
+{#    </br>#}
+{#    </br>#}
+{##}
+{##}
+{##}
+{#    <a href="{% url 'sign_dc_new' %}" class="btn btn-dark" >Подписать и отправить</a>#}
+
+
+    <div class="d-flex justify-content-center">
+        <div class="card" style="width: 40rem;">
+            <div class="card-body">
+                <h2 class="card-title">{{ documentconsent.title }}</h2>
+                <p class="card-text">{{ documentconsent.created_at }}</p>
+                <p class="card-text">{{ documentconsent.path_to_template }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <a href="{% url 'document_consent_download_docx' documentconsent.pk %}" class="btn btn-primary">Скачать
+                        в формате DOCX</a>
+                    <a href="{% url 'document_consent_download_pdf' documentconsent.pk %}" class="btn btn-danger">Скачать
+                        в формате PDF</a>
+                </li>
+
+                {#        <li class="list-group-item">Vestibulum at eros</li>#}
+            </ul>
+            <div class="card-body">
+                <a href="{% url 'document_consent_edit' documentconsent.pk %}" class="btn btn-outline-warning">Редактировать
+                    данные для документа</a>
+                <a href="{% url 'document_consent_delete' documentconsent.pk %}" class="btn btn-outline-danger">Удалить
+                    документ</a>
+
+            </div>
+
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <a href="{% url 'sign_dc_new' %}" class="btn btn-dark">Подписать и отправить</a>
+                </li>
+
+            </ul>
+        </div>
     </div>
 
-    <div class="col-md-4">
-
-        <a href="{% url 'document_consent_download_docx' documentconsent.pk %}" class="btn btn-primary">Скачать в формате DOCX</a>
-        <a href="{% url 'document_consent_download_pdf' documentconsent.pk %}" class="btn btn-danger">Скачать в формате PDF</a>
-
-    </div>
-
-    <a href="{% url 'document_consent_edit' documentconsent.pk %}" class="btn btn-outline-warning">+Редактировать данные для документа</a>
-    </br>
-    <a href="{% url 'document_consent_delete' documentconsent.pk %}" class="btn btn-outline-danger" >-Удалить документ</a>
-
-</br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-
-
-
-    <a href="{% url 'sign_dc_new' %}" class="btn btn-dark" >Подписать и отправить</a>
 {% endblock %}
