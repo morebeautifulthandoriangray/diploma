@@ -2,9 +2,12 @@
 {% load widget_tweaks %}
 
 {% block content %}
- <form method="post" action="">
-        <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
+
+    <input type="button" class="btn btn-outline-secondary" value="Назад" onclick="history.back()">
         <h1>  </h1>
+    <div class="d-flex justify-content-center w-50 mx-auto">
+ <form method="post" action="" class="w-50 mx-auto">
+
         {% csrf_token %}
 {#        {{ form.as_p }}#}
 
@@ -37,8 +40,12 @@
 {#                }#}
 {#            });#}
 {#        </script>#}
-        <button type="submit" class="btn btn-primary">Отправить</button>
+
+ <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary mr-2">Отправить</button>
  <input type="button" class="btn btn-outline-secondary" value="Отмена" onclick="history.back()">
+     </div>
 
     </form>
+    </div>
 {% endblock %}
