@@ -8,7 +8,9 @@ An in-depth paragraph about your project and overview of use.
 
 ## Getting Started
 
-### Description
+### About the project
+
+#### 1. Summary
 
 Данное программное обеспечение востребована организациям и людям, у которых есть потребность быстро и легко сформировать документ, и с помощью интеграции систем отправить документ на согласование двум и более сторонам.
 
@@ -18,6 +20,21 @@ An in-depth paragraph about your project and overview of use.
 
 Для разработки базы данных была выбрана **СУБД PostgreSQL**. Для разработки серверной части будет выбран фреймворк **Django**, а для клиентской части выбран язык гипертекстовой разметки **HTML**. Для того, чтобы приложение осуществляло задуманные функциональные возможности, понадобится использовать библиотеки **DocxTpl** и **Aspose-words** для взаимодействия с документами и данными, **Numtostr-rus** для преобразования числа в текст, библиотеку **Petrovich** для изменения склонений ФИО пользователей и **DaData** для подсказок адреса и ФИО.
 
+#### 2. Description of functions
+
+##### 2.1 Landing page without authorization
+##### 2.2 Landing page with authorization
+##### 2.3 Sample catalog
+##### 2.4 Sample description
+##### 2.5 Edit Sample 
+##### 2.6 Delete Sample
+##### 2.7 Create Document with Sample
+##### 2.8 Document info
+##### 2.9 Create Document package
+##### 2.10 Admin panel
+##### 2.11 User control
+##### 2.12 Grafana + Prometheus
+![alt text](https://github.com/morebeautifulthandoriangray/diploma/blob/main/grafanaprometheus.png?raw=true)
 
 
 
@@ -109,7 +126,7 @@ git clone https://github.com/morebeautifulthandoriangray/diploma.git
 
 There are two steps to run the program:
 
-* Press Run buttin in IDE
+* Press Run button in IDE
 * Run the next command
 ```
 python manage.py runserver 8000
