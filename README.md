@@ -23,17 +23,31 @@ An in-depth paragraph about your project and overview of use.
 #### 2. Description of functions
 
 ##### 2.1 Landing page without authorization
+![alt text](https://github.com/morebeautifulthandoriangray/diploma/blob/main/landingwithoutauth.png?raw=true)
+![alt text](https://github.com/morebeautifulthandoriangray/diploma/blob/main/landingwithoutadd.png?raw=true)
 ##### 2.2 Landing page with authorization
+![alt text](https://github.com/morebeautifulthandoriangray/diploma/blob/main/landingwithauth.png?raw=true)
 ##### 2.3 Sample catalog
+![alt text](https://github.com/morebeautifulthandoriangray/diploma/blob/main/samplecatalog.png?raw=true)
 ##### 2.4 Sample description
+![alt text](https://github.com/morebeautifulthandoriangray/diploma/blob/main/samplecard.png?raw=true)
 ##### 2.5 Edit Sample 
+![alt text](https://github.com/morebeautifulthandoriangray/diploma/blob/main/sampleedit.png?raw=true)
 ##### 2.6 Delete Sample
-##### 2.7 Create Document with Sample
-##### 2.8 Document info
-##### 2.9 Create Document package
-##### 2.10 Admin panel
-##### 2.11 User control
-##### 2.12 Grafana + Prometheus
+![alt text](https://github.com/morebeautifulthandoriangray/diploma/blob/main/sampledelete.png?raw=true)
+##### 2.7 Document catalog with available samples
+![alt text](https://github.com/morebeautifulthandoriangray/diploma/blob/main/documentcatalog.png?raw=true)
+##### 2.8 Create Document with Sample
+![alt text](https://github.com/morebeautifulthandoriangray/diploma/blob/main/createdocument.png?raw=true)
+##### 2.9 Document info
+![alt text](https://github.com/morebeautifulthandoriangray/diploma/blob/main/documentinfo.png?raw=true)
+##### 2.10 Create Document package
+![alt text](https://github.com/morebeautifulthandoriangray/diploma/blob/main/documentpackage.png?raw=true)
+##### 2.11 Admin panel
+![alt text](https://github.com/morebeautifulthandoriangray/diploma/blob/main/adminpanel.png?raw=true)
+##### 2.12 User control
+![alt text](https://github.com/morebeautifulthandoriangray/diploma/blob/main/usercontrol.png?raw=true)
+##### 2.13 Grafana + Prometheus
 ![alt text](https://github.com/morebeautifulthandoriangray/diploma/blob/main/grafanaprometheus.png?raw=true)
 
 
